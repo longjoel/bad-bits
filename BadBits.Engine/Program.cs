@@ -14,9 +14,11 @@ namespace BadBits.Engine
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            using (var window = new OpenTK.GameWindow()) {
+
+                window.Run();
+
+            }
         }
     }
 }
