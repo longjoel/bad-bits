@@ -1,5 +1,4 @@
 ﻿using CommandLine;
-using Microsoft.ClearScript.V8;
 using System;
 
 namespace BadBits.Engine
@@ -39,43 +38,40 @@ namespace BadBits.Engine
         [STAThread]
         static void Main(string[] args)
         {
-            string entryPath = default(string);
+            // string entryPath = default(string);
             Engine.ScriptHost host = new Engine.ScriptHost();
 
-            Parser.Default.ParseArguments<ArgumentOptions>(args).WithParsed<ArgumentOptions>(o =>
+            //Parser.Default.ParseArguments<ArgumentOptions>(args).WithParsed<ArgumentOptions>(o =>
+            //{
+            //    if (string.IsNullOrWhiteSpace(o.Path))
+            //    {
+            //        Console.WriteLine("No path specified. Please specifiy a path to your main js file.");
+            //        System.Environment.Exit(1);
+            //    }
+
+            //    entryPath = o.Path;
+            //});
+
+            var scriptEngine = new Jint.Engine();
+
+            scriptEngine.SetValue("badBits", host);
+            scriptEngine.Execute(System.IO.File.ReadAllText(args[0]));
+
+            using (var window = new OpenTK.GameWindow())
             {
-
-                if (string.IsNullOrWhiteSpace(o.Path))
+                window.RenderFrame += (o, e) =>
                 {
-                    Console.WriteLine("No path specified. Please specifiy a path to your main js file.");
-                    System.Environment.Exit(1);
-                }
 
-                entryPath = o.Path;
-            });
-
-            using (var scriptEngine = new V8ScriptEngine())
-            {
-                scriptEngine.AddHostObject("badBits", host);
-                scriptEngine.Execute(System.IO.File.ReadAllText(entryPath));
-
-                
-
-                using (var window = new OpenTK.GameWindow())
-                {
-                    window.RenderFrame += (o, e) =>
+                    if (host.RenderFunction != null)
                     {
+                        host.RenderFunction.Invoke(e.Time);
+                    }
+                };
 
-                        if (host.RenderFunction != null)
-                        {
-                            host.RenderFunction.Invoke(e.Time);
-                        }
-                    };
+                window.Run();
 
-                    window.Run();
-
-                }
             }
+
         }
     }
 }
