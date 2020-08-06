@@ -9,9 +9,13 @@ namespace BadBits.Engine
 {
     public class ScriptHost
     {
-
         public Action<double> RenderFunction { get; private set; }
         public Action<double> ProcessFunction { get; private set; }
+        public Action InitFunction { get; private set; }
+
+        public void setInit(Action initFunc) {
+            this.InitFunction = initFunc;
+        }
 
         public void setRender(Action<double> renderFunc) {
             this.RenderFunction = renderFunc;
@@ -22,7 +26,7 @@ namespace BadBits.Engine
         }
 
         public void info(string infoString) {
-         //   Console.WriteLine(infoString);
+            Console.WriteLine(infoString);
         }
     }
 }

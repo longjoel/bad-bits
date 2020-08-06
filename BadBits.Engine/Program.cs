@@ -76,13 +76,19 @@ namespace BadBits.Engine
                 window.Bounds = new System.Drawing.Rectangle { X = 0, Y = 0, Width = 640, Height = 640 };
                 window.RenderFrame += (o, e) =>
                 {
-
                     if (host.RenderFunction != null)
                     {
                         host.RenderFunction.Invoke(e.Time);
                     }
                 };
 
+                window.UpdateFrame += (o, e) =>
+                {
+                    if (host.ProcessFunction != null)
+                    {
+                        host.ProcessFunction.Invoke(e.Time);
+                    }
+                };
                 window.Run();
 
             }
