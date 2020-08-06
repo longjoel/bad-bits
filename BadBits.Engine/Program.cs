@@ -1,5 +1,7 @@
 ﻿using CommandLine;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BadBits.Engine
 {
@@ -32,32 +34,44 @@ namespace BadBits.Engine
 
     static class Program
     {
+        static string FindName(string name, string root) {
+
+            return System.IO.Directory.EnumerateFiles(System.IO.Path.GetDirectoryName(System.IO.Path.GetFullPath(root)))
+                .SingleOrDefault(x => x.EndsWith(System.IO.Path.GetFileName(name)));
+
+        }
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main(string[] args)
         {
-            // string entryPath = default(string);
+            var requireMap = new List<string>();
+
             Engine.ScriptHost host = new Engine.ScriptHost();
-
-            //Parser.Default.ParseArguments<ArgumentOptions>(args).WithParsed<ArgumentOptions>(o =>
-            //{
-            //    if (string.IsNullOrWhiteSpace(o.Path))
-            //    {
-            //        Console.WriteLine("No path specified. Please specifiy a path to your main js file.");
-            //        System.Environment.Exit(1);
-            //    }
-
-            //    entryPath = o.Path;
-            //});
-
             var scriptEngine = new Jint.Engine();
 
-            scriptEngine.SetValue("badBits", host);
-            scriptEngine.Execute(System.IO.File.ReadAllText(args[0]));
+            dynamic gameGlobals = new { };
 
-            using (var window = new OpenTK.GameWindow())
+            scriptEngine.SetValue("globals", gameGlobals);
+
+            var require = new Action<string>((name) =>
+            {
+                if (requireMap.IndexOf(FindName(name, args[0]))<0) {
+
+                    requireMap.Add(FindName(name, args[0]));
+                    scriptEngine.Execute(System.IO.File.ReadAllText(FindName(name, args[0])));
+                }
+                
+            });
+
+            scriptEngine.SetValue("badBits", host);
+            scriptEngine.SetValue("require", require);
+
+            var newEngine = scriptEngine.Execute(System.IO.File.ReadAllText(args[0]));
+
+            using (var window = new OpenTK.GameWindow(640, 480, OpenTK.Graphics.GraphicsMode.Default, 
+                "Bad Bits Engine", OpenTK.GameWindowFlags.Default))
             {
                 window.RenderFrame += (o, e) =>
                 {
