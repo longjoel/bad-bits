@@ -1,10 +1,6 @@
 ﻿using CommandLine;
+using Microsoft.ClearScript.V8;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace BadBits.Engine
 {
@@ -29,9 +25,10 @@ namespace BadBits.Engine
     /// </summary>
     /// 
 
-    class ArgumentOptions { 
-    [Option()]
-    public string Path { get; set; }
+    class ArgumentOptions
+    {
+        [Option()]
+        public string Path { get; set; }
     }
 
     static class Program
@@ -42,21 +39,42 @@ namespace BadBits.Engine
         [STAThread]
         static void Main(string[] args)
         {
-            Parser.Default.ParseArguments<ArgumentOptions>(args).WithParsed<ArgumentOptions>(o=> {
+            string entryPath = default(string);
+            Engine.ScriptHost host = new Engine.ScriptHost();
 
-                if (string.IsNullOrWhiteSpace(o.Path)) {
+            Parser.Default.ParseArguments<ArgumentOptions>(args).WithParsed<ArgumentOptions>(o =>
+            {
+
+                if (string.IsNullOrWhiteSpace(o.Path))
+                {
                     Console.WriteLine("No path specified. Please specifiy a path to your main js file.");
                     System.Environment.Exit(1);
                 }
+
+                entryPath = o.Path;
             });
 
-
-            using (var window = new OpenTK.GameWindow()) {
+            using (var scriptEngine = new V8ScriptEngine())
+            {
+                scriptEngine.AddHostObject("badBits", host);
+                scriptEngine.Execute(System.IO.File.ReadAllText(entryPath));
 
                 
 
-                window.Run();
+                using (var window = new OpenTK.GameWindow())
+                {
+                    window.RenderFrame += (o, e) =>
+                    {
 
+                        if (host.RenderFunction != null)
+                        {
+                            host.RenderFunction.Invoke(e.Time);
+                        }
+                    };
+
+                    window.Run();
+
+                }
             }
         }
     }
