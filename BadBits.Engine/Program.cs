@@ -73,6 +73,7 @@ namespace BadBits.Engine
             using (var window = new OpenTK.GameWindow(640, 480, OpenTK.Graphics.GraphicsMode.Default, 
                 "Bad Bits Engine", OpenTK.GameWindowFlags.Default))
             {
+                window.Bounds = new System.Drawing.Rectangle { X = 0, Y = 0, Width = 640, Height = 640 };
                 window.RenderFrame += (o, e) =>
                 {
 

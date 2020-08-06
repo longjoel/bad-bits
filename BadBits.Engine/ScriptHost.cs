@@ -22,7 +22,7 @@ namespace BadBits.Engine
         }
 
         public void info(string infoString) {
-            Console.WriteLine(infoString);
+         //   Console.WriteLine(infoString);
         }
     }
 }
