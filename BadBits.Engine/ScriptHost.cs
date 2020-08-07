@@ -36,26 +36,6 @@ namespace BadBits.Engine
         public void info(string infoString) {
             Console.WriteLine(infoString);
         }
-
-        //public void setPixel2d(float x, float y, float r, float g, float b) {
-
-        //    gl.Color3(r, g, b);
-
-        //    gl.Begin(OpenTK.Graphics.OpenGL.PrimitiveType.Quads);
-
-        //    gl.Color3(r, g, b);
-
-        //    gl.Vertex3(x, y, 0);
-        //    gl.Vertex3(x + 1, y, 0);
-        //    gl.Vertex3(x + 1, y + 1, 0);
-        //    gl.Vertex3(x, y + 1, 0);
-
-        //    //gl.Vertex3(0,0, 0);
-        //    //gl.Vertex3(1, 0, 0);
-        //    //gl.Vertex3( 1, 1, 0);
-        //    //gl.Vertex3(0,  1, 0);
-
-        //    gl.End();
-        //}
+        
     }
 }

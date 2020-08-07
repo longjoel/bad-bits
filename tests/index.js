@@ -19,7 +19,7 @@ badBits.setRender2d(function (dt) {
     dtx = dtx + dt;
     for (i = 0; i < 320; i++) {
         for (j = 0; j < 240; j++) {
-            badBits.setPixel2d(i, j, i / 320, j / 200, ((i+j+(dtx*100))%200) / 200);
+          //  badBits.setPixel2d(i, j, i / 320, j / 200, ((i+j+(dtx*100))%200) / 200);
         }
     }
 

@@ -80,7 +80,7 @@ namespace BadBits.Engine
             {
                
 
-                window.Bounds = new System.Drawing.Rectangle { X = 0, Y = 0, Width = 640, Height = 640 };
+                window.Bounds = new System.Drawing.Rectangle { X = 0, Y = 0, Width = 640, Height = 480 };
                 window.RenderFrame += (o, e) =>
                 {
                     gl.Viewport(new Rectangle(0, 0, window.Width, window.Height));
