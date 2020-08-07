@@ -12,6 +12,7 @@ const clamp = function(x) {
 }
 
 badBits.setRender2d(function (dt) {
-    x = x + dt;
-    badBits.info(clamp(x));
+   
+    badBits.setPixel2d(160, 120, 1, 1, 1);
+
 });

@@ -72,15 +72,19 @@ namespace BadBits.Engine
             scriptEngine.SetValue("require", require);
 
             var newEngine = scriptEngine.Execute(System.IO.File.ReadAllText(args[0]));
-
+          
             using (var window = new OpenTK.GameWindow(640, 480, OpenTK.Graphics.GraphicsMode.Default, 
-                "Bad Bits Engine", OpenTK.GameWindowFlags.Default))
+                "Bad Bits Engine", OpenTK.GameWindowFlags.Default, 
+                OpenTK.DisplayDevice.Default, 1,2, 
+                OpenTK.Graphics.GraphicsContextFlags.Default))
             {
+               
+
                 window.Bounds = new System.Drawing.Rectangle { X = 0, Y = 0, Width = 640, Height = 640 };
                 window.RenderFrame += (o, e) =>
                 {
                     gl.Viewport(new Rectangle(0, 0, window.Width, window.Height));
-                    gl.ClearColor(Color.Black);
+                    gl.ClearColor(Color.Blue);
                     gl.Clear(OpenTK.Graphics.OpenGL.ClearBufferMask.ColorBufferBit 
                         | OpenTK.Graphics.OpenGL.ClearBufferMask.DepthBufferBit);
                     
@@ -92,6 +96,13 @@ namespace BadBits.Engine
 
                     if (host.Render2dFunction != null)
                     {
+                        gl.Disable(OpenTK.Graphics.OpenGL.EnableCap.CullFace);
+                        gl.Clear(OpenTK.Graphics.OpenGL.ClearBufferMask.DepthBufferBit);
+
+                        OpenTK.Matrix4 mtx;
+                        OpenTK.Matrix4.CreateOrthographicOffCenter(0, 320, 240, 0, 1, -1, out mtx);
+
+                        gl.LoadMatrix(ref mtx);
                         host.Render2dFunction.Invoke(e.Time);
                     }
 
