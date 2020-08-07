@@ -11,7 +11,7 @@ const clamp = function(x) {
     return x < 1000 ? x : 1000;
 }
 
-badBits.setRender(function (dt) {
+badBits.setRender2d(function (dt) {
     x = x + dt;
     badBits.info(clamp(x));
 });

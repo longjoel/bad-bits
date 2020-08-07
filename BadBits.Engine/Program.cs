@@ -1,7 +1,10 @@
 ﻿using CommandLine;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+
+using gl = OpenTK.Graphics.OpenGL.GL;
 
 namespace BadBits.Engine
 {
@@ -76,10 +79,23 @@ namespace BadBits.Engine
                 window.Bounds = new System.Drawing.Rectangle { X = 0, Y = 0, Width = 640, Height = 640 };
                 window.RenderFrame += (o, e) =>
                 {
-                    if (host.RenderFunction != null)
+                    gl.Viewport(new Rectangle(0, 0, window.Width, window.Height));
+                    gl.ClearColor(Color.Black);
+                    gl.Clear(OpenTK.Graphics.OpenGL.ClearBufferMask.ColorBufferBit 
+                        | OpenTK.Graphics.OpenGL.ClearBufferMask.DepthBufferBit);
+                    
+
+                    if (host.Render3dFunction != null)
                     {
-                        host.RenderFunction.Invoke(e.Time);
+                        host.Render3dFunction.Invoke(e.Time);
                     }
+
+                    if (host.Render2dFunction != null)
+                    {
+                        host.Render2dFunction.Invoke(e.Time);
+                    }
+
+                    window.SwapBuffers();
                 };
 
                 window.UpdateFrame += (o, e) =>
