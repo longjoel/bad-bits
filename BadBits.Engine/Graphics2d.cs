@@ -36,14 +36,19 @@ namespace BadBits.Engine
             gl.LoadMatrix(ref mtx);
             gl.Enable(OpenTK.Graphics.OpenGL.EnableCap.Blend);
             gl.Enable(OpenTK.Graphics.OpenGL.EnableCap.Texture2D);
+
             gl.Disable(OpenTK.Graphics.OpenGL.EnableCap.DepthTest);
             gl.Disable(OpenTK.Graphics.OpenGL.EnableCap.CullFace);
 
+            gl.BlendFunc(OpenTK.Graphics.OpenGL.BlendingFactor.SrcAlpha, 
+                OpenTK.Graphics.OpenGL.BlendingFactor.OneMinusSrcAlpha);
+
             gl.Begin(OpenTK.Graphics.OpenGL.PrimitiveType.Quads);
+
+            gl.Color4(System.Drawing.Color.White); gl.TexCoord2(0, 0); gl.Vertex2(0, 0);
 
             gl.End();
 
-            gl.BlendFunc(OpenTK.Graphics.OpenGL.BlendingFactor.SrcAlpha, OpenTK.Graphics.OpenGL.BlendingFactor.OneMinusSrcAlpha);
         }
     }
 }
