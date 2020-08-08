@@ -1,9 +1,10 @@
 ﻿using CommandLine;
+using Jint.CommonJS;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-
+using System.Resources;
 using gl = OpenTK.Graphics.OpenGL.GL;
 
 namespace BadBits.Engine
@@ -37,50 +38,34 @@ namespace BadBits.Engine
 
     static class Program
     {
-        static string FindName(string name, string root) {
 
-            return System.IO.Directory.EnumerateFiles(System.IO.Path.GetDirectoryName(System.IO.Path.GetFullPath(root)))
-                .SingleOrDefault(x => x.EndsWith(System.IO.Path.GetFileName(name)));
-
-        }
+     
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main(string[] args)
         {
-            var requireMap = new List<string>();
 
             Engine.ScriptHost host = new Engine.ScriptHost();
             var scriptEngine = new Jint.Engine();
 
-            dynamic gameGlobals = new { };
+            dynamic globals= new { };
 
-            scriptEngine.SetValue("globals", gameGlobals);
-
-            var require = new Action<string>((name) =>
-            {
-                if (requireMap.IndexOf(FindName(name, args[0]))<0) {
-
-                    requireMap.Add(FindName(name, args[0]));
-                    scriptEngine.Execute(System.IO.File.ReadAllText(FindName(name, args[0])));
-                }
-                
-            });
-
+            scriptEngine.SetValue("globals", globals);
             scriptEngine.SetValue("badBits", host);
-            scriptEngine.SetValue("require", require);
 
-            var newEngine = scriptEngine.Execute(System.IO.File.ReadAllText(args[0]));
-          
+            // Creates a new Jint instance and runs the myModule.js file in the program's
+            // current working directory.
+            Jint.Native.JsValue exports = scriptEngine.CommonJS().RunMain(args[0]);
+   
             using (var window = new OpenTK.GameWindow(640, 480, OpenTK.Graphics.GraphicsMode.Default, 
                 "Bad Bits Engine", OpenTK.GameWindowFlags.Default, 
                 OpenTK.DisplayDevice.Default, 1,2, 
                 OpenTK.Graphics.GraphicsContextFlags.Default))
             {
-               
 
-                window.Bounds = new System.Drawing.Rectangle { X = 0, Y = 0, Width = 640, Height = 480 };
+                window.Bounds = new Rectangle { X = 0, Y = 0, Width = 640, Height = 480 };
                 window.RenderFrame += (o, e) =>
                 {
                     gl.Viewport(new Rectangle(0, 0, window.Width, window.Height));

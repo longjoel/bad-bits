@@ -1,6 +1,6 @@
 "use strict";
 
-require('./backup.js');
+const backup = require('./backup.js');
 
 badBits = badBits || {};
 
