@@ -18,11 +18,11 @@ namespace BadBits.Engine
             gl.TexImage2D(OpenTK.Graphics.OpenGL.TextureTarget.Texture2D, 0, OpenTK.Graphics.OpenGL.PixelInternalFormat.Rgba,
              512, 256, 0, OpenTK.Graphics.OpenGL.PixelFormat.Rgba, OpenTK.Graphics.OpenGL.PixelType.Byte, _buffer);
 
-            gl.TexParameterI(OpenTK.Graphics.OpenGL.TextureTarget.Texture2D, OpenTK.Graphics.OpenGL.TextureParameterName.TextureWrapS, new int[(int)OpenTK.Graphics.OpenGL.TextureWrapMode.Repeat]);
-            gl.TexParameterI(OpenTK.Graphics.OpenGL.TextureTarget.Texture2D, OpenTK.Graphics.OpenGL.TextureParameterName.TextureWrapT, new int[(int)OpenTK.Graphics.OpenGL.TextureWrapMode.Repeat]);
+            gl.TexParameter(OpenTK.Graphics.OpenGL.TextureTarget.Texture2D, OpenTK.Graphics.OpenGL.TextureParameterName.TextureMinFilter, (int)OpenTK.Graphics.OpenGL.TextureMinFilter.Nearest);
+            gl.TexParameter(OpenTK.Graphics.OpenGL.TextureTarget.Texture2D, OpenTK.Graphics.OpenGL.TextureParameterName.TextureMagFilter, (int)OpenTK.Graphics.OpenGL.TextureMagFilter.Nearest);
+            gl.TexParameter(OpenTK.Graphics.OpenGL.TextureTarget.Texture2D, OpenTK.Graphics.OpenGL.TextureParameterName.TextureWrapS, (int)OpenTK.Graphics.OpenGL.TextureWrapMode.Repeat);
+            gl.TexParameter(OpenTK.Graphics.OpenGL.TextureTarget.Texture2D, OpenTK.Graphics.OpenGL.TextureParameterName.TextureWrapT, (int)OpenTK.Graphics.OpenGL.TextureWrapMode.Repeat);
 
-            gl.TexParameterI(OpenTK.Graphics.OpenGL.TextureTarget.Texture2D, OpenTK.Graphics.OpenGL.TextureParameterName.TextureMinFilter, new int[(int)OpenTK.Graphics.OpenGL.TextureMinFilter.Nearest]);
-            gl.TexParameterI(OpenTK.Graphics.OpenGL.TextureTarget.Texture2D, OpenTK.Graphics.OpenGL.TextureParameterName.TextureMagFilter, new int[(int)OpenTK.Graphics.OpenGL.TextureMinFilter.Nearest]);
 
         }
 
@@ -69,7 +69,7 @@ namespace BadBits.Engine
 
             gl.Begin(OpenTK.Graphics.OpenGL.PrimitiveType.Quads);
 
-           // gl.Color4(System.Drawing.Color.Yellow);
+            gl.Color4(new byte[] { 255, 255, 255, 250 });
 
             gl.TexCoord2(0f, .9375f); gl.Vertex2(5f, 5f);
 
