@@ -84,7 +84,7 @@ namespace BadBits.Engine
                 window.RenderFrame += (o, e) =>
                 {
                     gl.Viewport(new Rectangle(0, 0, window.Width, window.Height));
-                    gl.ClearColor(Color.Blue);
+                    gl.ClearColor(Color.Black);
                     gl.Clear(OpenTK.Graphics.OpenGL.ClearBufferMask.ColorBufferBit 
                         | OpenTK.Graphics.OpenGL.ClearBufferMask.DepthBufferBit);
                     

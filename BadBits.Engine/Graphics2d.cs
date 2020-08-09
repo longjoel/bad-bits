@@ -10,13 +10,13 @@ namespace BadBits.Engine
 
         public Graphics2D()
         {
-            _buffer = new byte[512 * 256 * 4];
+            _buffer = new byte[320 * 240 * 4];
             gl.GenTextures(1, out _textureHandle);
 
             gl.BindTexture(OpenTK.Graphics.OpenGL.TextureTarget.Texture2D, _textureHandle);
 
             gl.TexImage2D(OpenTK.Graphics.OpenGL.TextureTarget.Texture2D, 0, OpenTK.Graphics.OpenGL.PixelInternalFormat.Rgba,
-             512, 256, 0, OpenTK.Graphics.OpenGL.PixelFormat.Rgba, OpenTK.Graphics.OpenGL.PixelType.UnsignedByte, _buffer);
+             320,240 ,0, OpenTK.Graphics.OpenGL.PixelFormat.Rgba, OpenTK.Graphics.OpenGL.PixelType.UnsignedByte, _buffer);
 
             gl.TexParameter(OpenTK.Graphics.OpenGL.TextureTarget.Texture2D, OpenTK.Graphics.OpenGL.TextureParameterName.TextureMinFilter, (int)OpenTK.Graphics.OpenGL.TextureMinFilter.Nearest);
             gl.TexParameter(OpenTK.Graphics.OpenGL.TextureTarget.Texture2D, OpenTK.Graphics.OpenGL.TextureParameterName.TextureMagFilter, (int)OpenTK.Graphics.OpenGL.TextureMagFilter.Nearest);
@@ -28,16 +28,24 @@ namespace BadBits.Engine
 
         public void clear()
         {
-            System.Array.Clear(_buffer, 0, 512 * 256 * 4);
+            System.Array.Clear(_buffer, 0, 320*240*4);
         }
 
         public void setPixel(int x, int y, byte r, byte g, byte b, byte a)
         {
 
-            _buffer[(y * 512) + (x * 4) + 0] = r;
-            _buffer[(y * 512) + (x * 4) + 1] = g;
-            _buffer[(y * 512) + (x * 4) + 2] = b;
-            _buffer[(y * 512) + (x * 4) + 3] = a;
+            _buffer[(y * 320*4) + (x * 4) + 0] = r;
+            _buffer[(y * 320*4) + (x * 4) + 1] = g;
+            _buffer[(y * 320*4) + (x * 4) + 2] = b;
+            _buffer[(y * 320*4) + (x * 4) + 3] = a;
+        }
+
+        public void setRect(int x, int y, int w, int h, byte r, byte g, byte b, byte a) {
+            for (int dy = y; dy < y + h; dy++) {
+                for (int dx = x; dx < x + w; dx++) {
+                    setPixel(dx, dy, r, g, b, a);
+                }
+            }
         }
 
         public void render()
@@ -47,7 +55,7 @@ namespace BadBits.Engine
             // update the texture.
             gl.BindTexture(OpenTK.Graphics.OpenGL.TextureTarget.Texture2D, _textureHandle);
             gl.TexSubImage2D(OpenTK.Graphics.OpenGL.TextureTarget.Texture2D, 
-                0, 0, 0, 512, 256, 
+                0, 0, 0, 320, 240, 
                 OpenTK.Graphics.OpenGL.PixelFormat.Rgba, OpenTK.Graphics.OpenGL.PixelType.UnsignedByte, _buffer);
 
             OpenTK.Matrix4 mtx;
@@ -72,11 +80,11 @@ namespace BadBits.Engine
 
             gl.TexCoord2(0f, 0f); gl.Vertex2(5f, 5f);
 
-            gl.TexCoord2(.625f, 0); gl.Vertex2(315f, 5f);
+            gl.TexCoord2(1, 0); gl.Vertex2(315f, 5f);
 
-            gl.TexCoord2(.625f, .9375f); gl.Vertex2(315f, 235f);
+            gl.TexCoord2(1, 1); gl.Vertex2(315f, 235f);
 
-            gl.TexCoord2(0f, .9375f); gl.Vertex2(5f, 235f);
+            gl.TexCoord2(0f, 1); gl.Vertex2(5f, 235f);
 
             gl.End();
 
