@@ -58,12 +58,27 @@ namespace BadBits.Engine
             // Creates a new Jint instance and runs the myModule.js file in the program's
             // current working directory.
             Jint.Native.JsValue exports = scriptEngine.CommonJS().RunMain(args[0]);
+
+            Graphics2D gfx2d = default(Graphics2D);
+          
    
             using (var window = new OpenTK.GameWindow(640, 480, OpenTK.Graphics.GraphicsMode.Default, 
                 "Bad Bits Engine", OpenTK.GameWindowFlags.Default, 
-                OpenTK.DisplayDevice.Default, 1,2, 
+                OpenTK.DisplayDevice.Default, 2,1, 
                 OpenTK.Graphics.GraphicsContextFlags.Default))
             {
+
+                window.Load += (o, e) =>
+                {
+                    if (!window.Context.IsCurrent)
+                    {
+                        window.Context.MakeCurrent(window.WindowInfo);
+                    }
+
+                    gfx2d = new Graphics2D();
+
+                };
+
 
                 window.Bounds = new Rectangle { X = 0, Y = 0, Width = 640, Height = 480 };
                 window.RenderFrame += (o, e) =>
@@ -81,14 +96,9 @@ namespace BadBits.Engine
 
                     if (host.Render2dFunction != null)
                     {
-                        gl.Disable(OpenTK.Graphics.OpenGL.EnableCap.CullFace);
-                        gl.Clear(OpenTK.Graphics.OpenGL.ClearBufferMask.DepthBufferBit);
-
-                        OpenTK.Matrix4 mtx;
-                        OpenTK.Matrix4.CreateOrthographicOffCenter(0, 320, 240, 0, 1, -1, out mtx);
-
-                        gl.LoadMatrix(ref mtx);
-                        host.Render2dFunction.Invoke(e.Time);
+                      
+                    
+                        host.Render2dFunction.Invoke(e.Time,gfx2d);
                     }
 
                     window.SwapBuffers();

@@ -11,7 +11,7 @@ namespace BadBits.Engine
 {
     public class ScriptHost
     {
-        public Action<double> Render2dFunction { get; private set; }
+        public Action<double,Graphics2D> Render2dFunction { get; private set; }
         public Action<double> Render3dFunction { get; private set; }
         public Action<double> ProcessFunction { get; private set; }
         public Action InitFunction { get; private set; }
@@ -20,7 +20,7 @@ namespace BadBits.Engine
             this.InitFunction = initFunc;
         }
 
-        public void setRender2d(Action<double> renderFunc) {
+        public void setRender2d(Action<double, Graphics2D> renderFunc) {
             this.Render2dFunction = renderFunc;
         }
 
