@@ -6,9 +6,19 @@ badBits = badBits || {};
 
 badBits.setRender2d(function (dt, g) {
 
-    g.clear();
+    //g.clear();
 
-    g.setPixel(32, 32, 0xFF, 0xFF, 0xFF, 0xFF);
+    let x = 0;
+    let y = 0;
+    let dtAccum = dt;
+
+    for (x = 0; x < 320; x++) {
+
+        for (y = 0; y < 240; y++) {
+            g.setPixel(x, y, 0xFF, 0xFF, 0xFF,255);
+        }
+    
+    }
 
     g.render();
 
