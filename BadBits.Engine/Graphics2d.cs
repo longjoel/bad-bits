@@ -1,93 +1,95 @@
-﻿
-using gl = OpenTK.Graphics.OpenGL.GL;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace BadBits.Engine
 {
-    public class Graphics2D
+    public class Graphics2d : IGraphics2D
     {
+        private readonly GraphicsDevice _graphics;
+
         private readonly byte[] _buffer;
-        private readonly int _textureHandle;
 
-        public Graphics2D()
+        private Texture2D _texture2D;
+        private VertexBuffer _vertexBuffer;
+
+        public Graphics2d(GraphicsDevice graphics)
         {
+            _graphics = graphics;
             _buffer = new byte[320 * 240 * 4];
-            gl.GenTextures(1, out _textureHandle);
 
-            gl.BindTexture(OpenTK.Graphics.OpenGL.TextureTarget.Texture2D, _textureHandle);
+            _texture2D = new Texture2D(graphics, 320, 240);
+            _vertexBuffer = new VertexBuffer(_graphics, typeof(VertexPositionColorTexture), 6, BufferUsage.None);
 
-            gl.TexImage2D(OpenTK.Graphics.OpenGL.TextureTarget.Texture2D, 0, OpenTK.Graphics.OpenGL.PixelInternalFormat.Rgba,
-             320,240 ,0, OpenTK.Graphics.OpenGL.PixelFormat.Rgba, OpenTK.Graphics.OpenGL.PixelType.UnsignedByte, _buffer);
+            var drawBuffer = new VertexPositionColorTexture[] {
+                // top triangle
+                new VertexPositionColorTexture{ Position = new Vector3{X = 5, Y=5, Z=0},TextureCoordinate= new Vector2{X=0,Y=0 }, Color= new Color(0xFFFFFFFF) },
+                new VertexPositionColorTexture{ Position = new Vector3{X = 315, Y=5, Z=0},TextureCoordinate= new Vector2{X=1,Y=0 }, Color= new Color(0xFFFFFFFF) },
+                new VertexPositionColorTexture{ Position = new Vector3{X = 315, Y=235, Z=0},TextureCoordinate= new Vector2{X=1,Y=1 }, Color= new Color(0xFFFFFFFF) },
 
-            gl.TexParameter(OpenTK.Graphics.OpenGL.TextureTarget.Texture2D, OpenTK.Graphics.OpenGL.TextureParameterName.TextureMinFilter, (int)OpenTK.Graphics.OpenGL.TextureMinFilter.Nearest);
-            gl.TexParameter(OpenTK.Graphics.OpenGL.TextureTarget.Texture2D, OpenTK.Graphics.OpenGL.TextureParameterName.TextureMagFilter, (int)OpenTK.Graphics.OpenGL.TextureMagFilter.Nearest);
-            gl.TexParameter(OpenTK.Graphics.OpenGL.TextureTarget.Texture2D, OpenTK.Graphics.OpenGL.TextureParameterName.TextureWrapS, (int)OpenTK.Graphics.OpenGL.TextureWrapMode.Repeat);
-            gl.TexParameter(OpenTK.Graphics.OpenGL.TextureTarget.Texture2D, OpenTK.Graphics.OpenGL.TextureParameterName.TextureWrapT, (int)OpenTK.Graphics.OpenGL.TextureWrapMode.Repeat);
+                // bottom triangle
+                new VertexPositionColorTexture{ Position = new Vector3{X = 315, Y=235, Z=0},TextureCoordinate= new Vector2{X=1,Y=1 }, Color= new Color(0xFFFFFFFF) },
+                new VertexPositionColorTexture{ Position = new Vector3{X = 5, Y=235, Z=0},TextureCoordinate= new Vector2{X=0,Y=1 }, Color= new Color(0xFFFFFFFF) } ,
+                new VertexPositionColorTexture{ Position = new Vector3{X = 5, Y=5, Z=0},TextureCoordinate= new Vector2{X=0,Y=0 }, Color= new Color(0xFFFFFFFF) }
+            };
 
+            _vertexBuffer.SetData(drawBuffer);
 
         }
 
         public void clear()
         {
-            System.Array.Clear(_buffer, 0, 320*240*4);
+            Array.Clear(_buffer, 0, 320 * 240 * 4);
         }
+
+        public void render()
+        {
+
+            _texture2D.SetData(_buffer);
+
+            _graphics.SetVertexBuffer(_vertexBuffer);
+
+            _graphics.SamplerStates[0] = SamplerState.PointClamp;
+
+            using (var effect = new BasicEffect(_graphics))
+            {
+                effect.TextureEnabled = true;
+                effect.Texture = _texture2D;
+
+                effect.View = Matrix.CreateOrthographicOffCenter(new Rectangle(0, 0, 320, 240), -1, 1);
+                effect.World = Matrix.Identity;
+
+                foreach (var pass in effect.CurrentTechnique.Passes)
+                {
+                    
+                    pass.Apply();
+                    _graphics.DrawPrimitives(PrimitiveType.TriangleList, 0, 2);
+                }
+            }
+
+        }
+
+
 
         public void setPixel(int x, int y, byte r, byte g, byte b, byte a)
         {
 
-            _buffer[(y * 320*4) + (x * 4) + 0] = r;
-            _buffer[(y * 320*4) + (x * 4) + 1] = g;
-            _buffer[(y * 320*4) + (x * 4) + 2] = b;
-            _buffer[(y * 320*4) + (x * 4) + 3] = a;
+            _buffer[(y * 320 * 4) + (x * 4) + 0] = r;
+            _buffer[(y * 320 * 4) + (x * 4) + 1] = g;
+            _buffer[(y * 320 * 4) + (x * 4) + 2] = b;
+            _buffer[(y * 320 * 4) + (x * 4) + 3] = a;
         }
 
-        public void setRect(int x, int y, int w, int h, byte r, byte g, byte b, byte a) {
-            for (int dy = y; dy < y + h; dy++) {
-                for (int dx = x; dx < x + w; dx++) {
+        public void setRect(int x, int y, int w, int h, byte r, byte g, byte b, byte a)
+        {
+            for (int dy = y; dy < y + h; dy++)
+            {
+                for (int dx = x; dx < x + w; dx++)
+                {
                     setPixel(dx, dy, r, g, b, a);
                 }
             }
         }
 
-        public void render()
-        {
-            gl.Clear(OpenTK.Graphics.OpenGL.ClearBufferMask.DepthBufferBit);
-
-            // update the texture.
-            gl.BindTexture(OpenTK.Graphics.OpenGL.TextureTarget.Texture2D, _textureHandle);
-            gl.TexSubImage2D(OpenTK.Graphics.OpenGL.TextureTarget.Texture2D, 
-                0, 0, 0, 320, 240, 
-                OpenTK.Graphics.OpenGL.PixelFormat.Rgba, OpenTK.Graphics.OpenGL.PixelType.UnsignedByte, _buffer);
-
-            OpenTK.Matrix4 mtx;
-            OpenTK.Matrix4.CreateOrthographicOffCenter(0, 320, 240, 0, 1, -1, out mtx);
-
-            gl.LoadMatrix(ref mtx);
-
-            gl.Enable(OpenTK.Graphics.OpenGL.EnableCap.Blend);
-            gl.Enable(OpenTK.Graphics.OpenGL.EnableCap.Texture2D);
-
-            gl.Disable(OpenTK.Graphics.OpenGL.EnableCap.DepthTest);
-            gl.Disable(OpenTK.Graphics.OpenGL.EnableCap.CullFace);
-
-            gl.BlendFunc(OpenTK.Graphics.OpenGL.BlendingFactor.SrcAlpha,
-                OpenTK.Graphics.OpenGL.BlendingFactor.OneMinusSrcAlpha);
-
-            gl.AlphaFunc(OpenTK.Graphics.OpenGL.AlphaFunction.Gequal, 0.9f);
-            
-            gl.Begin(OpenTK.Graphics.OpenGL.PrimitiveType.Quads);
-
-            gl.Color4(new byte[] { 255, 255, 255, 255 });
-
-            gl.TexCoord2(0f, 0f); gl.Vertex2(5f, 5f);
-
-            gl.TexCoord2(1, 0); gl.Vertex2(315f, 5f);
-
-            gl.TexCoord2(1, 1); gl.Vertex2(315f, 235f);
-
-            gl.TexCoord2(0f, 1); gl.Vertex2(5f, 235f);
-
-            gl.End();
-
-        }
     }
 }
