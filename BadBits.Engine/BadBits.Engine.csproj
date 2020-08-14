@@ -65,6 +65,10 @@
   <ItemGroup>
     <Compile Include="Graphics2d.cs" />
     <Compile Include="IGraphics2D.cs" />
+    <Compile Include="Interfaces\Context\IGraphicsContext2d.cs" />
+    <Compile Include="Interfaces\Context\IGraphicsContext3d.cs" />
+    <Compile Include="Interfaces\Context\IScriptContext.cs" />
+    <Compile Include="Interfaces\Services\IScriptService.cs" />
     <Compile Include="ScriptHost.cs">
       <Generator>DtsGenerator</Generator>
       <LastGenOutput>ScriptHost.cs.d.ts</LastGenOutput>
