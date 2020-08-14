@@ -63,6 +63,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Context\GraphicsContext2d.cs" />
+    <Compile Include="Context\ScriptContext.cs" />
     <Compile Include="Graphics2d.cs" />
     <Compile Include="IGraphics2D.cs" />
     <Compile Include="Interfaces\Context\IGraphicsContext2d.cs" />
@@ -77,6 +79,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ScriptService.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

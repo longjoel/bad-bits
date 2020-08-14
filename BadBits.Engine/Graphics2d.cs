@@ -64,7 +64,7 @@ namespace BadBits.Engine
 
                 foreach (var pass in effect.CurrentTechnique.Passes)
                 {
-                    
+
                     pass.Apply();
                     _graphics.DrawPrimitives(PrimitiveType.TriangleList, 0, 2);
                 }
