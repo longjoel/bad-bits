@@ -69,6 +69,8 @@
     <Compile Include="Interfaces\Context\IGraphicsContext3d.cs" />
     <Compile Include="Interfaces\Context\IScriptContext.cs" />
     <Compile Include="Interfaces\Services\IScriptService.cs" />
+    <Compile Include="Model\Sprite.cs" />
+    <Compile Include="Model\Texture.cs" />
     <Compile Include="ScriptHost.cs">
       <Generator>DtsGenerator</Generator>
       <LastGenOutput>ScriptHost.cs.d.ts</LastGenOutput>

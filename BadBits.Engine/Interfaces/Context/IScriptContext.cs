@@ -73,17 +73,11 @@ namespace BadBits.Engine.Interfaces.Context
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="textureName"></param>
-        void refreshTexture(string textureName);
-
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="name"></param>
         /// <param name="path"></param>
         /// <param name="cols"></param>
         /// <param name="rows"></param>
-        void loadSpriteSheet(string name, string path, int cols, int rows);
+        void loadSpriteSheet(string name, string path, int rows, int cols);
 
         /// <summary>
         /// 
@@ -92,7 +86,27 @@ namespace BadBits.Engine.Interfaces.Context
         /// <param name="textureName"></param>
         /// <param name="cols"></param>
         /// <param name="rows"></param>
-        void setSpriteSheet(string name, string textureName, int cols, int rows);
+        void setSpriteSheet(string name, string textureName, int rows, int cols);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="srcRect"></param>
+        /// <param name="destRect"></param>
+        void drawTexture(string name, int[] srcRect, int[] destRect);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="row"></param>
+        /// <param name="col"></param>
+        void drawSprite(string name, int x, int y, int row, int col);
+
+
 
     }
 }
