@@ -50,6 +50,7 @@ namespace BadBits.Engine
             _graphics.SetVertexBuffer(_vertexBuffer);
 
             _graphics.SamplerStates[0] = SamplerState.PointClamp;
+            _graphics.BlendState = BlendState.AlphaBlend;
 
             using (var effect = new BasicEffect(_graphics))
             {
@@ -58,6 +59,8 @@ namespace BadBits.Engine
 
                 effect.View = Matrix.CreateOrthographicOffCenter(new Rectangle(0, 0, 320, 240), -1, 1);
                 effect.World = Matrix.Identity;
+
+                effect.VertexColorEnabled = true;
 
                 foreach (var pass in effect.CurrentTechnique.Passes)
                 {

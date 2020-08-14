@@ -4,5 +4,6 @@ declare module server {
 		render3dFunction: any;
 		processFunction: any;
 		initFunction: any;
+		textures: { [index: string]: any };
 	}
 }
