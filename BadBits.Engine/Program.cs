@@ -20,7 +20,7 @@ namespace BadBits.Engine
         public BadBitsGame() : base() {
             this._graphics = new GraphicsDeviceManager(this);
 
-            _host = new ScriptHost();
+            _host = new ScriptHost(GraphicsDevice);
             _scriptEngine = new Jint.Engine();
             _globals = new { };
             _scriptEngine.SetValue("globals", _globals);
