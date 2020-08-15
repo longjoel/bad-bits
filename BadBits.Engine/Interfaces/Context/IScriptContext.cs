@@ -8,6 +8,11 @@ namespace BadBits.Engine.Interfaces.Context
 {
     public interface IScriptContext
     {
+        Action InitAction { get; }
+        Action<double> ProcessAction { get; }
+        Action<double> Render2dAction { get; }
+        Action<double> Render3dAction { get; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -18,13 +23,13 @@ namespace BadBits.Engine.Interfaces.Context
         /// 
         /// </summary>
         /// <param name="render2dAction"></param>
-        void setRender2d(Action<double, IGraphicsContext2d> render2dAction);
+        void setRender2d(Action<double> render2dAction);
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="render3dAction"></param>
-        void setRender3d(Action<double, IGraphicsContext3d> render3dAction);
+        void setRender3d(Action<double> render3dAction);
 
         /// <summary>
         /// 
@@ -57,7 +62,7 @@ namespace BadBits.Engine.Interfaces.Context
         /// <param name="g"></param>
         /// <param name="b"></param>
         /// <param name="a"></param>
-        void setPixel(string textureName, int x, int y, byte r, byte g, byte b, byte a);
+        void setPixelTransparent(string textureName, int x, int y, int r, int g, int b, int a);
 
         /// <summary>
         /// 
@@ -68,7 +73,7 @@ namespace BadBits.Engine.Interfaces.Context
         /// <param name="r"></param>
         /// <param name="g"></param>
         /// <param name="b"></param>
-        void setPixel(string textureName, int x, int y, byte r, byte g, byte b);
+        void setPixel(string textureName, int x, int y, int r, int g, int b);
 
         /// <summary>
         /// 
@@ -83,10 +88,9 @@ namespace BadBits.Engine.Interfaces.Context
         /// 
         /// </summary>
         /// <param name="name"></param>
-        /// <param name="textureName"></param>
         /// <param name="cols"></param>
         /// <param name="rows"></param>
-        void setSpriteSheet(string name, string textureName, int rows, int cols);
+        void setSpriteSheet(string name,  int rows, int cols);
 
         /// <summary>
         /// 
@@ -105,8 +109,6 @@ namespace BadBits.Engine.Interfaces.Context
         /// <param name="row"></param>
         /// <param name="col"></param>
         void drawSprite(string name, int x, int y, int row, int col);
-
-
 
     }
 }

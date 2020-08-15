@@ -57,7 +57,7 @@ namespace BadBits.Engine.Context
 
             _spriteBatch = new SpriteBatch(_graphics);
 
-            _renderTarget = new RenderTarget2D(_graphics, 320, 240);
+            _renderTarget = new RenderTarget2D(_graphics, 320, 240,false, SurfaceFormat.Color, DepthFormat.None);
 
         }
 
@@ -66,7 +66,7 @@ namespace BadBits.Engine.Context
             _textureCache[name] = new Model.Texture(_graphics, width, height);
         }
 
-        public void CreateSpriteSheet(string name, int rows, int cols) {
+        public void SetSpriteSheet(string name, int rows, int cols) {
             _spriteCache[name] = new Model.SpriteSheet(name, rows, cols, _textureCache[name].Width, _textureCache[name].Height);
         }
 
@@ -77,7 +77,7 @@ namespace BadBits.Engine.Context
 
         public void LoadSpriteSheet(string name, string path, int rows, int cols) {
             LoadTexture(name, path);
-            CreateSpriteSheet(name, rows, cols);
+            SetSpriteSheet(name, rows, cols);
         }
 
         public void SetPixel(string textureName, int x, int y, byte r, byte g, byte b, byte a)
@@ -93,11 +93,15 @@ namespace BadBits.Engine.Context
         public void Render()
         {
 
-            var lastTarget = _graphics.GetRenderTargets().FirstOrDefault();
+            foreach (var t in _textureCache.Values.Where(x => x.IsDirty)) {
+                t.SetData();
+            }
 
             _graphics.SetRenderTarget(_renderTarget);
 
-            _spriteBatch.Begin(SpriteSortMode.Deferred);
+            _graphics.Clear(Color.White);
+
+            _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap);
 
             foreach (var command in _drawCommands)
             {
@@ -112,10 +116,17 @@ namespace BadBits.Engine.Context
 
             _texture.SetData();
 
-            _graphics.Clear(ClearOptions.DepthBuffer, Microsoft.Xna.Framework.Color.Transparent, _graphics.Viewport.MaxDepth, 0);
+            _graphics.Clear(ClearOptions.DepthBuffer, Color.Transparent, _graphics.Viewport.MaxDepth, 0);
 
-            _graphics.SamplerStates[0] = SamplerState.PointClamp;
+           
+            _graphics.SetVertexBuffer(_vertexBuffer);
+
+            _graphics.SamplerStates[0] = SamplerState.PointWrap;
+            _graphics.SamplerStates[1] = SamplerState.PointWrap;
+            _graphics.SamplerStates[2] = SamplerState.PointWrap;
+            
             _graphics.BlendState = BlendState.AlphaBlend;
+
 
             using (var effect = new BasicEffect(_graphics))
             {
@@ -159,5 +170,6 @@ namespace BadBits.Engine.Context
                 DestRect = new Rectangle { X = destRect[0], Y = destRect[1], Width = destRect[2], Height = destRect[3] }
             });
         }
+        
     }
 }

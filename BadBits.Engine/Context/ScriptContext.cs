@@ -10,7 +10,14 @@ namespace BadBits.Engine.Context
     public class ScriptContext : IScriptContext
     {
         private IGraphicsContext2d _graphicsContext2D;
-       
+
+        public Action InitAction { get; private set; }
+
+        public Action<double> Render2dAction { get; private set; }
+
+        public Action<double> Render3dAction { get; private set; }
+
+        public Action<double> ProcessAction { get; private set; }
 
         public ScriptContext(IGraphicsContext2d graphicsContext2D) {
             _graphicsContext2D = graphicsContext2D;
@@ -41,39 +48,40 @@ namespace BadBits.Engine.Context
             _graphicsContext2D.LoadTexture(name, path);
         }
 
+        public void setSpriteSheet(string name, int rows, int cols)
+        {
+            _graphicsContext2D.SetSpriteSheet(name,  rows, cols);
+        }
+
+        public void setPixelTransparent(string textureName, int x, int y, int r, int g, int b, int a)
+        {
+            _graphicsContext2D.SetPixel(textureName, x, y, (byte)r, (byte)g, (byte)b, (byte)a);
+        }
+
+        public void setPixel(string textureName, int x, int y, int r, int g, int b)
+        {
+            _graphicsContext2D.SetPixel(textureName, x, y, (byte)r, (byte)g, (byte)b);
+        }
+
         public void setInit(Action initAction)
         {
-            throw new NotImplementedException();
+            InitAction = initAction;
         }
-
-        public void setPixel(string textureName, int x, int y, byte r, byte g, byte b, byte a)
-        {
-            _graphicsContext2D.SetPixel(textureName, x, y, r, g, b, a);
-        }
-
-        public void setPixel(string textureName, int x, int y, byte r, byte g, byte b)
-        {
-            _graphicsContext2D.SetPixel(textureName, x, y, r, g, b);
-        }
-
         public void setProcess(Action<double> processAction)
         {
-            throw new NotImplementedException();
+            ProcessAction = processAction;
         }
 
-        public void setRender2d(Action<double, IGraphicsContext2d> render2dAction)
+        public void setRender2d(Action<double> render2dAction)
         {
-            throw new NotImplementedException();
+            Render2dAction = render2dAction;
         }
 
-        public void setRender3d(Action<double, IGraphicsContext3d> render3dAction)
+        public void setRender3d(Action<double> render3dAction)
         {
-            throw new NotImplementedException();
+            Render3dAction = render3dAction;
         }
 
-        public void setSpriteSheet(string name, string textureName, int rows, int cols)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }

@@ -1,24 +1,30 @@
-"use strict";
+'use strict';
 
-const backup = require('./backup.js');
+engine.setInit(function () {
 
-badBits.setRender2d(function (dt, g) {
+    engine.createTexture('alpha', 64, 64);
+    engine.loadTexture('beta', __dirname + '/up.png');
 
-    g.clear();
+    let x, y;
 
-    g.setRect(0, 0, 16, 16, 255, 255, 255, 0xFF);
-    g.setRect(0, 240 - 16, 16, 16, 128, 128, 128, 0xFF);
-    g.setRect(320 - 16, 240 - 16, 16, 16, 128, 128, 0, 0xFF);
-
-    let x;
-    let y;
-    
-    for (y = 50; y < 190; y++) {
-        for (x = 50; x < 270; x++) {
-            g.setPixel(x,y,(x*y)%255,(x+y)%255,128,255);
+    for (y = 0; y < 64; y++) {
+        for (x = 0; x < 64; x++) {
+            if(x %2 == 0 && y%2 == 0 && (x+y)%3 == 0){
+            engine.setPixel('alpha',
+                x, y,
+               0,0,255);
+            }else{
+                engine.setPixelTransparent('alpha',x,y,0,0,0,0);
+            }
         }
     }
-    
-    g.render();
 
+});
+
+let t = 0;
+
+engine.setRender2d(function (dt) {
+    t = t + (dt * 2);
+    engine.drawTexture('beta', [0, 0, 64, 64], [0, 0, 320, 240]);
+    engine.drawTexture('alpha', [0, 0, 64, 64], [(t * 5) % 200, 0, 128, 128]);
 });

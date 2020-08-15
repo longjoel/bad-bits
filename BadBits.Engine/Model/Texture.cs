@@ -38,26 +38,6 @@ namespace BadBits.Engine.Model
         /// </summary>
         public bool IsDirty { get; private set; }
 
-        private void ReorderPixels()
-        {
-
-            for (int y = 0; y < Height; y++)
-            {
-                for (int x = 0; x < Width; x++)
-                {
-                    var a = Data[4 * (y * Width + x) + 0];
-                    var r = Data[4 * (y * Width + x) + 1];
-                    var g = Data[4 * (y * Width + x) + 2];
-                    var b = Data[4 * (y * Width + x) + 3];
-
-
-                    Data[4 * (y * Width + x) + 0] = r;
-                    Data[4 * (y * Width + x) + 1] = g;
-                    Data[4 * (y * Width + x) + 2] = b;
-                    Data[4 * (y * Width + x) + 3] = a;
-                }
-            }
-        }
 
         /// <summary>
         /// 
@@ -72,7 +52,7 @@ namespace BadBits.Engine.Model
             Height = height;
 
             Data = new byte[width * height * 4];
-            Texture2D = new Texture2D(g, width, height);
+            Texture2D = new Texture2D(g, width, height, false, SurfaceFormat.Color);
 
             IsDirty = true;
 
@@ -92,20 +72,24 @@ namespace BadBits.Engine.Model
                 Height = img.Height;
 
                 Data = new byte[Width * Height * 4];
-                Texture2D = new Texture2D(g, Width, Height);
+                Texture2D = new Texture2D(g, Width, Height, false, SurfaceFormat.Color);
 
                 using (var bmp = new System.Drawing.Bitmap(img))
                 {
 
-                    var data = bmp.LockBits(new System.Drawing.Rectangle(0, 0, Width, Height), System.Drawing.Imaging.ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-
-                    System.Runtime.InteropServices.Marshal.Copy(data.Scan0, Data, 0, Width * Height * 4);
-
-                    bmp.UnlockBits(data);
+                    for (int y = 0; y < Height; y++)
+                    {
+                        for (int x = 0; x < Width; x++)
+                        {
+                            var c = bmp.GetPixel(x, y);
+                            SetPixel(x, y, c.R, c.G, c.B, c.A);
+                        }
+                    }
 
                 }
             }
-            ReorderPixels();
+
+            SetData();
         }
 
         /// <summary>
@@ -121,10 +105,10 @@ namespace BadBits.Engine.Model
         {
             IsDirty = true;
 
-            Data[4 * (y * Width + x) + 0] = r;
-            Data[4 * (y * Width + x) + 1] = g;
-            Data[4 * (y * Width + x) + 2] = b;
-            Data[4 * (y * Width + x) + 3] = a;
+            Data[(y * Width * 4) + (x * 4) + 0] = r;
+            Data[(y * Width * 4) + (x * 4) + 1] = g;
+            Data[(y * Width * 4) + (x * 4) + 2] = b;
+            Data[(y * Width * 4) + (x * 4) + 3] = a;
 
         }
 
@@ -153,9 +137,9 @@ namespace BadBits.Engine.Model
             {
                 for (int x = 0; x < Width; x++)
                 {
-                    var rx = Data[4 * (y * Width + x) + 0];
-                    var gx = Data[4 * (y * Width + x) + 1];
-                    var bx = Data[4 * (y * Width + x) + 2];
+                    var rx = Data[(y * Width * 4) + (x * 4) + 0];
+                    var gx = Data[(y * Width * 4) + (x * 4) + 1];
+                    var bx = Data[(y * Width * 4) + (x * 4) + 2];
                     var a = (byte)255;
                     if (rx == r && gx == g && bx == b)
                     {
