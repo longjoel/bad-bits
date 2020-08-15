@@ -12,6 +12,8 @@ namespace BadBits.Engine
 
         private Interfaces.Context.IGraphicsContext2d _graphicsContext2d;
         private Interfaces.Context.IGraphicsContext3d _graphicsContext3d;
+        private Interfaces.Context.IInputContext _inputContext;
+
         private Interfaces.Context.IScriptContext _scriptContext;
 
         Jint.Engine _scriptEngine; 
@@ -20,7 +22,7 @@ namespace BadBits.Engine
        // dynamic _globals;
 
         public BadBitsGame() : base() {
-            this._graphics = new GraphicsDeviceManager(this);
+            _graphics = new GraphicsDeviceManager(this);
 
         }
 
@@ -29,7 +31,9 @@ namespace BadBits.Engine
             _graphicsContext2d = new Context.GraphicsContext2d(_graphics.GraphicsDevice);
             _graphicsContext3d = null;
 
-            _scriptContext = new Context.ScriptContext(_graphicsContext2d);
+            _inputContext = new Context.InputContext();
+
+            _scriptContext = new Context.ScriptContext(_graphicsContext2d, _inputContext);
 
             _scriptEngine = new Jint.Engine();
             _scriptEngine.SetValue("engine", _scriptContext);
@@ -49,6 +53,7 @@ namespace BadBits.Engine
             {
                 _scriptContext.ProcessAction.Invoke(gameTime.ElapsedGameTime.TotalSeconds);
             }
+
             base.Update(gameTime);
         }
 
