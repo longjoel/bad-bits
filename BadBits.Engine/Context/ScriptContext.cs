@@ -10,6 +10,7 @@ namespace BadBits.Engine.Context
     public class ScriptContext : IScriptContext
     {
         private IGraphicsContext2d _graphicsContext2D;
+        private IInputContext _inputContext;
 
         public Action InitAction { get; private set; }
 
@@ -19,8 +20,9 @@ namespace BadBits.Engine.Context
 
         public Action<double> ProcessAction { get; private set; }
 
-        public ScriptContext(IGraphicsContext2d graphicsContext2D) {
+        public ScriptContext(IGraphicsContext2d graphicsContext2D, IInputContext inputContext) {
             _graphicsContext2D = graphicsContext2D;
+            _inputContext = inputContext;
         }
 
         public void createTexture(string name, int width, int height)
@@ -82,6 +84,11 @@ namespace BadBits.Engine.Context
             Render3dAction = render3dAction;
         }
 
-       
+        public Model.InputState pollInput()
+        {
+            return _inputContext.PollInput();
+        }
+
+      
     }
 }

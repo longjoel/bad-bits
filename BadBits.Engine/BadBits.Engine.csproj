@@ -61,16 +61,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\GraphicsContext2d.cs" />
+    <Compile Include="Context\InputContext.cs" />
     <Compile Include="Context\ScriptContext.cs">
       <Generator>DtsGenerator</Generator>
       <LastGenOutput>ScriptContext.cs.d.ts</LastGenOutput>
     </Compile>
     <Compile Include="Interfaces\Context\IGraphicsContext2d.cs" />
     <Compile Include="Interfaces\Context\IGraphicsContext3d.cs" />
+    <Compile Include="Interfaces\Context\IInputContext.cs" />
     <Compile Include="Interfaces\Context\IScriptContext.cs">
       <Generator>DtsGenerator</Generator>
       <LastGenOutput>IScriptContext.cs.d.ts</LastGenOutput>
     </Compile>
+    <Compile Include="Model\InputState.cs" />
     <Compile Include="Model\SpriteSheet.cs" />
     <Compile Include="Model\Texture.cs" />
     <Compile Include="Program.cs" />

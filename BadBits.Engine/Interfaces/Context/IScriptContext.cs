@@ -110,5 +110,11 @@ namespace BadBits.Engine.Interfaces.Context
         /// <param name="col"></param>
         void drawSprite(string name, int x, int y, int row, int col);
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        Model.InputState pollInput();
+
     }
 }
