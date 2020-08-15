@@ -33,12 +33,12 @@ namespace BadBits.Engine.Context
 
         public void loadSpriteSheet(string name, string path, int rows, int cols)
         {
-            throw new NotImplementedException();
+            _graphicsContext2D.LoadSpriteSheet(name, path,rows,cols);
         }
 
         public void loadTexture(string name, string path)
         {
-            throw new NotImplementedException();
+            _graphicsContext2D.LoadTexture(name, path);
         }
 
         public void setInit(Action initAction)

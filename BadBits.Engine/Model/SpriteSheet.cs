@@ -5,7 +5,7 @@ namespace BadBits.Engine.Model
     /// <summary>
     /// 
     /// </summary>
-    public class Sprite
+    public class SpriteSheet
     {
         public string Texture { get; private set; }
         public int Rows { get; private set; }
@@ -13,7 +13,7 @@ namespace BadBits.Engine.Model
         public int CellWidth { get; private set; }
         public int CellHeight { get; private set; }
 
-        public Sprite(string texture, int rows, int cols, int width, int height)
+        public SpriteSheet(string texture, int rows, int cols, int width, int height)
         {
             Texture = texture;
             Rows = rows;

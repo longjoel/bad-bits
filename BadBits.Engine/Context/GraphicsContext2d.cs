@@ -23,7 +23,7 @@ namespace BadBits.Engine.Context
         private SpriteBatch _spriteBatch;
 
         private readonly Dictionary<string, Model.Texture> _textureCache;
-        private readonly Dictionary<string, Model.Sprite> _spriteCache;
+        private readonly Dictionary<string, Model.SpriteSheet> _spriteCache;
 
         private List<DrawCommand> _drawCommands;
 
@@ -35,7 +35,7 @@ namespace BadBits.Engine.Context
             _graphics = graphics;
             _drawCommands = new List<DrawCommand>();
             _textureCache = new Dictionary<string, Model.Texture>();
-            _spriteCache = new Dictionary<string, Model.Sprite>();
+            _spriteCache = new Dictionary<string, Model.SpriteSheet>();
 
             _texture = new Model.Texture(graphics, 320, 240);
 
@@ -66,9 +66,18 @@ namespace BadBits.Engine.Context
             _textureCache[name] = new Model.Texture(_graphics, width, height);
         }
 
+        public void CreateSpriteSheet(string name, int rows, int cols) {
+            _spriteCache[name] = new Model.SpriteSheet(name, rows, cols, _textureCache[name].Width, _textureCache[name].Height);
+        }
+
         public void LoadTexture(string name, string path)
         {
             _textureCache[name] = new Model.Texture(_graphics, path);
+        }
+
+        public void LoadSpriteSheet(string name, string path, int rows, int cols) {
+            LoadTexture(name, path);
+            CreateSpriteSheet(name, rows, cols);
         }
 
         public void SetPixel(string textureName, int x, int y, byte r, byte g, byte b, byte a)

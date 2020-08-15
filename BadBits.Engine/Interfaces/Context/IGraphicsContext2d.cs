@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BadBits.Engine.Interfaces.Context
+﻿namespace BadBits.Engine.Interfaces.Context
 {
     public interface IGraphicsContext2d
     {
         void CreateTexture(string name, int width, int height);
+        void CreateSpriteSheet(string name, int rows, int cols);
+
         void LoadTexture(string name, string path);
+        void LoadSpriteSheet(string name, string path, int rows, int cols);
+
+
         void SetPixel(string textureName, int x, int y, byte r, byte g, byte b, byte a);
         void SetPixel(string textureName, int x, int y, byte r, byte g, byte b);
         void Render();
