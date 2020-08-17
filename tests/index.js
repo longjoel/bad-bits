@@ -9,10 +9,10 @@ engine.setInit(function () {
 
     for (y = 0; y < 64; y++) {
         for (x = 0; x < 64; x++) {
-            if (x % 2 == 0 && y % 2 == 0 && (x + y) % 3 == 0) {
+            if (x % 2 == 0 && y % 2 == 0 && (x + y) % 3 != 0) {
                 engine.setPixel('alpha',
                     x, y,
-                    0, 0, 255);
+                    (x*100)%255, (x*y)%255, 255);
             } else {
                 engine.setPixelTransparent('alpha', x, y, 0, 0, 0, 0);
             }
