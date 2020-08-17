@@ -74,6 +74,8 @@ namespace BadBits.Engine.Context
             ProcessAction = processAction;
         }
 
+
+
         public void setRender2d(Action<double> render2dAction)
         {
             Render2dAction = render2dAction;
@@ -89,6 +91,9 @@ namespace BadBits.Engine.Context
             return _inputContext.PollInput();
         }
 
-      
+        public void makeTransparent(string name, int r, int g, int b)
+        {
+            _graphicsContext2D.MakeTransparent(name, (byte)r, (byte)g, (byte)b);
+        }
     }
 }

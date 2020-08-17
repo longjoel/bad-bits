@@ -28,6 +28,9 @@ namespace BadBits.Engine
 
         protected override void Initialize()
         {
+            _graphics.PreferredBackBufferWidth = 960;
+            _graphics.PreferredBackBufferHeight = 720;
+            _graphics.ApplyChanges();
             _graphicsContext2d = new Context.GraphicsContext2d(_graphics.GraphicsDevice);
             _graphicsContext3d = null;
 
