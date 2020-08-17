@@ -116,5 +116,15 @@ namespace BadBits.Engine.Interfaces.Context
         /// <returns></returns>
         Model.InputState pollInput();
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="r"></param>
+        /// <param name="g"></param>
+        /// <param name="b"></param>
+        void makeTransparent(string name, int r, int g, int b);
+        
+
     }
 }

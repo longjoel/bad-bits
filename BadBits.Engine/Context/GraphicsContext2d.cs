@@ -21,6 +21,7 @@ namespace BadBits.Engine.Context
         private Model.Texture _texture;
         private VertexBuffer _vertexBuffer;
         private SpriteBatch _spriteBatch;
+        private Color _clearColor;
 
         private readonly Dictionary<string, Model.Texture> _textureCache;
         private readonly Dictionary<string, Model.SpriteSheet> _spriteCache;
@@ -38,19 +39,20 @@ namespace BadBits.Engine.Context
             _spriteCache = new Dictionary<string, Model.SpriteSheet>();
 
             _texture = new Model.Texture(graphics, 320, 240);
+            _clearColor = Color.Transparent;
 
             _vertexBuffer = new VertexBuffer(_graphics, typeof(VertexPositionColorTexture), 6, BufferUsage.None);
 
             var drawBuffer = new VertexPositionColorTexture[] {
                 // top triangle
-                new VertexPositionColorTexture{ Position = new Vector3{X = 5, Y=5, Z=0},TextureCoordinate= new Vector2{X=0,Y=0 }, Color= new Color(0xFFFFFFFF) },
-                new VertexPositionColorTexture{ Position = new Vector3{X = 315, Y=5, Z=0},TextureCoordinate= new Vector2{X=1,Y=0 }, Color= new Color(0xFFFFFFFF) },
-                new VertexPositionColorTexture{ Position = new Vector3{X = 315, Y=235, Z=0},TextureCoordinate= new Vector2{X=1,Y=1 }, Color= new Color(0xFFFFFFFF) },
+                new VertexPositionColorTexture{ Position = new Vector3{X = 0, Y=0, Z=0},TextureCoordinate= new Vector2{X=0,Y=0 }, Color= new Color(0xFFFFFFFF) },
+                new VertexPositionColorTexture{ Position = new Vector3{X = 320, Y=0, Z=0},TextureCoordinate= new Vector2{X=1,Y=0 }, Color= new Color(0xFFFFFFFF) },
+                new VertexPositionColorTexture{ Position = new Vector3{X = 320, Y=240, Z=0},TextureCoordinate= new Vector2{X=1,Y=1 }, Color= new Color(0xFFFFFFFF) },
 
                 // bottom triangle
-                new VertexPositionColorTexture{ Position = new Vector3{X = 315, Y=235, Z=0},TextureCoordinate= new Vector2{X=1,Y=1 }, Color= new Color(0xFFFFFFFF) },
-                new VertexPositionColorTexture{ Position = new Vector3{X = 5, Y=235, Z=0},TextureCoordinate= new Vector2{X=0,Y=1 }, Color= new Color(0xFFFFFFFF) } ,
-                new VertexPositionColorTexture{ Position = new Vector3{X = 5, Y=5, Z=0},TextureCoordinate= new Vector2{X=0,Y=0 }, Color= new Color(0xFFFFFFFF) }
+                new VertexPositionColorTexture{ Position = new Vector3{X = 320, Y=240, Z=0},TextureCoordinate= new Vector2{X=1,Y=1 }, Color= new Color(0xFFFFFFFF) },
+                new VertexPositionColorTexture{ Position = new Vector3{X = 0, Y=240, Z=0},TextureCoordinate= new Vector2{X=0,Y=1 }, Color= new Color(0xFFFFFFFF) } ,
+                new VertexPositionColorTexture{ Position = new Vector3{X = 0, Y=0, Z=0},TextureCoordinate= new Vector2{X=0,Y=0 }, Color= new Color(0xFFFFFFFF) }
             };
 
             _vertexBuffer.SetData(drawBuffer);
@@ -99,7 +101,7 @@ namespace BadBits.Engine.Context
 
             _graphics.SetRenderTarget(_renderTarget);
 
-            _graphics.Clear(Color.White);
+            _graphics.Clear(_clearColor);
 
             _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap);
 
@@ -170,6 +172,18 @@ namespace BadBits.Engine.Context
                 DestRect = new Rectangle { X = destRect[0], Y = destRect[1], Width = destRect[2], Height = destRect[3] }
             });
         }
-        
+
+        public void SetClearColor(byte r, byte g, byte b)
+        {
+            _clearColor.R = r;
+            _clearColor.G = g;
+            _clearColor.B = b;
+            _clearColor.A = 0;
+        }
+
+        public void MakeTransparent(string textureName, byte r, byte g, byte b)
+        {
+            _textureCache[textureName].MakeTransparent(r, g, b);
+        }
     }
 }
