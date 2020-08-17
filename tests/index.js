@@ -25,7 +25,7 @@ let t = 0;
 
 engine.setRender2d(function (dt) {
     t = t + (dt * 2);
-    engine.drawTexture('beta', [0, 0, 64, 64], [0, 0, 320, 240]);
+   engine.drawTexture('beta', [0, 0, 64, 64], [0, 0, 320, 240]);
     if (engine.pollInput().up) {engine.drawTexture('alpha', [0, 0, 64, 64], [(t * 5) % 200, 0, 128, 128]);  }
     
 });

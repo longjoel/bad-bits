@@ -74,6 +74,8 @@ namespace BadBits.Engine.Context
             ProcessAction = processAction;
         }
 
+
+
         public void setRender2d(Action<double> render2dAction)
         {
             Render2dAction = render2dAction;
