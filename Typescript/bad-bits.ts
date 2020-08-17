@@ -55,4 +55,6 @@ export interface IBadBits {
     setRender3d: (render3dAction: (dt:number) => void) => void;
 
     pollInput:()=> IInputState;
+
+	makeTransparent:(name:string, r:number, int :number, b:number)=> void;
 }
