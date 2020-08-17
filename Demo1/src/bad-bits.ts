@@ -32,7 +32,7 @@ export interface IBadBits {
         srcRect: number[], destRect: number[]) => void;
 
     loadSpriteSheet: (name: string, path: string, 
-        rows: string, cols: string) => void;
+        rows: number, cols: number) => void;
 
     loadTexture: (name: string, path: string) => void;
 
