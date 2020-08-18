@@ -1,4 +1,5 @@
 ﻿using BadBits.Engine.Interfaces.Context;
+using BadBits.Engine.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -94,6 +95,29 @@ namespace BadBits.Engine.Context
         public void makeTransparent(string name, int r, int g, int b)
         {
             _graphicsContext2D.MakeTransparent(name, (byte)r, (byte)g, (byte)b);
+        }
+
+        public SpriteAttribs getSpriteAttribs(string name)
+        {
+            var sprite = _graphicsContext2D.SpriteCache[name];
+
+            return new SpriteAttribs
+            {
+                cellHeight = sprite.CellHeight,
+                cellWidth = sprite.CellWidth,
+                cols = sprite.Cols,
+                rows = sprite.Rows
+            };
+        }
+
+        public TextureAttribs getTextureAttribs(string name)
+        {
+            var texture = _graphicsContext2D.TextureCache[name];
+
+            return new TextureAttribs {
+                width = texture.Width,
+                height = texture.Height
+            };
         }
     }
 }

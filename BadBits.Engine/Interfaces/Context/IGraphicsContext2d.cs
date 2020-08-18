@@ -1,7 +1,12 @@
-﻿namespace BadBits.Engine.Interfaces.Context
+﻿using System.Collections.Generic;
+
+namespace BadBits.Engine.Interfaces.Context
 {
     public interface IGraphicsContext2d
     {
+        Dictionary<string, Model.Texture> TextureCache { get; }
+        Dictionary<string, Model.SpriteSheet> SpriteCache { get;  }
+
         void CreateTexture(string name, int width, int height);
 
         void LoadTexture(string name, string path);

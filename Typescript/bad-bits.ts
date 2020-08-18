@@ -19,19 +19,31 @@ export interface IInputState {
     select: boolean;
 }
 
+export interface ITextureAttribs {
+    width: number;
+    height: number;
+}
+
+export interface ISpriteAttribs {
+    rows: number;
+    cols: number;
+    cellWidth: number;
+    cellHeight: number;
+}
+
 export interface IBadBits {
 
     createTexture: (name: string, width: number, height: number) => void;
 
-    drawSprite: (name: string, 
-        x: number, y: number, 
+    drawSprite: (name: string,
+        x: number, y: number,
         row: number, col: number) => void;
 
 
-    drawTexture: (name: string, 
+    drawTexture: (name: string,
         srcRect: number[], destRect: number[]) => void;
 
-    loadSpriteSheet: (name: string, path: string, 
+    loadSpriteSheet: (name: string, path: string,
         rows: string, cols: string) => void;
 
     loadTexture: (name: string, path: string) => void;
@@ -48,13 +60,17 @@ export interface IBadBits {
 
     setInit: (initAction: () => void) => void;
 
-    setProcess: (processAction: (dt:number) => void) => void;
+    setProcess: (processAction: (dt: number) => void) => void;
 
-    setRender2d: (render2dAction: (dt:number) => void) => void;
+    setRender2d: (render2dAction: (dt: number) => void) => void;
 
-    setRender3d: (render3dAction: (dt:number) => void) => void;
+    setRender3d: (render3dAction: (dt: number) => void) => void;
 
-    pollInput:()=> IInputState;
+    pollInput: () => IInputState;
 
-	makeTransparent:(name:string, r:number, int :number, b:number)=> void;
+    makeTransparent: (name: string, r: number, int: number, b: number) => void;
+
+    getTextureAttribs: (name: string) => ITextureAttribs;
+
+    getSpriteAttribs: (name: string) => ISpriteAttribs;
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BadBits.Engine.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace BadBits.Engine.Interfaces.Context
 {
+   
     public interface IScriptContext
     {
         Action InitAction { get; }
@@ -124,7 +126,20 @@ namespace BadBits.Engine.Interfaces.Context
         /// <param name="g"></param>
         /// <param name="b"></param>
         void makeTransparent(string name, int r, int g, int b);
-        
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        SpriteAttribs getSpriteAttribs(string name);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        TextureAttribs getTextureAttribs(string name);
 
     }
 }

@@ -1,7 +1,6 @@
 ﻿using BadBits.Engine.Interfaces.Context;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -23,8 +22,8 @@ namespace BadBits.Engine.Context
         private SpriteBatch _spriteBatch;
         private Color _clearColor;
 
-        private readonly Dictionary<string, Model.Texture> _textureCache;
-        private readonly Dictionary<string, Model.SpriteSheet> _spriteCache;
+        public Dictionary<string, Model.Texture> TextureCache { get; private set; }
+        public Dictionary<string, Model.SpriteSheet> SpriteCache { get; private set; }
 
         private List<DrawCommand> _drawCommands;
 
@@ -32,11 +31,11 @@ namespace BadBits.Engine.Context
 
         public GraphicsContext2d(GraphicsDevice graphics)
         {
+            TextureCache = new Dictionary<string, Model.Texture>();
+            SpriteCache = new Dictionary<string, Model.SpriteSheet>();
 
             _graphics = graphics;
             _drawCommands = new List<DrawCommand>();
-            _textureCache = new Dictionary<string, Model.Texture>();
-            _spriteCache = new Dictionary<string, Model.SpriteSheet>();
 
             _texture = new Model.Texture(graphics, 320, 240);
             _clearColor = Color.Transparent;
@@ -59,43 +58,46 @@ namespace BadBits.Engine.Context
 
             _spriteBatch = new SpriteBatch(_graphics);
 
-            _renderTarget = new RenderTarget2D(_graphics, 320, 240,false, SurfaceFormat.Color, DepthFormat.None);
+            _renderTarget = new RenderTarget2D(_graphics, 320, 240, false, SurfaceFormat.Color, DepthFormat.None);
 
         }
 
         public void CreateTexture(string name, int width, int height)
         {
-            _textureCache[name] = new Model.Texture(_graphics, width, height);
+            TextureCache[name] = new Model.Texture(_graphics, width, height);
         }
 
-        public void SetSpriteSheet(string name, int rows, int cols) {
-            _spriteCache[name] = new Model.SpriteSheet(name, rows, cols, _textureCache[name].Width, _textureCache[name].Height);
+        public void SetSpriteSheet(string name, int rows, int cols)
+        {
+            SpriteCache[name] = new Model.SpriteSheet(name, rows, cols, TextureCache[name].Width, TextureCache[name].Height);
         }
 
         public void LoadTexture(string name, string path)
         {
-            _textureCache[name] = new Model.Texture(_graphics, path);
+            TextureCache[name] = new Model.Texture(_graphics, path);
         }
 
-        public void LoadSpriteSheet(string name, string path, int rows, int cols) {
+        public void LoadSpriteSheet(string name, string path, int rows, int cols)
+        {
             LoadTexture(name, path);
             SetSpriteSheet(name, rows, cols);
         }
 
         public void SetPixel(string textureName, int x, int y, byte r, byte g, byte b, byte a)
         {
-            _textureCache[textureName].SetPixel(x, y, r, g, b, a);
+            TextureCache[textureName].SetPixel(x, y, r, g, b, a);
         }
 
         public void SetPixel(string textureName, int x, int y, byte r, byte g, byte b)
         {
-            _textureCache[textureName].SetPixel(x, y, r, g, b);
+            TextureCache[textureName].SetPixel(x, y, r, g, b);
         }
 
         public void Render()
         {
 
-            foreach (var t in _textureCache.Values.Where(x => x.IsDirty)) {
+            foreach (var t in TextureCache.Values.Where(x => x.IsDirty))
+            {
                 t.SetData();
             }
 
@@ -107,7 +109,7 @@ namespace BadBits.Engine.Context
 
             foreach (var command in _drawCommands)
             {
-                _spriteBatch.Draw(_textureCache[command.TextureName].Texture2D, command.DestRect, command.SrcRect, Color.White);
+                _spriteBatch.Draw(TextureCache[command.TextureName].Texture2D, command.DestRect, command.SrcRect, Color.White);
             }
 
             _spriteBatch.End();
@@ -120,13 +122,13 @@ namespace BadBits.Engine.Context
 
             _graphics.Clear(ClearOptions.DepthBuffer, Color.Transparent, _graphics.Viewport.MaxDepth, 0);
 
-           
+
             _graphics.SetVertexBuffer(_vertexBuffer);
 
             _graphics.SamplerStates[0] = SamplerState.PointWrap;
             _graphics.SamplerStates[1] = SamplerState.PointWrap;
             _graphics.SamplerStates[2] = SamplerState.PointWrap;
-            
+
             _graphics.BlendState = BlendState.AlphaBlend;
 
 
@@ -153,7 +155,7 @@ namespace BadBits.Engine.Context
 
         public void DrawSprite(string name, int x, int y, int row, int col)
         {
-            var spriteSheet = _spriteCache[name];
+            var spriteSheet = SpriteCache[name];
 
             _drawCommands.Add(new DrawCommand
             {
@@ -183,7 +185,7 @@ namespace BadBits.Engine.Context
 
         public void MakeTransparent(string textureName, byte r, byte g, byte b)
         {
-            _textureCache[textureName].MakeTransparent(r, g, b);
+            TextureCache[textureName].MakeTransparent(r, g, b);
         }
     }
 }

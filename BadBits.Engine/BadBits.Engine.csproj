@@ -69,10 +69,7 @@
     <Compile Include="Interfaces\Context\IGraphicsContext2d.cs" />
     <Compile Include="Interfaces\Context\IGraphicsContext3d.cs" />
     <Compile Include="Interfaces\Context\IInputContext.cs" />
-    <Compile Include="Interfaces\Context\IScriptContext.cs">
-      <Generator>DtsGenerator</Generator>
-      <LastGenOutput>IScriptContext.cs.d.ts</LastGenOutput>
-    </Compile>
+    <Compile Include="Interfaces\Context\IScriptContext.cs" />
     <Compile Include="Model\InputState.cs" />
     <Compile Include="Model\SpriteSheet.cs" />
     <Compile Include="Model\Texture.cs" />
@@ -106,11 +103,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ScriptContext.cs</DependentUpon>
-    </Content>
-    <Content Include="Interfaces\Context\IScriptContext.cs.d.ts">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>IScriptContext.cs</DependentUpon>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
