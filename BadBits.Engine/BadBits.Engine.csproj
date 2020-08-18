@@ -70,6 +70,7 @@
     <Compile Include="Interfaces\Context\IGraphicsContext3d.cs" />
     <Compile Include="Interfaces\Context\IInputContext.cs" />
     <Compile Include="Interfaces\Context\IScriptContext.cs" />
+    <Compile Include="Model\Attribs.cs" />
     <Compile Include="Model\InputState.cs" />
     <Compile Include="Model\SpriteSheet.cs" />
     <Compile Include="Model\Texture.cs" />

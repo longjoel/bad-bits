@@ -73,4 +73,6 @@ export interface IBadBits {
     getTextureAttribs: (name: string) => ITextureAttribs;
 
     getSpriteAttribs: (name: string) => ISpriteAttribs;
+
+	logInfo: (text:string)=> void;
 }

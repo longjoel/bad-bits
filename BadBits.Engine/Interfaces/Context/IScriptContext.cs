@@ -141,5 +141,11 @@ namespace BadBits.Engine.Interfaces.Context
         /// <returns></returns>
         TextureAttribs getTextureAttribs(string name);
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="text"></param>
+        void logInfo(string text);
+
     }
 }

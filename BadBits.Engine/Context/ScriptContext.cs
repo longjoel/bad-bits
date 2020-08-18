@@ -119,5 +119,10 @@ namespace BadBits.Engine.Context
                 height = texture.Height
             };
         }
+
+        public void logInfo(string text)
+        {
+            Console.WriteLine(text);
+        }
     }
 }
