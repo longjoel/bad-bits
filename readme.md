@@ -11,3 +11,7 @@ _A retro game enspired engine for PC, Mac, and Linux._
 * It supports commonJS modules.
 
 * It can be used with typescript! (if you use the typescript compiler)
+
+## Screenshots
+
+![Screen shot of example game in action](docs/screen-shot-0.png)

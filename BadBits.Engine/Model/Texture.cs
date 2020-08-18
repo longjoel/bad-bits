@@ -65,7 +65,7 @@ namespace BadBits.Engine.Model
         /// <param name="path"></param>
         public Texture(GraphicsDevice g, string path)
         {
-            using (var img = System.Drawing.Image.FromFile(path))
+            using (var img = System.Drawing.Image.FromFile(System.IO.Path.GetFullPath(path)))
             {
 
                 Width = img.Width;
