@@ -1,0 +1,9 @@
+{
+    "includeDeclarations": "true",
+    "out": "../docs/typedoc",
+    "name": "Bad Bits API",
+    "hideGenerator": "true",
+    "excludeExternals": "true",
+    "mode": "file",
+    "readme": "none"
+}

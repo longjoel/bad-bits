@@ -1,0 +1,16 @@
+{
+  "name": "bad-bits-definition",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "doc": "typedoc --options typedoc.json --exclude \"node_modules\" ./bad-bits.d.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typedoc": "^0.18.0",
+    "typescript": "^3.9.7"
+  }
+}
