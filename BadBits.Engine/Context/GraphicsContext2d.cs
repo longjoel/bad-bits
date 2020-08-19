@@ -1,6 +1,7 @@
 ﻿using BadBits.Engine.Interfaces.Context;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -67,20 +68,20 @@ namespace BadBits.Engine.Context
             TextureCache[name] = new Model.Texture(_graphics, width, height);
         }
 
-        public void SetSpriteSheet(string name, int rows, int cols)
-        {
-            SpriteCache[name] = new Model.SpriteSheet(name, rows, cols, TextureCache[name].Width, TextureCache[name].Height);
-        }
 
         public void LoadTexture(string name, string path)
         {
             TextureCache[name] = new Model.Texture(_graphics, path);
         }
 
-        public void LoadSpriteSheet(string name, string path, int rows, int cols)
+        public void LoadSpriteSheet(string name, string path, string spriteSheetPath)
         {
             LoadTexture(name, path);
-            SetSpriteSheet(name, rows, cols);
+
+            var spriteFrames = JsonConvert.DeserializeObject<Dictionary<string, Rectangle>>(System.IO.File.ReadAllText(spriteSheetPath));
+
+            SpriteCache[name] = new Model.SpriteSheet(name) { Cells = spriteFrames };
+
         }
 
         public void SetPixel(string textureName, int x, int y, byte r, byte g, byte b, byte a)
@@ -153,16 +154,12 @@ namespace BadBits.Engine.Context
 
         }
 
-        public void DrawSprite(string name, int x, int y, int row, int col)
+        public void DrawSprite(string spriteName, string frameName, int x, int y)
         {
-            var spriteSheet = SpriteCache[name];
-
-            _drawCommands.Add(new DrawCommand
-            {
-                TextureName = spriteSheet.Texture,
-                SrcRect = new Rectangle { X = col * spriteSheet.CellWidth, Y = row * spriteSheet.CellHeight, Width = spriteSheet.CellWidth, Height = spriteSheet.CellHeight },
-                DestRect = new Rectangle { X = x, Y = y, Width = spriteSheet.CellWidth, Height = spriteSheet.CellHeight }
-            });
+            var cell = SpriteCache[spriteName].Cells[frameName];
+            DrawTexture(spriteName,
+                new int[] { cell.X, cell.Y, cell.Width, cell.Height },
+                new int[] { x, y, cell.Width, cell.Height });
         }
 
         public void DrawTexture(string name, int[] srcRect, int[] destRect)

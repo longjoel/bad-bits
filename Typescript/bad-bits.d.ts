@@ -14,22 +14,28 @@ export interface IInputState {
     start: boolean;
     select: boolean;
 }
+
 export interface ITextureAttribs {
     width: number;
     height: number;
 }
+
+export interface ISpriteCell{
+    x:number, 
+    y:number, 
+    width:number, 
+    height:number}
+
 export interface ISpriteAttribs {
-    rows: number;
-    cols: number;
-    cellWidth: number;
-    cellHeight: number;
+    [key: string]: ISpriteCell;
 }
+
 export interface IBadBits {
     createTexture: (name: string, width: number, height: number) => void;
-    drawSprite: (name: string, x: number, y: number, row: number, col: number) => void;
+    drawSprite: (name: string, frame:string, x:number, y:number) => void;
     drawTexture: (name: string, srcRect: number[], destRect: number[]) => void;
-    loadSpriteSheet: (name: string, path: string, rows: string, cols: string) => void;
-    loadTexture: (name: string, path: string) => void;
+    loadSpriteSheet: (name: string, path: string, spriteSheetPath:string) => void;
+    loadTexture: (name: string, path: string, spriteSheetPath:string) => void;
     setSpriteSheet: (name: string, rows: number, cols: number) => void;
     setPixelTransparent: (textureName: string, x: number, y: number, r: number, g: number, b: number, a: number) => void;
     setPixel: (textureName: string, x: number, y: number, r: number, g: number, b: number) => void;

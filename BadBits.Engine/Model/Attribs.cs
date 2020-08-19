@@ -12,12 +12,16 @@ namespace BadBits.Engine.Model
         public int height { get; set; }
     }
 
-    public class SpriteAttribs
+    public class SpriteCell {
+        public int x { get; set; }
+        public int y { get; set; }
+        public int width { get; set; }
+        public int height { get; set; }
+    }
+
+    public class SpriteAttribs :Dictionary<string, SpriteCell>
     {
-        public int rows { get; set; }
-        public int cols { get; set; }
-        public int cellWidth { get; set; }
-        public int cellHeight { get; set; }
+       
     }
 
 }

@@ -10,11 +10,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{7A33C8EA
 		tests\index.js = tests\index.js
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Typescript", "Typescript", "{C2C7C15D-3BF1-433F-A550-8E8E1A2BBC99}"
-	ProjectSection(SolutionItems) = preProject
-		Typescript\bad-bits.ts = Typescript\bad-bits.ts
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

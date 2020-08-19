@@ -31,9 +31,9 @@ namespace BadBits.Engine.Context
             _graphicsContext2D.CreateTexture(name, width, height);
         }
 
-        public void drawSprite(string name, int x, int y, int row, int col)
+        public void drawSprite(string spriteName, string frameName, int x, int y)
         {
-            _graphicsContext2D.DrawSprite(name, x, y, row, col);
+            _graphicsContext2D.DrawSprite(spriteName,frameName,x,y);
         }
 
         public void drawTexture(string name, int[] srcRect, int[] destRect)
@@ -41,19 +41,14 @@ namespace BadBits.Engine.Context
             _graphicsContext2D.DrawTexture(name, srcRect, destRect);
         }
 
-        public void loadSpriteSheet(string name, string path, int rows, int cols)
+        public void loadSpriteSheet(string name, string path, string spriteSheetPath)
         {
-            _graphicsContext2D.LoadSpriteSheet(name, path,rows,cols);
+            _graphicsContext2D.LoadSpriteSheet(name, path,spriteSheetPath);
         }
 
         public void loadTexture(string name, string path)
         {
             _graphicsContext2D.LoadTexture(name, path);
-        }
-
-        public void setSpriteSheet(string name, int rows, int cols)
-        {
-            _graphicsContext2D.SetSpriteSheet(name,  rows, cols);
         }
 
         public void setPixelTransparent(string textureName, int x, int y, int r, int g, int b, int a)
@@ -74,8 +69,6 @@ namespace BadBits.Engine.Context
         {
             ProcessAction = processAction;
         }
-
-
 
         public void setRender2d(Action<double> render2dAction)
         {
@@ -101,13 +94,12 @@ namespace BadBits.Engine.Context
         {
             var sprite = _graphicsContext2D.SpriteCache[name];
 
-            return new SpriteAttribs
-            {
-                cellHeight = sprite.CellHeight,
-                cellWidth = sprite.CellWidth,
-                cols = sprite.Cols,
-                rows = sprite.Rows
-            };
+            var spriteAttribs = new SpriteAttribs();
+            foreach (var s in sprite.Cells) {
+                spriteAttribs[s.Key] = new SpriteCell { x = s.Value.X, y = s.Value.Y, width = s.Value.Width, height = s.Value.Height };
+            }
+
+            return spriteAttribs;
         }
 
         public TextureAttribs getTextureAttribs(string name)

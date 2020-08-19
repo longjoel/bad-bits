@@ -82,18 +82,9 @@ namespace BadBits.Engine.Interfaces.Context
         /// </summary>
         /// <param name="name"></param>
         /// <param name="path"></param>
-        /// <param name="cols"></param>
-        /// <param name="rows"></param>
-        void loadSpriteSheet(string name, string path, int rows, int cols);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="cols"></param>
-        /// <param name="rows"></param>
-        void setSpriteSheet(string name,  int rows, int cols);
-
+        /// <param name="spriteSheetPath"></param>
+        void loadSpriteSheet(string name, string path, string spriteSheetPath);
+        
         /// <summary>
         /// 
         /// </summary>
@@ -102,15 +93,15 @@ namespace BadBits.Engine.Interfaces.Context
         /// <param name="destRect"></param>
         void drawTexture(string name, int[] srcRect, int[] destRect);
 
+       
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="name"></param>
+        /// <param name="spriteName"></param>
+        /// <param name="frameName"></param>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        /// <param name="row"></param>
-        /// <param name="col"></param>
-        void drawSprite(string name, int x, int y, int row, int col);
+        void drawSprite(string spriteName, string frameName, int x, int y);
 
         /// <summary>
         /// 

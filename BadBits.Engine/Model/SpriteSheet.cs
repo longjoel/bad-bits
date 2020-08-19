@@ -1,5 +1,6 @@
 ﻿using System;
-
+using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 namespace BadBits.Engine.Model
 {
     /// <summary>
@@ -8,18 +9,16 @@ namespace BadBits.Engine.Model
     public class SpriteSheet
     {
         public string Texture { get; private set; }
-        public int Rows { get; private set; }
-        public int Cols { get; private set; }
-        public int CellWidth { get; private set; }
-        public int CellHeight { get; private set; }
+        public Dictionary<string, Rectangle> Cells { get; set; }
 
-        public SpriteSheet(string texture, int rows, int cols, int width, int height)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="texture"></param>
+        public SpriteSheet(string texture)
         {
             Texture = texture;
-            Rows = rows;
-            Cols = cols;
-            CellWidth = width / cols;
-            CellHeight = height / rows;
+            Cells = new Dictionary<string, Rectangle>();
         }
 
     }

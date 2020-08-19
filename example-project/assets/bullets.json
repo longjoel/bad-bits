@@ -1,0 +1,20 @@
+{
+    "leftBullet": {
+        "x": 127,
+        "y": 120,
+        "width": 8,
+        "height": 10
+    },
+    "centerBullet": {
+        "x": 138,
+        "y": 120,
+        "width": 8,
+        "height": 10
+    },
+    "rightBullet": {
+        "x": 155,
+        "y": 120,
+        "width": 8,
+        "height": 10
+    }
+}

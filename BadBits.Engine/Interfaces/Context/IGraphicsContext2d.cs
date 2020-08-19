@@ -10,7 +10,7 @@ namespace BadBits.Engine.Interfaces.Context
         void CreateTexture(string name, int width, int height);
 
         void LoadTexture(string name, string path);
-        void LoadSpriteSheet(string name, string path, int rows, int cols);
+        void LoadSpriteSheet(string name, string path, string spriteSheetPath);
 
         void SetClearColor(byte r, byte g, byte b);
 
@@ -20,9 +20,7 @@ namespace BadBits.Engine.Interfaces.Context
 
         void Render();
 
-        void DrawSprite(string name, int x, int y, int row, int col);
+        void DrawSprite(string spriteName, string frameName, int x, int y);
         void DrawTexture(string name, int[] srcRect, int[] destRect);
-
-        void SetSpriteSheet(string name,  int rows, int cols);
     }
 }
