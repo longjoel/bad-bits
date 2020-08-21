@@ -79,8 +79,6 @@ namespace BadBits.Engine.Context
 
             _texture = new Model.Texture(_graphics, 320, 240);
 
-
-
         }
 
         public void DrawParticle(string textureName, VertexPosition location, double scale)

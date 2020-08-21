@@ -138,5 +138,14 @@ namespace BadBits.Engine.Interfaces.Context
         /// <param name="text"></param>
         void logInfo(string text);
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="r"></param>
+        /// <param name="g"></param>
+        /// <param name="b"></param>
+        /// <param name="vertices"></param>
+        void drawFlatShadedTriangles(int r, int g, int b, Model.vertexPosition[] vertices);
+
     }
 }
