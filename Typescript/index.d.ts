@@ -45,6 +45,12 @@ export interface ISpriteCell {
     height: number
 }
 
+export interface IVertexPosition{
+    x:number;
+    y:number;
+    z:number;
+}
+
 /**
  *
  *
@@ -176,4 +182,11 @@ export interface IBadBits {
      * @memberof IBadBits
      */
     logInfo: (text: string) => void;
+
+    /**
+     *
+     *
+     * @memberof IBadBits
+     */
+    drawFlatShadedTriangles:(r:number, g:number, b:number, verticies:IVertexPosition[])=> void;
 }

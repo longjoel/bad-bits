@@ -1,0 +1,5 @@
+{
+    "globalDependencies": {
+        "Typescript":"../Typescript/index.d.ts"
+    }
+}

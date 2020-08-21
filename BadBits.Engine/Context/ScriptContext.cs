@@ -122,7 +122,9 @@ namespace BadBits.Engine.Context
         public void drawFlatShadedTriangles(int r, int g, int b, vertexPosition[] vertices)
         {
             _graphicsContext3d.DrawFlatShadedTriangle(new Microsoft.Xna.Framework.Color((byte)r, (byte)g, (byte)b, (byte)255), 
-                vertices.Select(v=> new Microsoft.Xna.Framework.Graphics.VertexPosition (new Microsoft.Xna.Framework.Vector3(v.x,v.y,v.z))).ToList());
+                vertices.Select(v=> new Microsoft.Xna.Framework.Graphics.VertexPosition (new Microsoft.Xna.Framework.Vector3((float)v.x,
+                (float)v.y, 
+                (float)v.z))).ToList());
         }
     }
 }

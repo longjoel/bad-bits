@@ -1,4 +1,4 @@
-import { IBadBits, IInputState } from '../../Typescript/bad-bits';
+import { IBadBits, IInputState } from '../../Typescript/index';
 
 declare var engine: IBadBits;
 declare var __dirname: string;
@@ -61,10 +61,20 @@ engine.setProcess((dt) => {
 
 });
 
+engine.setRender3d((dt)=>{
+
+engine.drawFlatShadedTriangles(128,128,128, [
+    {x:-512.0,y:-512.0,z:0.0},
+    {x:-0.0,y:-512.0,z:0.0},
+    {x:-0.0,y:-0.0,z:0.0},
+]);
+
+});
+
 engine.setRender2d((dt) => {
     scrollPos = scrollPos + dt * 25;
     scrollPos = scrollPos % maxScrollPos;
-    engine.drawSprite('background', '_', -scrollPos, 0);
+    //engine.drawSprite('background', '_', -scrollPos, 0);
     engine.drawSprite('ship', '_', 32, shipY);
 
 

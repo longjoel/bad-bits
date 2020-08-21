@@ -37,6 +37,9 @@ namespace BadBits.Engine.Context
             _flatShadedTriangles = new Dictionary<Color, List<VertexPosition>>();
             _texturedTriangles = new Dictionary<Texture2D, List<VertexPositionTexture>>();
             _particles = new Dictionary<Texture2D, List<VertexPosition>>();
+            _texture = new Model.Texture(_graphics, 320, 240);
+            _vertexBuffer = new VertexBuffer(_graphics, typeof(VertexPositionColorTexture), 6, BufferUsage.None);
+
 
             _flatShadedEffect = new BasicEffect(device)
             {
@@ -77,7 +80,6 @@ namespace BadBits.Engine.Context
 
             _vertexBuffer.SetData(drawBuffer);
 
-            _texture = new Model.Texture(_graphics, 320, 240);
 
         }
 
