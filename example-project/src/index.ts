@@ -1,4 +1,4 @@
-import { IBadBits, IInputState } from '../../Typescript/index';
+import { IBadBits, IInputState, IVertexPosition } from '../../Typescript/index';
 
 declare var engine: IBadBits;
 declare var __dirname: string;
@@ -64,9 +64,9 @@ engine.setProcess((dt) => {
 engine.setRender3d((dt)=>{
 
 engine.drawFlatShadedTriangles(128,128,128, [
-    {x:-512.0,y:-512.0,z:0.0},
-    {x:-0.0,y:-512.0,z:0.0},
-    {x:-0.0,y:-0.0,z:0.0},
+    {x:-512.0,y:-512.0,z:0.0} as IVertexPosition,
+    {x:-0.0,y:-512.0,z:0.0}as IVertexPosition,
+    {x:-0.0,y:-0.0,z:0.0}as IVertexPosition,
 ]);
 
 });
