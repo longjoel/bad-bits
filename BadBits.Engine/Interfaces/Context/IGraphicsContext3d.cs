@@ -11,9 +11,9 @@ namespace BadBits.Engine.Interfaces.Context
 {
     public interface IGraphicsContext3d
     {
-        void CreateShadedObject(string name, List<VertexPositionColor> vertexData);
-        void CreateTexturedObject(string name, string textureName, List<VertexPositionTexture> vertexData);
-
-
+        void DrawFlatShadedTriangle(Color c, List<VertexPosition> verticies);
+        void DrawTexturedTriangle(string textureName, List<VertexPositionTexture> vertices);
+        void DrawParticle(string textureName, VertexPosition location, double scale);
+        void Render();
     }
 }

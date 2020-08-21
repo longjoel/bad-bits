@@ -63,6 +63,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Context\GraphicsContex3d.cs" />
     <Compile Include="Context\GraphicsContext2d.cs" />
     <Compile Include="Context\InputContext.cs" />
     <Compile Include="Context\ScriptContext.cs">
@@ -75,7 +76,6 @@
     <Compile Include="Interfaces\Context\IScriptContext.cs" />
     <Compile Include="Model\Attribs.cs" />
     <Compile Include="Model\InputState.cs" />
-    <Compile Include="Model\ObjectAttributes.cs" />
     <Compile Include="Model\SpriteSheet.cs" />
     <Compile Include="Model\Texture.cs" />
     <Compile Include="Program.cs" />

@@ -32,11 +32,11 @@ namespace BadBits.Engine
             _graphics.PreferredBackBufferHeight = 720;
             _graphics.ApplyChanges();
             _graphicsContext2d = new Context.GraphicsContext2d(_graphics.GraphicsDevice);
-            _graphicsContext3d = null;
+            _graphicsContext3d = new Context.GraphicsContex3d(_graphics.GraphicsDevice, _graphicsContext2d);
 
             _inputContext = new Context.InputContext();
 
-            _scriptContext = new Context.ScriptContext(_graphicsContext2d, _inputContext);
+            _scriptContext = new Context.ScriptContext(_graphicsContext2d,_graphicsContext3d, _inputContext);
 
             _scriptEngine = new Jint.Engine();
             _scriptEngine.SetValue("engine", _scriptContext);
@@ -64,7 +64,10 @@ namespace BadBits.Engine
         {
             GraphicsDevice.Clear(Color.Black);
 
-            
+            if (_scriptContext.Render3dAction != null) {
+                _scriptContext.Render3dAction.Invoke(gameTime.ElapsedGameTime.TotalSeconds);
+                _graphicsContext3d.Render();
+            }
 
             if (_scriptContext.Render2dAction != null)
             {
@@ -73,7 +76,7 @@ namespace BadBits.Engine
 
             }
             base.Draw(gameTime);
-        }
+        } 
     }
 
     public static class Program
