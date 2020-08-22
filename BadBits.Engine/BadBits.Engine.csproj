@@ -68,7 +68,6 @@
     <Compile Include="Context\InputContext.cs" />
     <Compile Include="Context\ScriptContext.cs">
       <Generator>DtsGenerator</Generator>
-      <LastGenOutput>ScriptContext.cs.d.ts</LastGenOutput>
     </Compile>
     <Compile Include="Interfaces\Context\IGraphicsContext2d.cs" />
     <Compile Include="Interfaces\Context\IGraphicsContext3d.cs" />

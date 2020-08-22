@@ -30,7 +30,7 @@ namespace BadBits.Engine.Context
 
         private RenderTarget2D _renderTarget;
 
-        public GraphicsContext2d(GraphicsDevice graphics)
+        public GraphicsContext2d(GraphicsDevice graphics, RenderTarget2D renderTarget)
         {
             TextureCache = new Dictionary<string, Model.Texture>();
             SpriteCache = new Dictionary<string, Model.SpriteSheet>();
@@ -39,27 +39,27 @@ namespace BadBits.Engine.Context
             _drawCommands = new List<DrawCommand>();
 
             _texture = new Model.Texture(graphics, 320, 240);
-            _clearColor = Color.Transparent;
+           
 
             _vertexBuffer = new VertexBuffer(_graphics, typeof(VertexPositionColorTexture), 6, BufferUsage.None);
 
             var drawBuffer = new VertexPositionColorTexture[] {
                 // top triangle
-                new VertexPositionColorTexture{ Position = new Vector3{X = 0, Y=0, Z=0},TextureCoordinate= new Vector2{X=0,Y=0 }, Color= new Color(0xFFFFFFFF) },
-                new VertexPositionColorTexture{ Position = new Vector3{X = 320, Y=0, Z=0},TextureCoordinate= new Vector2{X=1,Y=0 }, Color= new Color(0xFFFFFFFF) },
-                new VertexPositionColorTexture{ Position = new Vector3{X = 320, Y=240, Z=0},TextureCoordinate= new Vector2{X=1,Y=1 }, Color= new Color(0xFFFFFFFF) },
+                new VertexPositionColorTexture{ Position = new Vector3{X = 0, Y=0, Z=0.95f},TextureCoordinate= new Vector2{X=0,Y=0 }, Color= new Color(0xFFFFFFFF) },
+                new VertexPositionColorTexture{ Position = new Vector3{X = 320, Y=0, Z=0.95f},TextureCoordinate= new Vector2{X=1,Y=0 }, Color= new Color(0xFFFFFFFF) },
+                new VertexPositionColorTexture{ Position = new Vector3{X = 320, Y=240, Z=0.95f},TextureCoordinate= new Vector2{X=1,Y=1 }, Color= new Color(0xFFFFFFFF) },
 
                 // bottom triangle
-                new VertexPositionColorTexture{ Position = new Vector3{X = 320, Y=240, Z=0},TextureCoordinate= new Vector2{X=1,Y=1 }, Color= new Color(0xFFFFFFFF) },
-                new VertexPositionColorTexture{ Position = new Vector3{X = 0, Y=240, Z=0},TextureCoordinate= new Vector2{X=0,Y=1 }, Color= new Color(0xFFFFFFFF) } ,
-                new VertexPositionColorTexture{ Position = new Vector3{X = 0, Y=0, Z=0},TextureCoordinate= new Vector2{X=0,Y=0 }, Color= new Color(0xFFFFFFFF) }
+                new VertexPositionColorTexture{ Position = new Vector3{X = 320, Y=240,Z=0.95f},TextureCoordinate= new Vector2{X=1,Y=1 }, Color= new Color(0xFFFFFFFF) },
+                new VertexPositionColorTexture{ Position = new Vector3{X = 0, Y=240, Z=0.95f},TextureCoordinate= new Vector2{X=0,Y=1 }, Color= new Color(0xFFFFFFFF) } ,
+                new VertexPositionColorTexture{ Position = new Vector3{X = 0, Y=0,Z=0.95f},TextureCoordinate= new Vector2{X=0,Y=0 }, Color= new Color(0xFFFFFFFF) }
             };
 
             _vertexBuffer.SetData(drawBuffer);
 
             _spriteBatch = new SpriteBatch(_graphics);
 
-            _renderTarget = new RenderTarget2D(_graphics, 320, 240, false, SurfaceFormat.Color, DepthFormat.None);
+            _renderTarget = renderTarget;
 
         }
 
@@ -104,7 +104,7 @@ namespace BadBits.Engine.Context
 
             _graphics.SetRenderTarget(_renderTarget);
 
-            _graphics.Clear(_clearColor);
+           // _graphics.Clear(Color.Transparent);
 
             _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap);
 
@@ -116,39 +116,6 @@ namespace BadBits.Engine.Context
             _spriteBatch.End();
 
             _graphics.SetRenderTarget(null);
-
-            _renderTarget.GetData(_texture.Data);
-
-            _texture.SetData();
-
-            _graphics.Clear(ClearOptions.DepthBuffer, Color.Transparent, _graphics.Viewport.MaxDepth, 0);
-
-
-            _graphics.SetVertexBuffer(_vertexBuffer);
-
-            _graphics.SamplerStates[0] = SamplerState.PointWrap;
-            _graphics.SamplerStates[1] = SamplerState.PointWrap;
-            _graphics.SamplerStates[2] = SamplerState.PointWrap;
-
-            _graphics.BlendState = BlendState.AlphaBlend;
-
-
-            using (var effect = new BasicEffect(_graphics))
-            {
-                effect.TextureEnabled = true;
-                effect.Texture = _texture.Texture2D;
-
-                effect.View = Matrix.CreateOrthographicOffCenter(new Rectangle(0, 0, 320, 240), -1, 1);
-                effect.World = Matrix.Identity;
-
-                effect.VertexColorEnabled = true;
-
-                foreach (var pass in effect.CurrentTechnique.Passes)
-                {
-                    pass.Apply();
-                    _graphics.DrawPrimitives(PrimitiveType.TriangleList, 0, 2);
-                }
-            }
 
             _drawCommands.Clear();
 

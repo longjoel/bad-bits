@@ -145,7 +145,7 @@ namespace BadBits.Engine.Interfaces.Context
         /// <param name="g"></param>
         /// <param name="b"></param>
         /// <param name="vertices"></param>
-        void drawFlatShadedTriangles(int r, int g, int b, Model.vertexPosition[] vertices);
+        void drawFlatShadedTriangles(int r, int g, int b, object[] vertices);
 
     }
 }
