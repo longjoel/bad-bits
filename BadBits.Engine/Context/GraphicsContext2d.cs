@@ -104,7 +104,7 @@ namespace BadBits.Engine.Context
 
             _graphics.SetRenderTarget(_renderTarget);
 
-           // _graphics.Clear(Color.Transparent);
+            _graphics.Clear(Color.Transparent);
 
             _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap);
 

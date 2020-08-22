@@ -38,6 +38,10 @@ namespace BadBits.Engine
             _graphics.PreferredBackBufferWidth = 960;
             _graphics.PreferredBackBufferHeight = 720;
             _graphics.ApplyChanges();
+            _renderTarget2d = new RenderTarget2D(_graphics.GraphicsDevice, 320, 240);
+            _renderTarget3d = new RenderTarget2D(_graphics.GraphicsDevice, 320, 240);
+            _final = new RenderTarget2D(_graphics.GraphicsDevice, 320, 240);
+
             _graphicsContext2d = new Context.GraphicsContext2d(_graphics.GraphicsDevice, _renderTarget2d);
             _graphicsContext3d = new Context.GraphicsContex3d(_graphics.GraphicsDevice, _graphicsContext2d, _renderTarget3d);
 
@@ -55,9 +59,7 @@ namespace BadBits.Engine
                 _scriptContext.InitAction.Invoke();
             }
 
-            _renderTarget2d = new RenderTarget2D(_graphics.GraphicsDevice, 320, 240);
-            _renderTarget3d = new RenderTarget2D(_graphics.GraphicsDevice, 320, 240);
-            _final = new RenderTarget2D(_graphics.GraphicsDevice, 320, 240);
+      
 
             base.Initialize();
         }
@@ -99,9 +101,13 @@ namespace BadBits.Engine
             _graphics.GraphicsDevice.Clear(Color.Black);
             using (var sb = new SpriteBatch(_graphics.GraphicsDevice))
             {
-                sb.Begin();
-                sb.Draw(_renderTarget3d, new Rectangle(0, 0, 320, 240), null, Color.White);
-                sb.Draw(_renderTarget2d, new Rectangle(0, 0, 320, 240), null, Color.White);
+                sb.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap, null, RasterizerState.CullNone,null,null);
+                sb.Draw(_renderTarget3d, new Rectangle(0, 0, 320, 240), new Rectangle(0, 0, 320, 240), Color.White);
+
+                
+                sb.Draw(_renderTarget2d, new Rectangle(0, 0, 320, 240), new Rectangle(0, 0, 320, 240), Color.White);
+
+                
                 sb.End();
             }
 

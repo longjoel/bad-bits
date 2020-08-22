@@ -45,8 +45,8 @@ namespace BadBits.Engine.Context
             {
                 FogEnabled = true,
                 FogColor = new Vector3(),
-                FogStart = 500,
-                FogEnd = 512,
+                FogStart = 90,
+                FogEnd = 100,
                 LightingEnabled = false,
                 Projection = Matrix.CreateOrthographicOffCenter(0, 320, 240, 0, -100, 100),
                 TextureEnabled = false,
@@ -57,8 +57,8 @@ namespace BadBits.Engine.Context
             {
                 FogEnabled = true,
                 FogColor = new Vector3(),
-                FogStart = 500,
-                FogEnd = 512,
+                FogStart = 90,
+                FogEnd = 100,
                 LightingEnabled = false,
                 Projection = Matrix.CreateOrthographicOffCenter(0, 320, 240, 0, -100, 100),
                 TextureEnabled = true
@@ -92,10 +92,8 @@ namespace BadBits.Engine.Context
         public void Render()
         {
             _graphics.SetRenderTarget(_renderTarget);
-
-            RasterizerState rasterizerState = new RasterizerState();
-            rasterizerState.CullMode = CullMode.None;
-            _graphics.RasterizerState = rasterizerState;
+            _graphics.Clear(Color.Transparent);
+            _graphics.RasterizerState = RasterizerState.CullNone;
 
             foreach (var p in _flatShadedEffect.CurrentTechnique.Passes)
             {
