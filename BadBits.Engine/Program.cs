@@ -30,6 +30,7 @@ namespace BadBits.Engine
         public BadBitsGame() : base()
         {
             _graphics = new GraphicsDeviceManager(this);
+            Window.AllowUserResizing = true;
 
         }
 
@@ -37,6 +38,7 @@ namespace BadBits.Engine
         {
             _graphics.PreferredBackBufferWidth = 960;
             _graphics.PreferredBackBufferHeight = 720;
+            
             _graphics.ApplyChanges();
             _renderTarget2d = new RenderTarget2D(_graphics.GraphicsDevice, 320, 240);
             _renderTarget3d = new RenderTarget2D(_graphics.GraphicsDevice, 320, 240);

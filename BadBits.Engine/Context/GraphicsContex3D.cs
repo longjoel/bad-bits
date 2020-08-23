@@ -102,9 +102,28 @@ namespace BadBits.Engine.Context
                 {
                     var color = kvp.Key;
 
-                    _graphics.DrawUserPrimitives(PrimitiveType.TriangleList, kvp.Value.Select(v => new VertexPositionColor(v.Position, color)).ToArray(), 0, kvp.Value.Count / 3);
+                    _graphics.DrawUserPrimitives(PrimitiveType.TriangleList, 
+                        kvp.Value.Select(v => new VertexPositionColor(v.Position, color)).ToArray(), 0, kvp.Value.Count / 3);
                 }
             }
+
+            _flatShadedTriangles.Clear();
+
+            foreach (var p in _texturedEffect.CurrentTechnique.Passes)
+            {
+                p.Apply();
+                foreach (var kvp in _texturedTriangles)
+                {
+                    var texture = kvp.Key;
+                    _texturedEffect.Texture = texture;
+                    _texturedEffect.TextureEnabled = true;
+
+                    _graphics.DrawUserPrimitives(PrimitiveType.TriangleList,
+                        kvp.Value.Select(v => new VertexPositionTexture(v.Position, v.TextureCoordinate)).ToArray(), 0, kvp.Value.Count / 3);
+                }
+            }
+
+            _texturedTriangles.Clear();
 
             _graphics.SetRenderTarget(null);
         }
