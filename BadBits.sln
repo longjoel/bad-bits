@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.1209
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BadBits.Engine", "BadBits.Engine\BadBits.Engine.csproj", "{F701800D-3730-4138-970A-CE157DEFBFDA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BadBits.Engine.Next", "BadBits.Engine.Next\BadBits.Engine.Next.csproj", "{4764FE27-B282-47AA-A236-E387F05DA00B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{F701800D-3730-4138-970A-CE157DEFBFDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F701800D-3730-4138-970A-CE157DEFBFDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F701800D-3730-4138-970A-CE157DEFBFDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4764FE27-B282-47AA-A236-E387F05DA00B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4764FE27-B282-47AA-A236-E387F05DA00B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4764FE27-B282-47AA-A236-E387F05DA00B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4764FE27-B282-47AA-A236-E387F05DA00B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
