@@ -23,8 +23,6 @@ namespace BadBits.Engine.Next.Tests.Model.Client
         [TestMethod]
         public void Test()
         {
-
-           
             _engine.SetValue("test", this);
 
             _engine.Execute("test.GetRect({X:10,Y:10, Width:10, Height:10})");

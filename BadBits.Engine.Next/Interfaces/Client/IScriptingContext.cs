@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace BadBits.Engine.Next.Interfaces.Client
 {
+    
     public interface IScriptingContext
     {
+
     }
 }

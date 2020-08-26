@@ -65,6 +65,7 @@
     <Compile Include="Models\Client\Rgba.cs" />
     <Compile Include="Models\Client\VecPositionColor.cs" />
     <Compile Include="Models\Client\VecPositionTexture.cs" />
+    <Compile Include="Models\Host\Texture.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace BadBits.Engine.Next.Interfaces.Client
 {
-    interface IGraphicsContext2d
+    public interface IGraphicsContext2d
     {
+
     }
 }
