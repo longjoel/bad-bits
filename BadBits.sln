@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BadBits.Engine", "BadBits.E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BadBits.Engine.Next", "BadBits.Engine.Next\BadBits.Engine.Next.csproj", "{4764FE27-B282-47AA-A236-E387F05DA00B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{3BBBD7C3-E0DB-45EF-8188-82E8AA810A04}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BadBits.Engine.Next.Tests", "BadBits.Engine.Next.Tests\BadBits.Engine.Next.Tests.csproj", "{2C225E9B-98B3-44B3-A893-00BC7751183B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,9 +25,16 @@ Global
 		{4764FE27-B282-47AA-A236-E387F05DA00B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4764FE27-B282-47AA-A236-E387F05DA00B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4764FE27-B282-47AA-A236-E387F05DA00B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C225E9B-98B3-44B3-A893-00BC7751183B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C225E9B-98B3-44B3-A893-00BC7751183B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C225E9B-98B3-44B3-A893-00BC7751183B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C225E9B-98B3-44B3-A893-00BC7751183B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2C225E9B-98B3-44B3-A893-00BC7751183B} = {3BBBD7C3-E0DB-45EF-8188-82E8AA810A04}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {663DF75A-DBE2-4F30-AD32-D77B93046018}

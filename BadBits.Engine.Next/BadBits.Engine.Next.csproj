@@ -60,11 +60,11 @@
     <Compile Include="Interfaces\Client\IGraphicsContext2d.cs" />
     <Compile Include="Interfaces\Client\IGraphicsContext3d.cs" />
     <Compile Include="Interfaces\Client\IScriptingContext.cs" />
-    <Compile Include="Models\Backend\Color.cs" />
-    <Compile Include="Models\Backend\Rect.cs" />
     <Compile Include="Models\Client\Rect.cs" />
     <Compile Include="Models\Client\Rgb.cs" />
     <Compile Include="Models\Client\Rgba.cs" />
+    <Compile Include="Models\Client\VecPositionColor.cs" />
+    <Compile Include="Models\Client\VecPositionTexture.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

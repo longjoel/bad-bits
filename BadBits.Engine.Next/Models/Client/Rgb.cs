@@ -12,7 +12,7 @@ namespace BadBits.Engine.Next.Models.Client
         public Jint.Native.JsValue G { get; set; }
         public Jint.Native.JsValue B { get; set; }
 
-        public Backend.Color Color => new Backend.Color {
+        public Microsoft.Xna.Framework.Color Color => new Microsoft.Xna.Framework.Color {
             A = (255),
             R = (byte)R.AsNumber(),
             G = (byte)G.AsNumber(),

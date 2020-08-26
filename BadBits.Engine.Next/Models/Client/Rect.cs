@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Jint.Native;
+using Jint.Native.Object;
+using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +16,7 @@ namespace BadBits.Engine.Next.Models.Client
         public Jint.Native.JsValue Width { get; set; }
         public Jint.Native.JsValue Height { get; set; }
 
-        public Backend.Rect BackendRect => new Backend.Rect {
+        public Rectangle BackendRect => new Rectangle {
             X = (int)X.AsNumber(),
             Y = (int)Y.AsNumber(),
             Width = (int)Width.AsNumber(),
