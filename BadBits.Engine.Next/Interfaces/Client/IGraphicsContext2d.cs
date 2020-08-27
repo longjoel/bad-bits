@@ -8,6 +8,7 @@ namespace BadBits.Engine.Next.Interfaces.Client
 {
     public interface IGraphicsContext2d
     {
-
+        void drawTexture(string texture, dynamic srcRect, dynamic dstRect);
+        void drawSprite(string spriteName, int x, int y, double frameTime);
     }
 }
