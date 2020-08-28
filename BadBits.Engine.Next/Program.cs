@@ -20,9 +20,57 @@ namespace BadBits.Engine.Next
 
         Interfaces.Services.IResourceManager _resourceManager;
 
-        RenderTarget2D _backgroundRenderTarget { get; set; }
-        RenderTarget2D _graphics3dTarget { get; set; }
-        RenderTarget2D _foregroundRenderTarget { get; set; }
+        RenderTarget2D _backgroundRenderTarget;
+        RenderTarget2D _graphics3dTarget;
+        RenderTarget2D _foregroundRenderTarget;
+
+        BasicEffect _mainEffect;
+
+        SpriteBatch _spriteBatch;
+
+        private void DrawForeground(GameTime gameTime, List<RenderTarget2D> drawChain)
+        {
+            if (_scriptingContext.DrawForegroundCallback != null)
+            {
+                GraphicsDevice.SetRenderTarget(_foregroundRenderTarget);
+                GraphicsDevice.Clear(Color.Transparent);
+                _scriptingContext.DrawBackgroundCallback.Invoke(gameTime.ElapsedGameTime.TotalSeconds, _foregroundGraphicsContext);
+
+                _resourceManager.UpdateTextures();
+
+                _spriteBatch.Begin();
+
+                _foregroundGraphicsContext.DrawCommands.ForEach(x => _spriteBatch.Draw(_resourceManager.TextureCache[x.TextureName], x.Dest, x.Source, Color.White));
+
+                _spriteBatch.End();
+
+                _backgroundGraphicsContext.DrawCommands.Clear();
+                drawChain.Add(_foregroundRenderTarget);
+            }
+        }
+
+        private void DrawBackground(GameTime gameTime, List<RenderTarget2D> drawChain)
+        {
+            if (_scriptingContext.DrawBackgroundCallback != null)
+            {
+                GraphicsDevice.SetRenderTarget(_backgroundRenderTarget);
+                GraphicsDevice.Clear(Color.Transparent);
+                _scriptingContext.DrawBackgroundCallback.Invoke(gameTime.ElapsedGameTime.TotalSeconds, _backgroundGraphicsContext);
+
+                _resourceManager.UpdateTextures();
+
+                _spriteBatch.Begin();
+
+                _backgroundGraphicsContext.DrawCommands.ForEach(x => _spriteBatch.Draw(_resourceManager.TextureCache[x.TextureName], x.Dest, x.Source, Color.White));
+
+                _spriteBatch.End();
+
+                _backgroundGraphicsContext.DrawCommands.Clear();
+                drawChain.Add(_backgroundRenderTarget);
+
+            }
+        }
+
 
         protected override void Initialize()
         {
@@ -33,6 +81,10 @@ namespace BadBits.Engine.Next
             _backgroundRenderTarget = new RenderTarget2D(GraphicsDevice, 320, 240);
             _graphics3dTarget = new RenderTarget2D(GraphicsDevice, 320, 240);
             _foregroundRenderTarget = new RenderTarget2D(GraphicsDevice, 320, 240);
+
+            _spriteBatch = new SpriteBatch(this.GraphicsDevice);
+
+            _mainEffect = new BasicEffect(GraphicsDevice);
 
         
             base.Initialize();
@@ -50,27 +102,60 @@ namespace BadBits.Engine.Next
 
         protected override void Draw(GameTime gameTime)
         {
-            if (_scriptingContext.DrawBackgroundCallback != null) {
-                GraphicsDevice.SetRenderTarget(_backgroundRenderTarget);
-                GraphicsDevice.Clear(Color.Transparent);
-                _scriptingContext.DrawBackgroundCallback.Invoke(gameTime.ElapsedGameTime.TotalSeconds, _backgroundGraphicsContext);
-            }
+            var drawChain = new List<RenderTarget2D>();
 
-            if (_scriptingContext.Draw3dCallback != null) {
+            DrawBackground(gameTime, drawChain);
+
+            if (_scriptingContext.Draw3dCallback != null)
+            {
                 GraphicsDevice.SetRenderTarget(_graphics3dTarget);
                 GraphicsDevice.Clear(Color.Transparent);
                 _scriptingContext.Draw3dCallback.Invoke(gameTime.ElapsedGameTime.TotalSeconds, _graphics3dContext);
+
+                drawChain.Add(_graphics3dTarget);
             }
 
-            if (_scriptingContext.DrawForegroundCallback != null)
-            {
-                GraphicsDevice.SetRenderTarget(_foregroundRenderTarget);
-                GraphicsDevice.Clear(Color.Transparent);
-                _scriptingContext.DrawBackgroundCallback.Invoke(gameTime.ElapsedGameTime.TotalSeconds, _foregroundGraphicsContext);
+            DrawForeground(gameTime, drawChain);
+
+            GraphicsDevice.SetRenderTarget(null);
+
+            GraphicsDevice.Clear(Color.Black);
+
+            float z = -.25f;
+
+            foreach (var pass in _mainEffect.CurrentTechnique.Passes) {
+
+                foreach (var t in drawChain)
+                {
+                    _mainEffect.Texture = t;
+                    
+                    pass.Apply();
+
+                    GraphicsDevice.BlendState = BlendState.AlphaBlend;
+                    GraphicsDevice.RasterizerState = RasterizerState.CullNone;
+                    GraphicsDevice.SamplerStates[0] = SamplerState.PointWrap;
+                    
+                    GraphicsDevice.DrawUserPrimitives(PrimitiveType.TriangleList, new VertexPositionTexture[] {
+                        new VertexPositionTexture(new Vector3(0,0,z),new Vector2(0,0)),
+                        new VertexPositionTexture(new Vector3(1,0,z),new Vector2(1,0)),
+                        new VertexPositionTexture(new Vector3(1,1,z),new Vector2(1,1)),
+
+                        new VertexPositionTexture(new Vector3(1,1,z),new Vector2(1,1)),
+                        new VertexPositionTexture(new Vector3(0,1,z),new Vector2(0,1)),
+                        new VertexPositionTexture(new Vector3(0,0,z),new Vector2(0,0)),
+
+                    }, 0, 2);
+
+                    z += 0.05f;
+
+                }
+
             }
 
             base.Draw(gameTime);
         }
+
+    
 
         protected override void Update(GameTime gameTime)
         {
