@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Texture = BadBits.Engine.Next.Models.Host.Texture;
+using Newtonsoft;
 
 namespace BadBits.Engine.Next.Services
 {
@@ -51,22 +52,48 @@ namespace BadBits.Engine.Next.Services
 
         public void LoadSprite(string spriteName, string path)
         {
-            throw new NotImplementedException();
+            var sprite = Newtonsoft.Json.JsonConvert.DeserializeObject<Sprite>(System.IO.File.ReadAllText(path));
+            SpriteCache[spriteName] = sprite;
         }
 
         public void LoadTexture(string name, string path)
         {
-            throw new NotImplementedException();
+            using (var img = System.Drawing.Image.FromFile(System.IO.Path.GetFullPath(path)))
+            {
+
+                TextureCache[name] = new Texture(this._graphicsDevice, img.Width, img.Height);
+                
+
+                using (var bmp = new System.Drawing.Bitmap(img))
+                {
+
+                    for (int y = 0; y < img.Height; y++)
+                    {
+                        for (int x = 0; x < img.Width; x++)
+                        {
+                            var c = bmp.GetPixel(x, y);
+                            SetPixel(name, x, y, new Color(c.R,c.G,c.B,c.A));
+                        }
+                    }
+
+                }
+            }
+
+            TextureCache[name].Update();
         }
 
         public void SetPixel(string textureName, int x, int y, Color color)
         {
-            throw new NotImplementedException();
+            var t = TextureCache[textureName];
+
+            t.SetPixel(x, y, color);
         }
 
         public void UpdateTextures()
         {
-            throw new NotImplementedException();
+            foreach (var t in TextureCache.Values.Where(x => x.IsDirty)) {
+                t.Update();
+            }
         }
     }
 }

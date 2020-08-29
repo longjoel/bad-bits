@@ -82,7 +82,7 @@ namespace BadBits.Engine.Next
             _graphicsDeviceManager.ApplyChanges();
 
             _engine = new Jint.Engine();
-            _resourceManager = new Services.ResourceManager();
+            _resourceManager = new Services.ResourceManager(this.GraphicsDevice);
 
 
             _backgroundRenderTarget = new RenderTarget2D(GraphicsDevice, 320, 240);
