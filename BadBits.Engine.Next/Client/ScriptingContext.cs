@@ -23,32 +23,32 @@ namespace BadBits.Engine.Next.Client
 
         public void setClose(Action closeCallback)
         {
-            throw new NotImplementedException();
+            CloseCallback = closeCallback;
         }
 
         public void setDraw3d(Action<double, IGraphicsContext3d> renderCallback)
         {
-            throw new NotImplementedException();
+            Draw3dCallback = Draw3dCallback;
         }
 
         public void setDrawBackground(Action<double, IGraphicsContext2d> renderCallback)
         {
-            throw new NotImplementedException();
+            DrawBackgroundCallback = renderCallback;
         }
 
         public void setDrawForeground(Action<double, IGraphicsContext2d> renderCallback)
         {
-            throw new NotImplementedException();
+            DrawForegroundCallback = renderCallback;
         }
 
         public void setInit(Action initCallback)
         {
-            throw new NotImplementedException();
+            InitCallback = initCallback;
         }
 
         public void setProcess(Action<double> processCallback)
         {
-            throw new NotImplementedException();
+            ProcessCallback = processCallback;
         }
     }
 }

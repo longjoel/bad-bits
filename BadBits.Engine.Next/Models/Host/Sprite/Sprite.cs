@@ -10,7 +10,7 @@ namespace BadBits.Engine.Next.Models.Host.Sprite
     public class Sprite:List<SpriteFrame>
     {
 
-        Sprite() : base() { }
+        public Sprite() : base() { }
 
         public SpriteFrame Interpolate(double dt) {
 

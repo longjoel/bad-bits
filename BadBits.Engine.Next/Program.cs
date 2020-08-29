@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Jint.CommonJS;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace BadBits.Engine.Next
 {
-    class GameInstance : Microsoft.Xna.Framework.Game {
+    class GameInstance : Game {
 
         Jint.Engine _engine;
         GraphicsDeviceManager _graphicsDeviceManager;
@@ -75,8 +76,14 @@ namespace BadBits.Engine.Next
         protected override void Initialize()
         {
             _graphicsDeviceManager = new GraphicsDeviceManager(this);
+
+            _graphicsDeviceManager.PreferredBackBufferWidth = 960;
+            _graphicsDeviceManager.PreferredBackBufferHeight = 720;
+            _graphicsDeviceManager.ApplyChanges();
+
             _engine = new Jint.Engine();
             _resourceManager = new Services.ResourceManager();
+
 
             _backgroundRenderTarget = new RenderTarget2D(GraphicsDevice, 320, 240);
             _graphics3dTarget = new RenderTarget2D(GraphicsDevice, 320, 240);
@@ -86,7 +93,12 @@ namespace BadBits.Engine.Next
 
             _mainEffect = new BasicEffect(GraphicsDevice);
 
-        
+
+
+            _engine.SetValue("engine", _scriptingContext);
+
+            _engine.CommonJS().RunMain(Environment.GetCommandLineArgs()[1]);
+
             base.Initialize();
         }
 
