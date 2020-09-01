@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ISpriteCell | Bad Bits API</title>
+	<title>IRgba | Bad Bits API</title>
 	<meta name="description" content="Documentation for Bad Bits API">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,32 +54,26 @@
 					<a href="../index.html">Globals</a>
 				</li>
 				<li>
-					<a href="ispritecell.html">ISpriteCell</a>
+					<a href="irgba.html">IRgba</a>
 				</li>
 			</ul>
-			<h1>Interface ISpriteCell</h1>
+			<h1>Interface IRgba</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-comment">
-				<div class="tsd-comment tsd-typography">
-					<dl class="tsd-comment-tags">
-						<dt>export</dt>
-						<dd></dd>
-						<dt>interface</dt>
-						<dd><p>ISpriteCell</p>
-						</dd>
-					</dl>
-				</div>
-			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">ISpriteCell</span>
+						<a href="irgb.html" class="tsd-signature-type">IRgb</a>
+						<ul class="tsd-hierarchy">
+							<li>
+								<span class="target">IRgba</span>
+							</li>
+						</ul>
 					</li>
 				</ul>
 			</section>
@@ -90,10 +84,10 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ispritecell.html#height" class="tsd-kind-icon">height</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ispritecell.html#width" class="tsd-kind-icon">width</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ispritecell.html#x" class="tsd-kind-icon">x</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ispritecell.html#y" class="tsd-kind-icon">y</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="irgba.html#a" class="tsd-kind-icon">a</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="irgba.html#b" class="tsd-kind-icon">b</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="irgba.html#g" class="tsd-kind-icon">g</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="irgba.html#r" class="tsd-kind-icon">r</a></li>
 							</ul>
 						</section>
 					</div>
@@ -102,42 +96,45 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="height" class="tsd-anchor"></a>
-					<h3>height</h3>
-					<div class="tsd-signature tsd-kind-icon">height<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="a" class="tsd-anchor"></a>
+					<h3>a</h3>
+					<div class="tsd-signature tsd-kind-icon">a<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/longjoel/bad-bits/blob/f414c51/Typescript/bad-bits.d.ts#L45">bad-bits.d.ts:45</a></li>
+							<li>Defined in <a href="https://github.com/longjoel/bad-bits/blob/a663b7e/Typescript/index.d.ts#L17">index.d.ts:17</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="width" class="tsd-anchor"></a>
-					<h3>width</h3>
-					<div class="tsd-signature tsd-kind-icon">width<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="b" class="tsd-anchor"></a>
+					<h3>b</h3>
+					<div class="tsd-signature tsd-kind-icon">b<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
+						<p>Inherited from <a href="irgb.html">IRgb</a>.<a href="irgb.html#b">b</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/longjoel/bad-bits/blob/f414c51/Typescript/bad-bits.d.ts#L44">bad-bits.d.ts:44</a></li>
+							<li>Defined in <a href="https://github.com/longjoel/bad-bits/blob/a663b7e/Typescript/index.d.ts#L5">index.d.ts:5</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="x" class="tsd-anchor"></a>
-					<h3>x</h3>
-					<div class="tsd-signature tsd-kind-icon">x<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="g" class="tsd-anchor"></a>
+					<h3>g</h3>
+					<div class="tsd-signature tsd-kind-icon">g<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
+						<p>Inherited from <a href="irgb.html">IRgb</a>.<a href="irgb.html#g">g</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/longjoel/bad-bits/blob/f414c51/Typescript/bad-bits.d.ts#L42">bad-bits.d.ts:42</a></li>
+							<li>Defined in <a href="https://github.com/longjoel/bad-bits/blob/a663b7e/Typescript/index.d.ts#L6">index.d.ts:6</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="y" class="tsd-anchor"></a>
-					<h3>y</h3>
-					<div class="tsd-signature tsd-kind-icon">y<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="r" class="tsd-anchor"></a>
+					<h3>r</h3>
+					<div class="tsd-signature tsd-kind-icon">r<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
+						<p>Inherited from <a href="irgb.html">IRgb</a>.<a href="irgb.html#r">r</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/longjoel/bad-bits/blob/f414c51/Typescript/bad-bits.d.ts#L43">bad-bits.d.ts:43</a></li>
+							<li>Defined in <a href="https://github.com/longjoel/bad-bits/blob/a663b7e/Typescript/index.d.ts#L4">index.d.ts:4</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -154,37 +151,46 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-interface">
-						<a href="ibadbits.html" class="tsd-kind-icon">IBad<wbr>Bits</a>
+						<a href="i2dcontext.html" class="tsd-kind-icon">I2d<wbr>Context</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="iinputstate.html" class="tsd-kind-icon">IInput<wbr>State</a>
+						<a href="i3dcontext.html" class="tsd-kind-icon">I3d<wbr>Context</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="ispriteattribs.html" class="tsd-kind-icon">ISprite<wbr>Attribs</a>
+						<a href="igamepadstate.html" class="tsd-kind-icon">IGamepad<wbr>State</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="iinputcontext.html" class="tsd-kind-icon">IInput<wbr>Context</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="irect.html" class="tsd-kind-icon">IRect</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="irgb.html" class="tsd-kind-icon">IRgb</a>
 					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface">
-						<a href="ispritecell.html" class="tsd-kind-icon">ISprite<wbr>Cell</a>
+						<a href="irgba.html" class="tsd-kind-icon">IRgba</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="ispritecell.html#height" class="tsd-kind-icon">height</a>
+								<a href="irgba.html#a" class="tsd-kind-icon">a</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="ispritecell.html#width" class="tsd-kind-icon">width</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="irgba.html#b" class="tsd-kind-icon">b</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="ispritecell.html#x" class="tsd-kind-icon">x</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="irgba.html#g" class="tsd-kind-icon">g</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="ispritecell.html#y" class="tsd-kind-icon">y</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="irgba.html#r" class="tsd-kind-icon">r</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
 					<li class=" tsd-kind-interface">
-						<a href="itextureattribs.html" class="tsd-kind-icon">ITexture<wbr>Attribs</a>
+						<a href="iscriptingcontext.html" class="tsd-kind-icon">IScripting<wbr>Context</a>
 					</li>
 				</ul>
 			</nav>

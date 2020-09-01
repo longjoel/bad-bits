@@ -58,6 +58,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Client\GraphicsContext2d.cs" />
+    <Compile Include="Client\GraphicsContext3d.cs" />
     <Compile Include="Client\ScriptingContext.cs" />
     <Compile Include="Interfaces\Client\IGraphicsContext2d.cs" />
     <Compile Include="Interfaces\Client\IGraphicsContext3d.cs" />

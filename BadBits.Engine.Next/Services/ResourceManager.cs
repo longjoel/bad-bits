@@ -61,7 +61,7 @@ namespace BadBits.Engine.Next.Services
             using (var img = System.Drawing.Image.FromFile(System.IO.Path.GetFullPath(path)))
             {
 
-                TextureCache[name] = new Texture(this._graphicsDevice, img.Width, img.Height);
+                TextureCache[name] = new Texture(_graphicsDevice, img.Width, img.Height);
                 
 
                 using (var bmp = new System.Drawing.Bitmap(img))

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BadBits.Engine.Next.Client;
 using Jint.CommonJS;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -16,7 +17,7 @@ namespace BadBits.Engine.Next
 
         Interfaces.Client.IGraphicsContext2d _backgroundGraphicsContext;
         Interfaces.Client.IGraphicsContext2d _foregroundGraphicsContext;
-        Interfaces.Client.IGraphicsContext3d _graphics3dContext;
+        Interfaces.Client.IGraphicsContext3d _graphicsContext3d;
         Interfaces.Client.IScriptingContext _scriptingContext;
         Interfaces.Client.IInputContext _inputContext;
 
@@ -83,16 +84,21 @@ namespace BadBits.Engine.Next
             _graphicsDeviceManager.ApplyChanges();
 
             _engine = new Jint.Engine();
-            _resourceManager = new Services.ResourceManager(this.GraphicsDevice);
+            _resourceManager = new Services.ResourceManager(GraphicsDevice);
 
 
             _backgroundRenderTarget = new RenderTarget2D(GraphicsDevice, 320, 240);
             _graphics3dTarget = new RenderTarget2D(GraphicsDevice, 320, 240);
             _foregroundRenderTarget = new RenderTarget2D(GraphicsDevice, 320, 240);
 
-            _spriteBatch = new SpriteBatch(this.GraphicsDevice);
+            _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             _mainEffect = new BasicEffect(GraphicsDevice);
+
+            _scriptingContext = new ScriptingContext(_resourceManager);
+            _graphicsContext3d = new GraphicsContext3d();
+            _backgroundGraphicsContext = new GraphicsContext2d(_resourceManager);
+            _foregroundGraphicsContext = new GraphicsContext2d(_resourceManager);
 
 
 
@@ -123,7 +129,7 @@ namespace BadBits.Engine.Next
             {
                 GraphicsDevice.SetRenderTarget(_graphics3dTarget);
                 GraphicsDevice.Clear(Color.Transparent);
-                _scriptingContext.Draw3dCallback.Invoke(gameTime.ElapsedGameTime.TotalSeconds, _graphics3dContext);
+                _scriptingContext.Draw3dCallback.Invoke(gameTime.ElapsedGameTime.TotalSeconds, _graphicsContext3d);
 
                 drawChain.Add(_graphics3dTarget);
             }

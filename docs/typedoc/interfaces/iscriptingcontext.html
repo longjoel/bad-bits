@@ -1,0 +1,663 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>IScriptingContext | Bad Bits API</title>
+	<meta name="description" content="Documentation for Bad Bits API">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">Bad Bits API</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../index.html">Globals</a>
+				</li>
+				<li>
+					<a href="iscriptingcontext.html">IScriptingContext</a>
+				</li>
+			</ul>
+			<h1>Interface IScriptingContext</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">IScriptingContext</span>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="iscriptingcontext.html#createtexture" class="tsd-kind-icon">create<wbr>Texture</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="iscriptingcontext.html#gettextureattributes" class="tsd-kind-icon">get<wbr>Texture<wbr>Attributes</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="iscriptingcontext.html#loadtexture" class="tsd-kind-icon">load<wbr>Texture</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="iscriptingcontext.html#maketransparent" class="tsd-kind-icon">make<wbr>Transparent</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="iscriptingcontext.html#setclose" class="tsd-kind-icon">set<wbr>Close</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="iscriptingcontext.html#setdraw3d" class="tsd-kind-icon">set<wbr>Draw3d</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="iscriptingcontext.html#setdrawbackground" class="tsd-kind-icon">set<wbr>Draw<wbr>Background</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="iscriptingcontext.html#setdrawforeground" class="tsd-kind-icon">set<wbr>Draw<wbr>Foreground</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="iscriptingcontext.html#setinit" class="tsd-kind-icon">set<wbr>Init</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="iscriptingcontext.html#setpixel" class="tsd-kind-icon">set<wbr>Pixel</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="iscriptingcontext.html#setprocess" class="tsd-kind-icon">set<wbr>Process</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="createtexture" class="tsd-anchor"></a>
+					<h3>create<wbr>Texture</h3>
+					<div class="tsd-signature tsd-kind-icon">create<wbr>Texture<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, width<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, height<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/longjoel/bad-bits/blob/a663b7e/Typescript/index.d.ts#L59">index.d.ts:59</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, width<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, height<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>name: <span class="tsd-signature-type">string</span></h5>
+											</li>
+											<li>
+												<h5>width: <span class="tsd-signature-type">number</span></h5>
+											</li>
+											<li>
+												<h5>height: <span class="tsd-signature-type">number</span></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="gettextureattributes" class="tsd-anchor"></a>
+					<h3>get<wbr>Texture<wbr>Attributes</h3>
+					<div class="tsd-signature tsd-kind-icon">get<wbr>Texture<wbr>Attributes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="irect.html" class="tsd-signature-type">IRect</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/longjoel/bad-bits/blob/a663b7e/Typescript/index.d.ts#L71">index.d.ts:71</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="irect.html" class="tsd-signature-type">IRect</a></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>name: <span class="tsd-signature-type">string</span></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <a href="irect.html" class="tsd-signature-type">IRect</a></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="loadtexture" class="tsd-anchor"></a>
+					<h3>load<wbr>Texture</h3>
+					<div class="tsd-signature tsd-kind-icon">load<wbr>Texture<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, path<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/longjoel/bad-bits/blob/a663b7e/Typescript/index.d.ts#L60">index.d.ts:60</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, path<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>name: <span class="tsd-signature-type">string</span></h5>
+											</li>
+											<li>
+												<h5>path: <span class="tsd-signature-type">string</span></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="maketransparent" class="tsd-anchor"></a>
+					<h3>make<wbr>Transparent</h3>
+					<div class="tsd-signature tsd-kind-icon">make<wbr>Transparent<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, color<span class="tsd-signature-symbol">: </span><a href="irgb.html" class="tsd-signature-type">IRgb</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/longjoel/bad-bits/blob/a663b7e/Typescript/index.d.ts#L61">index.d.ts:61</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, color<span class="tsd-signature-symbol">: </span><a href="irgb.html" class="tsd-signature-type">IRgb</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>name: <span class="tsd-signature-type">string</span></h5>
+											</li>
+											<li>
+												<h5>color: <a href="irgb.html" class="tsd-signature-type">IRgb</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="setclose" class="tsd-anchor"></a>
+					<h3>set<wbr>Close</h3>
+					<div class="tsd-signature tsd-kind-icon">set<wbr>Close<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>closeCallback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/longjoel/bad-bits/blob/a663b7e/Typescript/index.d.ts#L65">index.d.ts:65</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>closeCallback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>closeCallback: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+												<ul class="tsd-parameters">
+													<li class="tsd-parameter-signature">
+														<ul class="tsd-signatures tsd-kind-type-literal">
+															<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+														</ul>
+														<ul class="tsd-descriptions">
+															<li class="tsd-description">
+																<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+															</li>
+														</ul>
+													</li>
+												</ul>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="setdraw3d" class="tsd-anchor"></a>
+					<h3>set<wbr>Draw3d</h3>
+					<div class="tsd-signature tsd-kind-icon">set<wbr>Draw3d<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>renderCallback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>dt<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, context<span class="tsd-signature-symbol">: </span><a href="i3dcontext.html" class="tsd-signature-type">I3dContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/longjoel/bad-bits/blob/a663b7e/Typescript/index.d.ts#L67">index.d.ts:67</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>renderCallback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>dt<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, context<span class="tsd-signature-symbol">: </span><a href="i3dcontext.html" class="tsd-signature-type">I3dContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>renderCallback: <span class="tsd-signature-symbol">(</span>dt<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, context<span class="tsd-signature-symbol">: </span><a href="i3dcontext.html" class="tsd-signature-type">I3dContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+												<ul class="tsd-parameters">
+													<li class="tsd-parameter-signature">
+														<ul class="tsd-signatures tsd-kind-type-literal">
+															<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>dt<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, context<span class="tsd-signature-symbol">: </span><a href="i3dcontext.html" class="tsd-signature-type">I3dContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+														</ul>
+														<ul class="tsd-descriptions">
+															<li class="tsd-description">
+																<h4 class="tsd-parameters-title">Parameters</h4>
+																<ul class="tsd-parameters">
+																	<li>
+																		<h5>dt: <span class="tsd-signature-type">number</span></h5>
+																	</li>
+																	<li>
+																		<h5>context: <a href="i3dcontext.html" class="tsd-signature-type">I3dContext</a></h5>
+																	</li>
+																</ul>
+																<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+															</li>
+														</ul>
+													</li>
+												</ul>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="setdrawbackground" class="tsd-anchor"></a>
+					<h3>set<wbr>Draw<wbr>Background</h3>
+					<div class="tsd-signature tsd-kind-icon">set<wbr>Draw<wbr>Background<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>renderCallback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>dt<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, context<span class="tsd-signature-symbol">: </span><a href="i2dcontext.html" class="tsd-signature-type">I2dContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/longjoel/bad-bits/blob/a663b7e/Typescript/index.d.ts#L68">index.d.ts:68</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>renderCallback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>dt<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, context<span class="tsd-signature-symbol">: </span><a href="i2dcontext.html" class="tsd-signature-type">I2dContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>renderCallback: <span class="tsd-signature-symbol">(</span>dt<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, context<span class="tsd-signature-symbol">: </span><a href="i2dcontext.html" class="tsd-signature-type">I2dContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+												<ul class="tsd-parameters">
+													<li class="tsd-parameter-signature">
+														<ul class="tsd-signatures tsd-kind-type-literal">
+															<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>dt<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, context<span class="tsd-signature-symbol">: </span><a href="i2dcontext.html" class="tsd-signature-type">I2dContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+														</ul>
+														<ul class="tsd-descriptions">
+															<li class="tsd-description">
+																<h4 class="tsd-parameters-title">Parameters</h4>
+																<ul class="tsd-parameters">
+																	<li>
+																		<h5>dt: <span class="tsd-signature-type">number</span></h5>
+																	</li>
+																	<li>
+																		<h5>context: <a href="i2dcontext.html" class="tsd-signature-type">I2dContext</a></h5>
+																	</li>
+																</ul>
+																<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+															</li>
+														</ul>
+													</li>
+												</ul>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="setdrawforeground" class="tsd-anchor"></a>
+					<h3>set<wbr>Draw<wbr>Foreground</h3>
+					<div class="tsd-signature tsd-kind-icon">set<wbr>Draw<wbr>Foreground<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>renderCallback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>dt<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, context<span class="tsd-signature-symbol">: </span><a href="i2dcontext.html" class="tsd-signature-type">I2dContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/longjoel/bad-bits/blob/a663b7e/Typescript/index.d.ts#L69">index.d.ts:69</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>renderCallback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>dt<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, context<span class="tsd-signature-symbol">: </span><a href="i2dcontext.html" class="tsd-signature-type">I2dContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>renderCallback: <span class="tsd-signature-symbol">(</span>dt<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, context<span class="tsd-signature-symbol">: </span><a href="i2dcontext.html" class="tsd-signature-type">I2dContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+												<ul class="tsd-parameters">
+													<li class="tsd-parameter-signature">
+														<ul class="tsd-signatures tsd-kind-type-literal">
+															<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>dt<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, context<span class="tsd-signature-symbol">: </span><a href="i2dcontext.html" class="tsd-signature-type">I2dContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+														</ul>
+														<ul class="tsd-descriptions">
+															<li class="tsd-description">
+																<h4 class="tsd-parameters-title">Parameters</h4>
+																<ul class="tsd-parameters">
+																	<li>
+																		<h5>dt: <span class="tsd-signature-type">number</span></h5>
+																	</li>
+																	<li>
+																		<h5>context: <a href="i2dcontext.html" class="tsd-signature-type">I2dContext</a></h5>
+																	</li>
+																</ul>
+																<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+															</li>
+														</ul>
+													</li>
+												</ul>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="setinit" class="tsd-anchor"></a>
+					<h3>set<wbr>Init</h3>
+					<div class="tsd-signature tsd-kind-icon">set<wbr>Init<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>initCallback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/longjoel/bad-bits/blob/a663b7e/Typescript/index.d.ts#L64">index.d.ts:64</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>initCallback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>initCallback: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+												<ul class="tsd-parameters">
+													<li class="tsd-parameter-signature">
+														<ul class="tsd-signatures tsd-kind-type-literal">
+															<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+														</ul>
+														<ul class="tsd-descriptions">
+															<li class="tsd-description">
+																<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+															</li>
+														</ul>
+													</li>
+												</ul>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="setpixel" class="tsd-anchor"></a>
+					<h3>set<wbr>Pixel</h3>
+					<div class="tsd-signature tsd-kind-icon">set<wbr>Pixel<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, y<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, color<span class="tsd-signature-symbol">: </span><a href="irgba.html" class="tsd-signature-type">IRgba</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/longjoel/bad-bits/blob/a663b7e/Typescript/index.d.ts#L62">index.d.ts:62</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, y<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, color<span class="tsd-signature-symbol">: </span><a href="irgba.html" class="tsd-signature-type">IRgba</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>name: <span class="tsd-signature-type">string</span></h5>
+											</li>
+											<li>
+												<h5>x: <span class="tsd-signature-type">number</span></h5>
+											</li>
+											<li>
+												<h5>y: <span class="tsd-signature-type">number</span></h5>
+											</li>
+											<li>
+												<h5>color: <a href="irgba.html" class="tsd-signature-type">IRgba</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="setprocess" class="tsd-anchor"></a>
+					<h3>set<wbr>Process</h3>
+					<div class="tsd-signature tsd-kind-icon">set<wbr>Process<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>processCallback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>dt<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, context<span class="tsd-signature-symbol">: </span><a href="iinputcontext.html" class="tsd-signature-type">IInputContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/longjoel/bad-bits/blob/a663b7e/Typescript/index.d.ts#L66">index.d.ts:66</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>processCallback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>dt<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, context<span class="tsd-signature-symbol">: </span><a href="iinputcontext.html" class="tsd-signature-type">IInputContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>processCallback: <span class="tsd-signature-symbol">(</span>dt<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, context<span class="tsd-signature-symbol">: </span><a href="iinputcontext.html" class="tsd-signature-type">IInputContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+												<ul class="tsd-parameters">
+													<li class="tsd-parameter-signature">
+														<ul class="tsd-signatures tsd-kind-type-literal">
+															<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>dt<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, context<span class="tsd-signature-symbol">: </span><a href="iinputcontext.html" class="tsd-signature-type">IInputContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+														</ul>
+														<ul class="tsd-descriptions">
+															<li class="tsd-description">
+																<h4 class="tsd-parameters-title">Parameters</h4>
+																<ul class="tsd-parameters">
+																	<li>
+																		<h5>dt: <span class="tsd-signature-type">number</span></h5>
+																	</li>
+																	<li>
+																		<h5>context: <a href="iinputcontext.html" class="tsd-signature-type">IInputContext</a></h5>
+																	</li>
+																</ul>
+																<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+															</li>
+														</ul>
+													</li>
+												</ul>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="../index.html"><em>Globals</em></a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-interface">
+						<a href="i2dcontext.html" class="tsd-kind-icon">I2d<wbr>Context</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="i3dcontext.html" class="tsd-kind-icon">I3d<wbr>Context</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="igamepadstate.html" class="tsd-kind-icon">IGamepad<wbr>State</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="iinputcontext.html" class="tsd-kind-icon">IInput<wbr>Context</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="irect.html" class="tsd-kind-icon">IRect</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="irgb.html" class="tsd-kind-icon">IRgb</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="irgba.html" class="tsd-kind-icon">IRgba</a>
+					</li>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface">
+						<a href="iscriptingcontext.html" class="tsd-kind-icon">IScripting<wbr>Context</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="iscriptingcontext.html#createtexture" class="tsd-kind-icon">create<wbr>Texture</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="iscriptingcontext.html#gettextureattributes" class="tsd-kind-icon">get<wbr>Texture<wbr>Attributes</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="iscriptingcontext.html#loadtexture" class="tsd-kind-icon">load<wbr>Texture</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="iscriptingcontext.html#maketransparent" class="tsd-kind-icon">make<wbr>Transparent</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="iscriptingcontext.html#setclose" class="tsd-kind-icon">set<wbr>Close</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="iscriptingcontext.html#setdraw3d" class="tsd-kind-icon">set<wbr>Draw3d</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="iscriptingcontext.html#setdrawbackground" class="tsd-kind-icon">set<wbr>Draw<wbr>Background</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="iscriptingcontext.html#setdrawforeground" class="tsd-kind-icon">set<wbr>Draw<wbr>Foreground</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="iscriptingcontext.html#setinit" class="tsd-kind-icon">set<wbr>Init</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="iscriptingcontext.html#setpixel" class="tsd-kind-icon">set<wbr>Pixel</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="iscriptingcontext.html#setprocess" class="tsd-kind-icon">set<wbr>Process</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer>
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
