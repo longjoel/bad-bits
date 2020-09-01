@@ -30,5 +30,7 @@ namespace BadBits.Engine.Next.Interfaces.Client
         void makeTransparent(string name, Models.Client.Rgb color);
 
         Models.Client.Rect getTextureAttributes(string name);
+
+        void log(string value);
     }
 }

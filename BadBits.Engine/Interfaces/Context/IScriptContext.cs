@@ -46,7 +46,7 @@ namespace BadBits.Engine.Interfaces.Context
         /// <param name="path"></param>
         void loadTexture(string name, string path);
 
-        TextureAttribs getTextureAttribs(string name);
+      
 
         /// <summary>
         /// 

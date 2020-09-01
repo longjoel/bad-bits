@@ -8,14 +8,14 @@ namespace BadBits.Engine.Next.Models.Client
 {
     public class Rgba : Rgb
     {
-        public Jint.Native.JsValue A { get; set; }
+        public double A { get; set; }
 
         public new Microsoft.Xna.Framework.Color Color => new Microsoft.Xna.Framework.Color
         {
-            A = (byte)A.AsNumber(),
-            R = (byte)R.AsNumber(),
-            G = (byte)G.AsNumber(),
-            B = (byte)B.AsNumber()
+            A = (byte)A,
+            R = (byte)R,
+            G = (byte)G,
+            B = (byte)B,
         };
     }
 }

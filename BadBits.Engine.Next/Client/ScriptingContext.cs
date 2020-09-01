@@ -79,7 +79,11 @@ namespace BadBits.Engine.Next.Client
         public Rect getTextureAttributes(string name)
         {
             var t = _resourceManager.TextureCache[name];
-            return new Rect { X = 0, Y = 0, Width = t.Width, Height = t.Height };
+            return new Rect { x = 0, y = 0, width = t.Width, height = t.Height };
+        }
+
+        public void log(string value) {
+            Console.WriteLine(value);
         }
     }
 }

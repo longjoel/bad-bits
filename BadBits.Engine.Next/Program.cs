@@ -31,6 +31,11 @@ namespace BadBits.Engine.Next
 
         SpriteBatch _spriteBatch;
 
+        public GameInstance() : base() {
+            _graphicsDeviceManager = new GraphicsDeviceManager(this);
+            Window.AllowUserResizing = true;
+        }
+
         private void DrawForeground(GameTime gameTime, List<RenderTarget2D> drawChain)
         {
             if (_scriptingContext.DrawForegroundCallback != null)
@@ -77,13 +82,13 @@ namespace BadBits.Engine.Next
 
         protected override void Initialize()
         {
-            _graphicsDeviceManager = new GraphicsDeviceManager(this);
+           
 
             _graphicsDeviceManager.PreferredBackBufferWidth = 960;
             _graphicsDeviceManager.PreferredBackBufferHeight = 720;
             _graphicsDeviceManager.ApplyChanges();
 
-            _engine = new Jint.Engine();
+            _engine = new Jint.Engine(cfg=> cfg.Strict(false).AllowClr(typeof(GameInstance).Assembly));
             _resourceManager = new Services.ResourceManager(GraphicsDevice);
 
 
@@ -101,8 +106,9 @@ namespace BadBits.Engine.Next
             _foregroundGraphicsContext = new GraphicsContext2d(_resourceManager);
 
 
-
+       
             _engine.SetValue("engine", _scriptingContext);
+           
 
             _engine.CommonJS().RunMain(Environment.GetCommandLineArgs()[1]);
 
@@ -147,12 +153,16 @@ namespace BadBits.Engine.Next
                 foreach (var t in drawChain)
                 {
                     _mainEffect.Texture = t;
+                    _mainEffect.TextureEnabled = true;
+                    _mainEffect.VertexColorEnabled = false;
                     
+                    _mainEffect.View = Matrix.CreateOrthographicOffCenter(0, 1, 1, 0, -1, 1);
                     pass.Apply();
 
                     GraphicsDevice.BlendState = BlendState.AlphaBlend;
                     GraphicsDevice.RasterizerState = RasterizerState.CullNone;
                     GraphicsDevice.SamplerStates[0] = SamplerState.PointWrap;
+                    
                     
                     GraphicsDevice.DrawUserPrimitives(PrimitiveType.TriangleList, new VertexPositionTexture[] {
                         new VertexPositionTexture(new Vector3(0,0,z),new Vector2(0,0)),

@@ -16,7 +16,7 @@ namespace BadBits.Engine.Next.Tests.Model.Client
 
         public BadBits.Engine.Next.Models.Client.Rect GetRect(dynamic r) {
 
-            return new Models.Client.Rect {X = r.X,Y=20,Width=40, Height=50 };
+            return new Models.Client.Rect {x = r.X,y=20,width=40, height=50 };
 
         }
 

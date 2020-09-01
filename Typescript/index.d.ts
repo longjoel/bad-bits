@@ -54,7 +54,7 @@ export interface IInputContext {
 
 
 
-export interface IScriptingContext {
+export interface IBadBits {
 
     createTexture: (name: string, width: number, height: number) => void;
     loadTexture: (name: string, path: string) => void;
@@ -69,4 +69,6 @@ export interface IScriptingContext {
     setDrawForeground: (renderCallback: (dt: number, context: I2dContext) => void) => void;
 
     getTextureAttributes: (name: string) => IRect;
+
+    log:(value:string)=>void;
 }

@@ -34,9 +34,17 @@ namespace BadBits.Engine.Next.Client
             });
         }
 
-        public void drawTexture(string texture, dynamic srcRect, dynamic destRect)
+        public void drawTexture(string texture, object srcRect, object destRect)
         {
-            DrawCommands.Add(new DrawCommand2d { TextureName = texture, Source = srcRect, Dest = destRect });
+            dynamic s = srcRect;
+            dynamic d = destRect;
+
+            DrawCommands.Add(new DrawCommand2d
+            {
+                TextureName = texture,
+                Source = new Microsoft.Xna.Framework.Rectangle((int)s.x, (int)s.y, (int)s.width, (int)s.height),
+                Dest = new Microsoft.Xna.Framework.Rectangle((int)d.x, (int)d.y, (int)d.width, (int)d.height)
+            });
         }
     }
 }

@@ -11,16 +11,16 @@ namespace BadBits.Engine.Next.Models.Client
 {
     public class Rect
     {
-        public Jint.Native.JsValue X { get; set; }
-        public Jint.Native.JsValue Y { get; set; }
-        public Jint.Native.JsValue Width { get; set; }
-        public Jint.Native.JsValue Height { get; set; }
+        public double x { get; set; }
+        public double y { get; set; }
+        public double width { get; set; }
+        public double height { get; set; }
 
         public Rectangle BackendRect => new Rectangle {
-            X = (int)X.AsNumber(),
-            Y = (int)Y.AsNumber(),
-            Width = (int)Width.AsNumber(),
-            Height = (int)Height.AsNumber(),
+            X = (int)x,
+            Y = (int)y,
+            Width = (int)width,
+            Height = (int)height,
         };
     }
 }

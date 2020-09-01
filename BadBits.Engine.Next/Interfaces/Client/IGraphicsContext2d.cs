@@ -11,7 +11,7 @@ namespace BadBits.Engine.Next.Interfaces.Client
     {
         List<DrawCommand2d> DrawCommands { get; }
 
-        void drawTexture(string texture, dynamic srcRect, dynamic dstRect);
+        void drawTexture(string texture, object srcRect, object destRect);
         void drawSprite(string spriteName, int x, int y, double frameTime);
     }
 }
