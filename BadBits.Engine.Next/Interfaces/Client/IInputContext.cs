@@ -8,6 +8,6 @@ namespace BadBits.Engine.Next.Interfaces.Client
 {
     public interface IInputContext
     {
-        Models.Client.GamepadState PollGamepadState();
+        Models.Client.GamepadState pollGamepadState();
     }
 }

@@ -65,8 +65,6 @@ namespace BadBits.Engine.Context
             };
 
             _renderTarget = renderTarget;
-
-
         }
 
         public void DrawParticle(string textureName, VertexPosition location, double scale)

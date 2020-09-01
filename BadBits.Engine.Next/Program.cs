@@ -18,6 +18,7 @@ namespace BadBits.Engine.Next
         Interfaces.Client.IGraphicsContext2d _foregroundGraphicsContext;
         Interfaces.Client.IGraphicsContext3d _graphics3dContext;
         Interfaces.Client.IScriptingContext _scriptingContext;
+        Interfaces.Client.IInputContext _inputContext;
 
         Interfaces.Services.IResourceManager _resourceManager;
 
@@ -172,7 +173,7 @@ namespace BadBits.Engine.Next
         protected override void Update(GameTime gameTime)
         {
 
-            _scriptingContext.ProcessCallback?.Invoke(gameTime.ElapsedGameTime.TotalSeconds);
+            _scriptingContext.ProcessCallback?.Invoke(gameTime.ElapsedGameTime.TotalSeconds, _inputContext);
 
             base.Update(gameTime);
         }
