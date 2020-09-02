@@ -1,6 +1,6 @@
 ﻿using BadBits.Engine.Next.Interfaces.Client;
 using BadBits.Engine.Next.Interfaces.Services;
-using BadBits.Engine.Next.Models.Client;
+using Microsoft.Xna.Framework;
 using System;
 
 namespace BadBits.Engine.Next.Client
@@ -21,14 +21,15 @@ namespace BadBits.Engine.Next.Client
 
         public Action CloseCallback { get; private set; }
 
-        public ScriptingContext(IResourceManager resourceManager) {
+        public ScriptingContext(IResourceManager resourceManager)
+        {
             _resourceManager = resourceManager;
         }
 
         public void createTexture(string name, int width, int height)
         {
             _resourceManager.CreateTexture(name, width, height);
-            
+
         }
 
         public void loadTexture(string name, string path)
@@ -36,9 +37,11 @@ namespace BadBits.Engine.Next.Client
             _resourceManager.LoadTexture(name, path);
         }
 
-        public void makeTransparent(string name, Rgb color)
+        public void makeTransparent(string name, object color)
         {
-            _resourceManager.TextureCache[name].MakeTransparent(color.Color);
+            dynamic c = color;
+
+            _resourceManager.TextureCache[name].MakeTransparent(new Color((byte)c.r, (byte)c.g, (byte)c.b));
         }
 
         public void setClose(Action closeCallback)
@@ -66,9 +69,10 @@ namespace BadBits.Engine.Next.Client
             InitCallback = initCallback;
         }
 
-        public void setPixel(string name, int x, int y, Rgba color)
+        public void setPixel(string name, int x, int y, object color)
         {
-            _resourceManager.TextureCache[name].SetPixel(x, y, color.Color);
+            dynamic c = color;
+            _resourceManager.TextureCache[name].SetPixel(x, y, new Color((byte)c.r, (byte)c.g, (byte)c.b));
         }
 
         public void setProcess(Action<double, IInputContext> processCallback)
@@ -76,13 +80,14 @@ namespace BadBits.Engine.Next.Client
             ProcessCallback = processCallback;
         }
 
-        public Rect getTextureAttributes(string name)
+        public object getTextureAttributes(string name)
         {
             var t = _resourceManager.TextureCache[name];
-            return new Rect { x = 0, y = 0, width = t.Width, height = t.Height };
+            return new { x = 0, y = 0, width = t.Width, height = t.Height };
         }
 
-        public void log(string value) {
+        public void log(string value)
+        {
             Console.WriteLine(value);
         }
     }

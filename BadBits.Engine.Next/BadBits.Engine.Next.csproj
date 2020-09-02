@@ -74,11 +74,6 @@
     <Compile Include="Interfaces\Client\IScriptingContext.cs" />
     <Compile Include="Interfaces\Services\IResourceManager.cs" />
     <Compile Include="Models\Client\GamepadState.cs" />
-    <Compile Include="Models\Client\Rect.cs" />
-    <Compile Include="Models\Client\Rgb.cs" />
-    <Compile Include="Models\Client\Rgba.cs" />
-    <Compile Include="Models\Client\VecPositionColor.cs" />
-    <Compile Include="Models\Client\VecPositionTexture.cs" />
     <Compile Include="Models\Host\DrawCommand2d.cs" />
     <Compile Include="Models\Host\Sprite\Sprite.cs" />
     <Compile Include="Models\Host\Sprite\SpriteFrame.cs" />

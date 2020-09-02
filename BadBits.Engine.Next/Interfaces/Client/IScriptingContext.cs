@@ -26,10 +26,10 @@ namespace BadBits.Engine.Next.Interfaces.Client
 
         void loadTexture(string name, string path);
         void createTexture(string name, int width, int height);
-        void setPixel(string name, int x, int y, Models.Client.Rgba color);
-        void makeTransparent(string name, Models.Client.Rgb color);
+        void setPixel(string name, int x, int y, object color);
+        void makeTransparent(string name, object color);
 
-        Models.Client.Rect getTextureAttributes(string name);
+        object getTextureAttributes(string name);
 
         void log(string value);
     }
