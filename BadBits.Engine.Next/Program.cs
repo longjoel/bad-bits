@@ -106,14 +106,14 @@ namespace BadBits.Engine.Next
                            vx.ToArray(), 0, kvp.Value.Count / 3);
                     }
 
-                  }
+                }
 
 
                 foreach (var p in _texturedEffect.CurrentTechnique.Passes)
                 {
                     _texturedEffect.Projection = _graphicsContext3d.ProjectionMatrix;
                     _texturedEffect.View = _graphicsContext3d.ViewMatrix;
-                    
+
                     p.Apply();
                     foreach (var kvp in _graphicsContext3d.TrianglesByTexture)
                     {
@@ -216,7 +216,7 @@ namespace BadBits.Engine.Next
 
             GraphicsDevice.SetRenderTarget(null);
 
-           GraphicsDevice.Clear(Color.White);
+            GraphicsDevice.Clear(Color.White);
 
             float z = -.25f;
 
