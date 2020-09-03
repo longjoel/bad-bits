@@ -13,6 +13,20 @@ export interface IRect {
     height: number;
 }
 
+export interface IVertexPosition {
+    x:number;
+    y:number;
+    z:number;
+}
+
+export interface IVertexTexture {
+    x:number;
+    y:number;
+    z:number;
+    u:number;
+    v:number;
+}
+
 export interface IRgba extends IRgb {
     a: number;
 }
@@ -39,7 +53,10 @@ export interface IGamepadState {
 }
 
 export interface I3dContext {
+    drawColoredTriangles:(color:IRgba, verticies:IVertexPosition[])=>void;
+    drawTexturedTriangles:(textureName:string, verticies:IVertexTexture[])=>void;
 
+  //  void setView(double xEye, double yEye, double zEye, double xLook, double yLook, double zLook, double fov);
 }
 
 export interface I2dContext {

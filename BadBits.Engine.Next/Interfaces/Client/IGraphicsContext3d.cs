@@ -12,8 +12,8 @@ namespace BadBits.Engine.Next.Interfaces.Client
     {
         Dictionary<Color, List<VertexPosition>> TrianglesByColor { get; }
         Dictionary<Texture2D, List<VertexPositionTexture>> TrianglesByTexture { get; }
+        Matrix ProjectionMatrix { get; }
         Matrix ViewMatrix { get; }
-        Matrix WorldMatrix { get; }
 
         void drawColoredTriangles(object color, object[] verticies);
         void drawTexturedTriangles(string textureName, object[] verticies);

@@ -51,7 +51,7 @@ namespace BadBits.Engine.Next.Client
 
         public void setDraw3d(Action<double, IGraphicsContext3d> renderCallback)
         {
-            Draw3dCallback = Draw3dCallback;
+            Draw3dCallback = renderCallback;
         }
 
         public void setDrawBackground(Action<double, IGraphicsContext2d> renderCallback)

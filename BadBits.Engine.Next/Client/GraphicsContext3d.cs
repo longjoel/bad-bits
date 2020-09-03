@@ -17,15 +17,17 @@ namespace BadBits.Engine.Next.Client
             TrianglesByColor = new Dictionary<Color, List<VertexPosition>>();
             TrianglesByTexture = new Dictionary<Texture2D, List<VertexPositionTexture>>();
             _resourceManager = resourceManager;
+            ProjectionMatrix = Matrix.Identity;
+            ViewMatrix = Matrix.Identity;
         }
 
         public Dictionary<Color, List<VertexPosition>> TrianglesByColor { get; private set; }
 
         public Dictionary<Texture2D, List<VertexPositionTexture>> TrianglesByTexture { get; private set; }
 
-        public Matrix ViewMatrix { get; private set; }
+        public Matrix ProjectionMatrix { get; private set; }
 
-        public Matrix WorldMatrix { get; private set; }
+        public Matrix ViewMatrix { get; private set; }
 
         public void drawColoredTriangles(object color, object[] verticies)
         {
@@ -55,13 +57,16 @@ namespace BadBits.Engine.Next.Client
 
             var verts = verticies.Select(v => {
                 dynamic dynamicVert = v;
-                return new VertexPositionTexture(new Vector3((float)(dynamicVert.x), (float)dynamicVert.y, (float)dynamicVert.z), new Vector2((float)dynamicVert.u, (float)dynamicVert.v) );
+                return new VertexPositionTexture(new Vector3((float)dynamicVert.x, (float)dynamicVert.y, (float)dynamicVert.z), new Vector2((float)dynamicVert.u, (float)dynamicVert.v) );
             });
+
+            TrianglesByTexture[tex2d].AddRange(verts);
         }
 
         public void setView(double xEye, double yEye, double zEye, double xLook, double yLook, double zLook, double fov)
         {
-            throw new NotImplementedException();
+            ProjectionMatrix = Matrix.CreatePerspective(320, 240, 1, 1000);
+            ViewMatrix = Matrix.CreateLookAt(new Vector3((float)xEye, (float)yEye, (float)zEye), new Vector3((float)xLook, (float)yLook, (float)zLook), new Vector3(0, 1, 0));
         }
     }
 }
