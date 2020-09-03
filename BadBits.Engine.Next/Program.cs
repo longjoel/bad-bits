@@ -101,10 +101,11 @@ namespace BadBits.Engine.Next
             _mainEffect = new BasicEffect(GraphicsDevice);
 
             _scriptingContext = new ScriptingContext(_resourceManager);
-            _graphicsContext3d = new GraphicsContext3d();
+            _graphicsContext3d = new GraphicsContext3d(_resourceManager);
             _backgroundGraphicsContext = new GraphicsContext2d(_resourceManager);
             _foregroundGraphicsContext = new GraphicsContext2d(_resourceManager);
 
+            _inputContext = new InputContext();
 
        
             _engine.SetValue("engine", _scriptingContext);
