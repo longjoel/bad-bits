@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "BadBits.Engine.Core": {
+      "commandName": "Project",
+      "commandLineArgs": "build/index.js",
+      "workingDirectory": "../example-project"
+    }
+  }
+}

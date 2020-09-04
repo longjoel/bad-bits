@@ -1,12 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.1209
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BadBits.Engine", "BadBits.Engine\BadBits.Engine.csproj", "{F701800D-3730-4138-970A-CE157DEFBFDA}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BadBits.Engine.Next", "BadBits.Engine.Next\BadBits.Engine.Next.csproj", "{4764FE27-B282-47AA-A236-E387F05DA00B}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{3BBBD7C3-E0DB-45EF-8188-82E8AA810A04}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BadBits.Engine.Next.Tests", "BadBits.Engine.Next.Tests\BadBits.Engine.Next.Tests.csproj", "{2C225E9B-98B3-44B3-A893-00BC7751183B}"
@@ -16,24 +12,22 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Typescript", "Typescript", 
 		Typescript\index.d.ts = Typescript\index.d.ts
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BadBits.Engine.Core", "BadBits.Engine.Core\BadBits.Engine.Core.csproj", "{A09CF045-2B3C-4747-8907-24DCA089E42C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F701800D-3730-4138-970A-CE157DEFBFDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F701800D-3730-4138-970A-CE157DEFBFDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F701800D-3730-4138-970A-CE157DEFBFDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F701800D-3730-4138-970A-CE157DEFBFDA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4764FE27-B282-47AA-A236-E387F05DA00B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4764FE27-B282-47AA-A236-E387F05DA00B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4764FE27-B282-47AA-A236-E387F05DA00B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4764FE27-B282-47AA-A236-E387F05DA00B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2C225E9B-98B3-44B3-A893-00BC7751183B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2C225E9B-98B3-44B3-A893-00BC7751183B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C225E9B-98B3-44B3-A893-00BC7751183B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C225E9B-98B3-44B3-A893-00BC7751183B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A09CF045-2B3C-4747-8907-24DCA089E42C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A09CF045-2B3C-4747-8907-24DCA089E42C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A09CF045-2B3C-4747-8907-24DCA089E42C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A09CF045-2B3C-4747-8907-24DCA089E42C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

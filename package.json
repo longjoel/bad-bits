@@ -1,0 +1,26 @@
+{
+  "name": "bad-bits",
+  "version": "1.0.0",
+  "description": "_A retro game enspired engine for PC, Mac, and Linux._",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-engine-windows": "\"%programfiles(x86)%\\Microsoft Visual Studio\\2017\\Enterprise\\MSBuild\\15.0\\Bin\\msbuild.exe\" ./BadBits.sln"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/longjoel/bad-bits.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/longjoel/bad-bits/issues"
+  },
+  "homepage": "https://github.com/longjoel/bad-bits#readme",
+  "dependencies": {
+    "dotnet": "^1.1.4"
+  }
+}
