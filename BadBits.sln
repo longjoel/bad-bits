@@ -11,6 +11,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{3BBBD7C3
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BadBits.Engine.Next.Tests", "BadBits.Engine.Next.Tests\BadBits.Engine.Next.Tests.csproj", "{2C225E9B-98B3-44B3-A893-00BC7751183B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Typescript", "Typescript", "{C15DFED3-3DEE-4A7E-A474-4305F7113D01}"
+	ProjectSection(SolutionItems) = preProject
+		Typescript\index.d.ts = Typescript\index.d.ts
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

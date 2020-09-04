@@ -55,8 +55,8 @@ export interface IGamepadState {
 export interface I3dContext {
     drawColoredTriangles:(color:IRgba, verticies:IVertexPosition[])=>void;
     drawTexturedTriangles:(textureName:string, verticies:IVertexTexture[])=>void;
-
-  //  void setView(double xEye, double yEye, double zEye, double xLook, double yLook, double zLook, double fov);
+	setView:(xEye:number, yEye:number, zEye:number, xLook:number, yEye:number, zEye:number);
+    //void setView(double xEye, double yEye, double zEye, double xLook, double yLook, double zLook, double fov);
 }
 
 export interface I2dContext {

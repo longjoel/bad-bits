@@ -63,7 +63,7 @@ namespace BadBits.Engine.Next.Client
             TrianglesByTexture[tex2d].AddRange(verts);
         }
 
-        public void setView(double xEye, double yEye, double zEye, double xLook, double yLook, double zLook, double fov)
+        public void setView(double xEye, double yEye, double zEye, double xLook, double yLook, double zLook)
         {
             ProjectionMatrix = Matrix.CreatePerspective(320, 240, 1, 1000);
             ViewMatrix = Matrix.CreateLookAt(new Vector3((float)xEye, (float)yEye, (float)zEye), new Vector3((float)xLook, (float)yLook, (float)zLook), new Vector3(0, 1, 0));
