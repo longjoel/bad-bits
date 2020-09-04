@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build-engine-windows": "\"%programfiles(x86)%\\Microsoft Visual Studio\\2017\\Enterprise\\MSBuild\\15.0\\Bin\\msbuild.exe\" ./BadBits.sln"
+    "build-engine": "dotnet publish BadBits.Engine.Core -r win-x64 --output bin -c Release /p:PublishSingleFile=true",
+    "start":"npm run start --prefix example-project"
   },
   "repository": {
     "type": "git",
