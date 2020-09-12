@@ -16,6 +16,8 @@ namespace BadBits.Engine.Interfaces.Services
 
         void CreateTexture(string name, int width, int height);
         void LoadTexture(string name, string path);
+
+        void LoadTextureFromResource(string name, string key);
         void SetPixel(string textureName, int x, int y, Color color);
         void UpdateTextures();
 

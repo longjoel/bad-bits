@@ -13,5 +13,9 @@ namespace BadBits.Engine.Interfaces.Client
 
         void drawTexture(string texture, object srcRect, object destRect);
         void drawSprite(string spriteName, int x, int y, double frameTime);
+
+        void drawLightText(int x, int y, string text);
+
+        void drawDarkText(int x, int y, string text);
     }
 }

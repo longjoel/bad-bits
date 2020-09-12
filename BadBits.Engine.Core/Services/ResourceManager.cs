@@ -95,5 +95,34 @@ namespace BadBits.Engine.Services
                 t.Update();
             }
         }
+
+        public void LoadTextureFromResource(string name, string key) {
+          
+            using (var img = System.Drawing.Image.FromStream(Resources.ResourceManager.GetStream(key)))
+            {
+
+                TextureCache[name] = new Texture(_graphicsDevice, img.Width, img.Height);
+
+
+                using (var bmp = new System.Drawing.Bitmap(img))
+                {
+
+                    for (int y = 0; y < img.Height; y++)
+                    {
+                        for (int x = 0; x < img.Width; x++)
+                        {
+                            var c = bmp.GetPixel(x, y);
+                            SetPixel(name, x, y, new Color(c.R, c.G, c.B, c.A));
+                        }
+                    }
+
+                }
+            }
+
+            TextureCache[name].Update();
+
+
+        }
+       
     }
 }

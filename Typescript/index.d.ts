@@ -56,12 +56,13 @@ export interface I3dContext {
     drawColoredTriangles:(color:IRgba, verticies:IVertexPosition[])=>void;
     drawTexturedTriangles:(textureName:string, verticies:IVertexTexture[])=>void;
 	setView:(xEye:number, yEye:number, zEye:number, xLook:number, yLook:number, zLook:number)=>void;
-    //void setView(double xEye, double yEye, double zEye, double xLook, double yLook, double zLook, double fov);
 }
 
 export interface I2dContext {
     drawTexture:(texture:string, srcRect:IRect, destRect:IRect)=>void;
     drawSprite:(spriteName:string, x:number, y:number, frameTime:number)=>void;
+    drawLightText:(x:number, y:number, text:string)=>void;
+    drawDarkText:(x:number, y:number, text:string)=>void;
 }
 
 export interface IInputContext {

@@ -1,6 +1,7 @@
 ﻿using BadBits.Engine.Interfaces.Client;
 using BadBits.Engine.Interfaces.Services;
 using BadBits.Engine.Models.Host;
+using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 
 namespace BadBits.Engine.Client
@@ -45,6 +46,84 @@ namespace BadBits.Engine.Client
                 Source = new Microsoft.Xna.Framework.Rectangle((int)s.x, (int)s.y, (int)s.width, (int)s.height),
                 Dest = new Microsoft.Xna.Framework.Rectangle((int)d.x, (int)d.y, (int)d.width, (int)d.height)
             });
+        }
+
+        private Dictionary<char, Point> _fontCache;
+
+        void BuildFontCache()
+        {
+            _fontCache = new Dictionary<char, Point>();
+            var data = new string[] {
+                " !\"#$%&'()*+,-./0123456789:;<=>?",
+                "@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_",
+                "`abcdefghijklmnopqrstuvwxyz{|}~" };
+
+            for (int i = 0; i < data.Length; i++)
+            {
+                var chrArray = data[i].ToCharArray();
+                for (int j = 0; j < chrArray.Length; j++)
+                {
+                    var chr = chrArray[j];
+                    _fontCache[chr] = new Point
+                    {
+                        X = j * 8,
+                        Y = i * 16
+                    };
+
+                }
+            }
+
+        }
+
+        void DrawText(int x, int y, string text, string textureName)
+        {
+            int row = 0;
+            int col = 0;
+
+            var chrArray = text.ToCharArray();
+
+            foreach (var c in chrArray)
+            {
+                if (c == '\n')
+                {
+                    row++;
+                    col = 0;
+                }
+                else
+                {
+                    var srcRect = new Rectangle(_fontCache[c], new Point(8, 16));
+                    DrawCommands.Add(new DrawCommand2d
+                    {
+                        TextureName = textureName,
+                        Source = srcRect,
+                        Dest = new Rectangle { X = x + (col * 8), Y = y + (row * 16), Width = 8, Height = 16 }
+                    });
+                    col++;
+                }
+            }
+
+        }
+
+        public void drawLightText(int x, int y, string text)
+        {
+            if (!_resourceManager.TextureCache.ContainsKey("__dark-font"))
+            {
+                BuildFontCache();
+                _resourceManager.LoadTextureFromResource("__dark-font", "darkFnt");
+            }
+
+            DrawText(x, y, text, "__dark-font");
+        }
+
+        public void drawDarkText(int x, int y, string text)
+        {
+            if (!_resourceManager.TextureCache.ContainsKey("__light-font"))
+            {
+                BuildFontCache();
+                _resourceManager.LoadTextureFromResource("__light-font", "darkFnt");
+            }
+
+            DrawText(x, y, text, "__dark-font");
         }
     }
 }
