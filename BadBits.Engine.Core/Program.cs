@@ -216,7 +216,7 @@ namespace BadBits.Engine
 
             GraphicsDevice.SetRenderTarget(null);
 
-            GraphicsDevice.Clear(Color.White);
+            GraphicsDevice.Clear(Color.Black);
 
             float z = -.25f;
 
