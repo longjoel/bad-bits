@@ -44,14 +44,15 @@ namespace BadBits.Engine
                 _scriptingContext.DrawForegroundCallback.Invoke(gameTime.ElapsedGameTime.TotalSeconds, _foregroundGraphicsContext);
 
                 _resourceManager.UpdateTextures();
-
-                _spriteBatch.Begin();
+                _spriteBatch.Begin(SpriteSortMode.Immediate,
+                    BlendState.AlphaBlend,
+                    SamplerState.PointClamp);
 
                 _foregroundGraphicsContext.DrawCommands.ForEach(x => _spriteBatch.Draw(_resourceManager.TextureCache[x.TextureName], x.Dest, x.Source, Color.White));
 
                 _spriteBatch.End();
 
-                _backgroundGraphicsContext.DrawCommands.Clear();
+                _foregroundGraphicsContext.DrawCommands.Clear();
                 drawChain.Add(_foregroundRenderTarget);
             }
         }
@@ -65,8 +66,9 @@ namespace BadBits.Engine
                 _scriptingContext.DrawBackgroundCallback.Invoke(gameTime.ElapsedGameTime.TotalSeconds, _backgroundGraphicsContext);
 
                 _resourceManager.UpdateTextures();
-
-                _spriteBatch.Begin();
+                _spriteBatch.Begin(SpriteSortMode.Immediate,
+                    BlendState.AlphaBlend,
+                    SamplerState.PointClamp);
 
                 _backgroundGraphicsContext.DrawCommands.ForEach(x => _spriteBatch.Draw(_resourceManager.TextureCache[x.TextureName], x.Dest, x.Source, Color.White));
 
