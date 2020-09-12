@@ -41,7 +41,7 @@ namespace BadBits.Engine
             {
                 GraphicsDevice.SetRenderTarget(_foregroundRenderTarget);
                 GraphicsDevice.Clear(Color.Transparent);
-                _scriptingContext.DrawBackgroundCallback.Invoke(gameTime.ElapsedGameTime.TotalSeconds, _foregroundGraphicsContext);
+                _scriptingContext.DrawForegroundCallback.Invoke(gameTime.ElapsedGameTime.TotalSeconds, _foregroundGraphicsContext);
 
                 _resourceManager.UpdateTextures();
 
@@ -218,7 +218,7 @@ namespace BadBits.Engine
 
             GraphicsDevice.Clear(Color.Black);
 
-            float z = -.25f;
+            float z = 0.25f;
 
             foreach (var pass in _mainEffect.CurrentTechnique.Passes)
             {
@@ -248,7 +248,7 @@ namespace BadBits.Engine
 
                     }, 0, 2);
 
-                    z += 0.05f;
+                    z -= 0.05f;
 
                 }
 
