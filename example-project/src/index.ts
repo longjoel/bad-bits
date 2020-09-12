@@ -1,39 +1,38 @@
 import { IBadBits } from '../../Typescript/index';
 
+import {examples} from './examples';
 declare var engine: IBadBits;
 declare var __dirname: string;
 
+let exampleIndex:number = 0;
 
 engine.setInit(() => {
 
-    engine.loadTexture("ship", "assets/tiny-ship.png");
+    examples.forEach(e=> e.init(engine));
 
 });
 
 engine.setDrawBackground((dt, context) => {
 
-    const srcRect = engine.getTextureAttributes("ship");
-    
-    context.drawTexture("ship", { x: 0, y: 0, width: 32, height: 32 }, { x: 0, y: 0, width: 32, height: 32 });
+    examples[exampleIndex].drawBackground(dt,context);
+
+    context.drawLightText(0, 0, "This is the bad-bits engine.\n"
+    +"Joel Longanecker (c)2020\n"
+    +"Press Up/Dn to change examples.");
 });
 
- engine.setDraw3d((dt, context)=>{
+engine.setDrawForeground((dt, context)=>{
+
+    examples[exampleIndex].drawForeground(dt,context);
 
 
-    context.drawColoredTriangles({r:128,g:128,b:128,a:255},[
-        {x:0,y:0,z:0},
-        {x:1,y:0,z:0},
-        {x:1,y:1,z:0}
-    ]);
+    context.drawLightText(0, 0, "This is the bad-bits engine.\n"
+    +"Joel Longanecker (c)2020\n"
+    +"Press Up/Dn to change examples.");
 
-    context.drawTexturedTriangles("ship", [
-        {x:.15,y:.15,z:.25,u:0,v:0},
-        {x:.45,y:.15,z:.25,u:1,v:0},
-        {x:.45,y:.45,z:.25,u:1,v:1},
+});
 
-        {x:.15,y:.15,z:.25,u:0,v:0},
-        {x:.15,y:.45,z:.25,u:0,v:1},
-        {x:.45,y:.45,z:.25,u:1,v:1}
-    ]);
+engine.setDraw3d((dt, context) => {
 
- });
+
+});

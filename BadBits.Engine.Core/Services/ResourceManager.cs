@@ -98,7 +98,7 @@ namespace BadBits.Engine.Services
 
         public void LoadTextureFromResource(string name, string key) {
           
-            using (var img = System.Drawing.Image.FromStream(Resources.ResourceManager.GetStream(key)))
+            using (var img = (System.Drawing.Image)(Resources.ResourceManager.GetObject(key)))
             {
 
                 TextureCache[name] = new Texture(_graphicsDevice, img.Width, img.Height);

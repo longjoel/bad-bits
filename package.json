@@ -9,7 +9,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-engine": "dotnet publish BadBits.Engine.Core -r win-x64 --output bin -c Release /p:PublishSingleFile=true",
-    "start": "npm run start --prefix example-project"
+    "start": "npm run build-engine && npm start --prefix example-project"
   },
   "repository": {
     "type": "git",

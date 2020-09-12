@@ -106,21 +106,30 @@ namespace BadBits.Engine.Client
 
         public void drawLightText(int x, int y, string text)
         {
-            if (!_resourceManager.TextureCache.ContainsKey("__dark-font"))
+            if (_fontCache == null)
             {
                 BuildFontCache();
-                _resourceManager.LoadTextureFromResource("__dark-font", "darkFnt");
+
+            }
+            if (!_resourceManager.TextureCache.ContainsKey("__light-font"))
+            {
+                _resourceManager.LoadTextureFromResource("__light-font", "lightFnt");
             }
 
-            DrawText(x, y, text, "__dark-font");
+            DrawText(x, y, text, "__light-font");
         }
 
         public void drawDarkText(int x, int y, string text)
         {
-            if (!_resourceManager.TextureCache.ContainsKey("__light-font"))
+            if (_fontCache == null)
             {
                 BuildFontCache();
-                _resourceManager.LoadTextureFromResource("__light-font", "darkFnt");
+
+            }
+            if (!_resourceManager.TextureCache.ContainsKey("__dark-font"))
+            {
+
+                _resourceManager.LoadTextureFromResource("__dark-font", "darkFnt");
             }
 
             DrawText(x, y, text, "__dark-font");
