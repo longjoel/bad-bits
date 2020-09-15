@@ -9,7 +9,7 @@ namespace BadBits.Engine.Models.Host.Sprite
 {
     public class SpriteFrame
     {
-        public Rectangle SrcRectangle { get; set; }
+        public Rectangle SrcRect { get; set; }
         public string TextureName { get; set; }
         public double FrameDurration { get; set; }
     }

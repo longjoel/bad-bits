@@ -86,6 +86,11 @@ namespace BadBits.Engine.Client
             return new { x = 0, y = 0, width = t.Width, height = t.Height };
         }
 
+        public void loadSprite(string name, string path) {
+
+            _resourceManager.LoadSprite(name, path);
+        }
+
         public void log(string value)
         {
             Console.WriteLine(value);

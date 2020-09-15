@@ -88,5 +88,7 @@ export interface IBadBits {
 
     getTextureAttributes: (name: string) => IRect;
 
+    loadSprite:(name:string, path:string)=> void;
+
     log:(value:string)=>void;
 }

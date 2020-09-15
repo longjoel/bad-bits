@@ -29,6 +29,8 @@ namespace BadBits.Engine.Interfaces.Client
         void setPixel(string name, int x, int y, object color);
         void makeTransparent(string name, object color);
 
+        void loadSprite(string name, string path);
+
         object getTextureAttributes(string name);
 
         void log(string value);

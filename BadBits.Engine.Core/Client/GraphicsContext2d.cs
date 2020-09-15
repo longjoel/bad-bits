@@ -29,9 +29,9 @@ namespace BadBits.Engine.Client
                 Dest = new Microsoft.Xna.Framework.Rectangle(
                     x,
                     y,
-                    frame.SrcRectangle.Width,
-                    frame.SrcRectangle.Height),
-                Source = frame.SrcRectangle
+                    frame.SrcRect.Width,
+                    frame.SrcRect.Height),
+                Source = frame.SrcRect
             });
         }
 
