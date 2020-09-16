@@ -46,8 +46,7 @@ engine.setDrawForeground((dt, context) => {
 
     examples[exampleIndex].drawForeground(dt, context);
 
-   drawText(context,-1, -1, "This is the bad-bits engine.\n"
-    + "Joel Longanecker (c)2020\n"
+   drawText(context,-1, -1, "Bad-Bits Engine \n"
     + "Press Up/Dn to change example.\n"
     + examples[exampleIndex].name);
 
