@@ -84,10 +84,7 @@ namespace BadBits.Engine
         {
             if (_scriptingContext.Draw3dCallback != null)
             {
-                GraphicsDevice.SetRenderTarget(_graphics3dTarget);
-                GraphicsDevice.Clear(Color.Transparent);
-                GraphicsDevice.RasterizerState = RasterizerState.CullNone;
-                GraphicsDevice.SamplerStates[0] = SamplerState.PointWrap;
+              
                 _scriptingContext.Draw3dCallback.Invoke(gameTime.ElapsedGameTime.TotalSeconds, _graphicsContext3d);
 
 
@@ -98,6 +95,12 @@ namespace BadBits.Engine
                     _flatShadedEffect.Projection = _graphicsContext3d.ProjectionMatrix;
                     _flatShadedEffect.View = _graphicsContext3d.ViewMatrix;
                     p.Apply();
+
+                    GraphicsDevice.SetRenderTarget(_graphics3dTarget);
+                    GraphicsDevice.Clear(Color.Transparent);
+                    GraphicsDevice.RasterizerState = RasterizerState.CullNone;
+                    GraphicsDevice.SamplerStates[0] = SamplerState.PointWrap;
+
                     foreach (var kvp in _graphicsContext3d.TrianglesByColor)
                     {
                         var color = kvp.Key;
