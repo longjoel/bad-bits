@@ -19,6 +19,11 @@ engine.setDrawBackground((dt, context) => {
 
 });
 
+engine.setDraw3d((dt,context)=>{
+    examples[exampleIndex].draw3d(dt, context);
+
+});
+
 engine.setProcess((dt, ctx) => {
     const state = ctx.pollGamepadState();
 

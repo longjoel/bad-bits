@@ -7,21 +7,32 @@ let b: IBadBits;
 
 const example: IExample = {
     name: '3d example',
-    draw3d: (dt,ctx) => { 
+    draw3d: (dt, ctx) => {
 
-        ctx.drawColoredTriangles({r:128,g:128,b:128,a:128},[
-            {x:0,y:0,z:0},
-            {x:10,y:0,z:0},
-            {x:5,y:10,z:0}
+        ctx.setView(-10,5,-10,0,0,0)
+
+        ctx.drawColoredTriangles({ r: 0, g: 0, b: 0, a: 255 }, [
+            { x: -20, y: 0, z: 0 },
+            { x: 20, y: 0, z: 0 },
+            { x: 0, y: 30, z: 0 }
         ]);
 
     },
 
-    drawBackground: (dt,ctx) => { 
+    drawBackground: (dt, ctx) => {
 
-        ctx.drawTexture('clouds',{x:0,y:0,width:320,height:240},{x:0,y:0,width:320,height:240});
-
-
+        ctx.drawTexture('clouds',
+            {
+                x: 0,
+                y: 0,
+                width: 320,
+                height: 240
+            }, {
+                x: 0,
+            y: 0,
+            width: 320,
+            height: 240
+        });
     },
 
     drawForeground: (dt, ctx) => {
@@ -31,7 +42,7 @@ const example: IExample = {
     init: (bb) => {
         b = bb;
 
-        b.loadTexture('clouds','assets/clouds.png');
+        b.loadTexture('clouds', 'assets/clouds.png');
     }
 };
 
