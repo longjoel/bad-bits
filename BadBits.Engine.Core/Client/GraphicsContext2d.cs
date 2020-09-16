@@ -18,21 +18,46 @@ namespace BadBits.Engine.Client
             DrawCommands = new List<DrawCommand2d>();
         }
 
-        public void drawSprite(string spriteName, int x, int y, double frameTime)
+        public void drawSprite(string spriteName, object destRect, bool ignoreAspectRatio, double frameTime)
         {
+            
+
             var sprite = _resourceManager.SpriteCache[spriteName];
             var frame = sprite.Interpolate(frameTime);
+            dynamic d = destRect;
 
-            DrawCommands.Add(new DrawCommand2d
+            if (ignoreAspectRatio)
             {
-                TextureName = frame.TextureName,
-                Dest = new Microsoft.Xna.Framework.Rectangle(
-                    x,
-                    y,
-                    frame.SrcRect.Width,
-                    frame.SrcRect.Height),
-                Source = frame.SrcRect
-            });
+                DrawCommands.Add(new DrawCommand2d
+                {
+                    TextureName = frame.TextureName,
+                    Dest = new Microsoft.Xna.Framework.Rectangle(
+                        d.x,
+                        d.y,
+                        d.width,
+                        d.height),
+                    Source = frame.SrcRect
+                });
+            }
+            else {
+                var scale = System.Math.Min(d.width / frame.SrcRect.Width, d.height / frame.SrcRect.Height);
+
+                var x = (int)d.x;
+                var y = (int)d.y;
+                var w = (int)(frame.SrcRect.Width * scale);
+                var h = (int)(frame.SrcRect.Height * scale);
+                DrawCommands.Add(new DrawCommand2d
+                {
+                    TextureName = frame.TextureName,
+                    Dest = new Rectangle(
+                    x + (int)( .5*(d.width - w)),
+                    y + (int)(.5 * (d.height - h)),
+                    w,
+                    h),
+                    Source = frame.SrcRect
+                });
+
+            }
         }
 
         public void drawTexture(string texture, object srcRect, object destRect)

@@ -60,7 +60,7 @@ export interface I3dContext {
 
 export interface I2dContext {
     drawTexture:(texture:string, srcRect:IRect, destRect:IRect)=>void;
-    drawSprite:(spriteName:string, x:number, y:number, frameTime:number)=>void;
+    drawSprite:(spriteName:string, destRect:IRect, ignoreAspectRatio:boolean, frameTime:number)=>void;
     drawLightText:(x:number, y:number, text:string)=>void;
     drawDarkText:(x:number, y:number, text:string)=>void;
 }

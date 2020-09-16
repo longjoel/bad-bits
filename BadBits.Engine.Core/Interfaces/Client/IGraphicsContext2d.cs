@@ -12,7 +12,7 @@ namespace BadBits.Engine.Interfaces.Client
         List<DrawCommand2d> DrawCommands { get; }
 
         void drawTexture(string texture, object srcRect, object destRect);
-        void drawSprite(string spriteName, int x, int y, double frameTime);
+        void drawSprite(string spriteName,object destRect, bool ignoreAspectRatio, double frameTime);
 
         void drawLightText(int x, int y, string text);
 

@@ -3,40 +3,80 @@
         "TextureName": "coins",
         "FrameDurration": 0.10,
         "SrcRect": {
-            "X": 64,
-            "Y": 62,
-            "Width": 82,
-            "Height": 82
+            "X": 0,
+            "Y": 0,
+            "Width": 80,
+            "Height": 80
         }
     },
     {
         "TextureName": "coins",
         "FrameDurration": 0.10,
         "SrcRect": {
-            "X": 168,
-            "Y": 62,
-            "Width": 63,
-            "Height": 82
+            "X": 100,
+            "Y": 0,
+            "Width": 85,
+            "Height": 80
         }
     },
     {
         "TextureName": "coins",
         "FrameDurration": 0.10,
         "SrcRect": {
-            "X": 276,
-            "Y": 62,
-            "Width": 68,
-            "Height": 82
+            "X": 210,
+            "Y": 0,
+            "Width": 70,
+            "Height": 80
         }
     },
     {
         "TextureName": "coins",
         "FrameDurration": 0.10,
         "SrcRect": {
-            "X": 366,
-            "Y": 62,
-            "Width": 46,
-            "Height": 82
+            "X": 300,
+            "Y": 0,
+            "Width": 50,
+            "Height": 80
+        }
+    },
+    {
+        "TextureName": "coins",
+        "FrameDurration": 0.10,
+        "SrcRect": {
+            "X": 370,
+            "Y": 0,
+            "Width": 25,
+            "Height": 80
+        }
+    },
+    {
+        "TextureName": "coins",
+        "FrameDurration": 0.10,
+        "SrcRect": {
+            "X": 415,
+            "Y": 0,
+            "Width": 50,
+            "Height": 80
+        }
+    },
+    {
+        "TextureName": "coins",
+        "FrameDurration": 0.10,
+        "SrcRect": {
+            "X": 485,
+            "Y": 0,
+            "Width": 70,
+            "Height": 80
+        }
+    },
+    {
+        "TextureName": "coins",
+        "FrameDurration": 0.10,
+        "SrcRect": {
+            "X": 570,
+            "Y": 0,
+            "Width": 80,
+            "Height": 80
         }
     }
 ]
