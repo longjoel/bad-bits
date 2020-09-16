@@ -2,6 +2,7 @@ import { I2dContext, I3dContext, IBadBits } from '../../../Typescript/index';
 
 import spriteDemo from './sprite-demo';
 import textureDemo from './texture-demo';
+import threedee from './3d-demo';
 
 export interface IExample {
 
@@ -22,5 +23,5 @@ export const examples: IExample[] = [
         drawForeground: () => { },
     },
     spriteDemo,
-    textureDemo
+    threedee
 ];
