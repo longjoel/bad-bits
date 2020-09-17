@@ -35,21 +35,26 @@ export class Matrix4 {
 
     rotateY(deg: number): Matrix4 {
 
-        var cos = Math.cos(deg);
-        var sine = Math.sin(deg);
-
-        var v0 = this.matrix[0];
-        var v4 = this.matrix[4];
-        var v8 = this.matrix[8];
-
-        this.matrix[0] = cos * this.matrix[0] + sine * this.matrix[2];
-        this.matrix[4] = cos * this.matrix[4] + sine * this.matrix[6];
-        this.matrix[8] = cos * this.matrix[8] + sine * this.matrix[10];
-
-        this.matrix[2] = cos * this.matrix[2] - sine * v0;
-        this.matrix[6] = cos * this.matrix[6] - sine * v4;
-        this.matrix[10] = cos * this.matrix[10] - sine * v8;
-
+        var s = Math.sin(deg);
+        var c = Math.cos(deg);
+        var a00 =  this.matrix[0];
+        var a01 =  this.matrix[1];
+        var a02 =  this.matrix[2];
+        var a03 =  this.matrix[3];
+        var a20 =  this.matrix[8];
+        var a21 =  this.matrix[9];
+        var a22 =  this.matrix[10];
+        var a23 =  this.matrix[11];
+    
+      
+        this.matrix[0] = a00 * c - a20 * s;
+        this.matrix[1] = a01 * c - a21 * s;
+        this.matrix[2] = a02 * c - a22 * s;
+        this.matrix[3] = a03 * c - a23 * s;
+        this.matrix[8] = a00 * s + a20 * c;
+        this.matrix[9] = a01 * s + a21 * c;
+        this.matrix[10] = a02 * s + a22 * c;
+        this.matrix[11] = a03 * s + a23 * c;
         return this;
 
     };
@@ -91,9 +96,9 @@ export class Matrix4 {
         return this;
     };
 
-    transform(src: IVertexPosition[]): IVertexPosition[] {
+    transform(src: any[]): any[] {
         return src.map(v => {
-            return {
+            return {...v,
                 x: v.x * this.matrix[0] + v.y * this.matrix[1] + v.z * this.matrix[2],
                 y: v.x * this.matrix[4] + v.y * this.matrix[5] + v.z * this.matrix[6],
                 z: v.z * this.matrix[8] + v.y * this.matrix[9] + v.z * this.matrix[10]

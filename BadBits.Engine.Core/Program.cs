@@ -84,7 +84,10 @@ namespace BadBits.Engine
         {
             if (_scriptingContext.Draw3dCallback != null)
             {
-              
+
+                GraphicsDevice.SetRenderTarget(_graphics3dTarget);
+                GraphicsDevice.Clear(Color.Transparent);
+
                 _scriptingContext.Draw3dCallback.Invoke(gameTime.ElapsedGameTime.TotalSeconds, _graphicsContext3d);
 
 
@@ -94,12 +97,12 @@ namespace BadBits.Engine
                 {
                     _flatShadedEffect.Projection = _graphicsContext3d.ProjectionMatrix;
                     _flatShadedEffect.View = _graphicsContext3d.ViewMatrix;
+
                     p.Apply();
 
-                    GraphicsDevice.SetRenderTarget(_graphics3dTarget);
-                    GraphicsDevice.Clear(Color.Transparent);
                     GraphicsDevice.RasterizerState = RasterizerState.CullNone;
                     GraphicsDevice.SamplerStates[0] = SamplerState.PointWrap;
+                    GraphicsDevice.DepthStencilState = DepthStencilState.Default;
 
                     foreach (var kvp in _graphicsContext3d.TrianglesByColor)
                     {
@@ -117,9 +120,16 @@ namespace BadBits.Engine
                 foreach (var p in _texturedEffect.CurrentTechnique.Passes)
                 {
                     _texturedEffect.Projection = _graphicsContext3d.ProjectionMatrix;
-                    _texturedEffect.View = _graphicsContext3d.ViewMatrix;
+                    _texturedEffect.View = _graphicsContext3d.ViewMatrix; 
+                    GraphicsDevice.DepthStencilState = DepthStencilState.DepthRead;
+
 
                     p.Apply();
+
+                    GraphicsDevice.RasterizerState = RasterizerState.CullNone;
+                    GraphicsDevice.SamplerStates[0] = SamplerState.PointWrap;
+                    GraphicsDevice.DepthStencilState = DepthStencilState.Default;
+
                     foreach (var kvp in _graphicsContext3d.TrianglesByTexture)
                     {
                         var texture = kvp.Key;
@@ -153,7 +163,7 @@ namespace BadBits.Engine
 
 
             _backgroundRenderTarget = new RenderTarget2D(GraphicsDevice, 320, 240);
-            _graphics3dTarget = new RenderTarget2D(GraphicsDevice, 320, 240);
+            _graphics3dTarget = new RenderTarget2D(GraphicsDevice, 320, 240, false, SurfaceFormat.Color, DepthFormat.Depth24);
             _foregroundRenderTarget = new RenderTarget2D(GraphicsDevice, 320, 240);
 
             _spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -167,7 +177,6 @@ namespace BadBits.Engine
                 FogStart = 90,
                 FogEnd = 100,
                 LightingEnabled = false,
-                Projection = Matrix.CreateOrthographicOffCenter(0, 320, 240, 0, 0, 100),
                 TextureEnabled = false,
                 VertexColorEnabled = true
             };
@@ -179,7 +188,6 @@ namespace BadBits.Engine
                 FogStart = 90,
                 FogEnd = 100,
                 LightingEnabled = false,
-                Projection = Matrix.CreateOrthographicOffCenter(0, 320, 240, 0, 0, 100),
                 TextureEnabled = true
             };
 

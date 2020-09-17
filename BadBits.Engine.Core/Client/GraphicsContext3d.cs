@@ -65,7 +65,7 @@ namespace BadBits.Engine.Client
 
         public void setView(double xEye, double yEye, double zEye, double xLook, double yLook, double zLook)
         {
-            ProjectionMatrix = Matrix.CreatePerspective(320, 240, 1, 1000);
+            ProjectionMatrix = Matrix.CreatePerspectiveFieldOfView((90f) * 0.0174533f, 320f / 240f, 0.001f, 100f);
             ViewMatrix = Matrix.CreateLookAt(new Vector3((float)xEye, (float)yEye, (float)zEye), new Vector3((float)xLook, (float)yLook, (float)zLook), new Vector3(0, 1, 0));
         }
     }
