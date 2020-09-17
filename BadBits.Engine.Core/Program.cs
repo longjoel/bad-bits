@@ -210,7 +210,7 @@ namespace BadBits.Engine
 
 
             _resourceManager.CreateTexture("__dither", 320, 240);
-
+            var r = new Random(4206932);
             for (int y = 0; y < 240; y++)
             {
                 for (int x = 0; x < 320; x++)
@@ -218,7 +218,7 @@ namespace BadBits.Engine
                     var c = Color.Transparent;
 
                     if ((x+y)%2==0) {
-                        c = new Color(0, 0, 0, 12);
+                        c = new Color(0, 0, 0, (byte)r.Next()%16);
                     }
                     _resourceManager.SetPixel("__dither",x, y, c);
                 }
