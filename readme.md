@@ -15,6 +15,7 @@ _A retro game enspired engine for PC, Mac, and Linux._
 ## Screenshots
 
 ![Screen shot of example game in action](docs/screen-shot-0.png)
+![gif of screen in action](https://gfycat.com/periodicimpossibleafricanharrierhawk)
 
 ## License
 
