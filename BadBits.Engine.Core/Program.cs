@@ -35,7 +35,7 @@ namespace BadBits.Engine
             Window.AllowUserResizing = true;
         }
 
-        private void DrawForeground(GameTime gameTime, List<RenderTarget2D> drawChain)
+        private void DrawForeground(GameTime gameTime, List<Texture2D> drawChain)
         {
             if (_scriptingContext.DrawForegroundCallback != null)
             {
@@ -57,7 +57,7 @@ namespace BadBits.Engine
             }
         }
 
-        private void DrawBackground(GameTime gameTime, List<RenderTarget2D> drawChain)
+        private void DrawBackground(GameTime gameTime, List<Texture2D> drawChain)
         {
             if (_scriptingContext.DrawBackgroundCallback != null)
             {
@@ -80,7 +80,7 @@ namespace BadBits.Engine
             }
         }
 
-        private void Draw3d(GameTime gameTime, List<RenderTarget2D> drawChain)
+        private void Draw3d(GameTime gameTime, List<Texture2D> drawChain)
         {
             if (_scriptingContext.Draw3dCallback != null)
             {
@@ -120,7 +120,7 @@ namespace BadBits.Engine
                 foreach (var p in _texturedEffect.CurrentTechnique.Passes)
                 {
                     _texturedEffect.Projection = _graphicsContext3d.ProjectionMatrix;
-                    _texturedEffect.View = _graphicsContext3d.ViewMatrix; 
+                    _texturedEffect.View = _graphicsContext3d.ViewMatrix;
                     GraphicsDevice.DepthStencilState = DepthStencilState.DepthRead;
 
 
@@ -145,6 +145,8 @@ namespace BadBits.Engine
                 _graphicsContext3d.TrianglesByTexture.Clear();
 
                 drawChain.Add(_graphics3dTarget);
+
+             
 
             }
         }
@@ -204,6 +206,26 @@ namespace BadBits.Engine
 
             _engine.CommonJS().RunMain(Environment.GetCommandLineArgs()[1]);
 
+
+
+
+            _resourceManager.CreateTexture("__dither", 320, 240);
+
+            for (int y = 0; y < 240; y++)
+            {
+                for (int x = 0; x < 320; x++)
+                {
+                    var c = Color.Transparent;
+
+                    if ((x+y)%2==0) {
+                        c = new Color(0, 0, 0, 12);
+                    }
+                    _resourceManager.SetPixel("__dither",x, y, c);
+                }
+            }
+
+            _resourceManager.UpdateTextures();
+
             base.Initialize();
         }
 
@@ -219,7 +241,7 @@ namespace BadBits.Engine
 
         protected override void Draw(GameTime gameTime)
         {
-            var drawChain = new List<RenderTarget2D>();
+            var drawChain = new List<Texture2D>();
 
             DrawBackground(gameTime, drawChain);
 
@@ -227,6 +249,7 @@ namespace BadBits.Engine
 
             DrawForeground(gameTime, drawChain);
 
+            drawChain.Add(_resourceManager.TextureCache["__dither"]);
             GraphicsDevice.SetRenderTarget(null);
 
             GraphicsDevice.Clear(Color.Black);
