@@ -1,11 +1,23 @@
-import { BooleanLiteral } from "typescript";
 
+/**
+ * 
+ */
 export interface IRgb {
     r: number;
     b: number;
     g: number;
 }
 
+/**
+ * 
+ */
+export interface IRgba extends IRgb {
+    a: number;
+}
+
+/**
+ * 
+ */
 export interface IRect {
     x: number;
     y: number;
@@ -13,24 +25,26 @@ export interface IRect {
     height: number;
 }
 
+/**
+ * 
+ */
 export interface IVertexPosition {
     x:number;
     y:number;
     z:number;
 }
 
-export interface IVertexTexture {
-    x:number;
-    y:number;
-    z:number;
+/**
+ * 
+ */
+export interface IVertexTexture extends IVertexPosition {
     u:number;
     v:number;
 }
 
-export interface IRgba extends IRgb {
-    a: number;
-}
-
+/**
+ * 
+ */
 export interface IGamepadState {
     up:boolean;
     down:boolean;
@@ -52,12 +66,18 @@ export interface IGamepadState {
 
 }
 
+/**
+ * 
+ */
 export interface I3dContext {
     drawColoredTriangles:(color:IRgba, verticies:IVertexPosition[])=>void;
     drawTexturedTriangles:(textureName:string, verticies:IVertexTexture[])=>void;
 	setView:(xEye:number, yEye:number, zEye:number, xLook:number, yLook:number, zLook:number)=>void;
 }
 
+/**
+ * 
+ */
 export interface I2dContext {
     drawTexture:(texture:string, srcRect:IRect, destRect:IRect)=>void;
     drawSprite:(spriteName:string, destRect:IRect, ignoreAspectRatio:boolean, frameTime:number)=>void;
@@ -65,13 +85,17 @@ export interface I2dContext {
     drawDarkText:(x:number, y:number, text:string)=>void;
 }
 
+/**
+ * 
+ */
 export interface IInputContext {
     pollGamepadState:()=>IGamepadState;
 
 }
 
-
-
+/**
+ * 
+ */
 export interface IBadBits {
 
     createTexture: (name: string, width: number, height: number) => void;
