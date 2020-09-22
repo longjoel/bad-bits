@@ -16,12 +16,13 @@ export interface IExample {
 
 export const examples: IExample[] = [
     {
-        name: '_',
+        name: '',
         init: () => { },
         draw3d: () => { },
         drawBackground: () => { },
         drawForeground: () => { },
     },
     spriteDemo,
+    textureDemo,
     threedee
 ];
