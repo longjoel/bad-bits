@@ -145,9 +145,6 @@ namespace BadBits.Engine
                 _graphicsContext3d.TrianglesByTexture.Clear();
 
                 drawChain.Add(_graphics3dTarget);
-
-             
-
             }
         }
 

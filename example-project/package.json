@@ -6,8 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
-    "start": "npm run build && ..\\bin\\BadBits.Engine.exe build\\index.js",
-    "watch": "nodemon watch ./src --ignore ./build --exec \"npm run build && npm run start\""
+    "start": "npm run build && ..\\bin\\BadBits.Engine.exe build\\index.js"
   },
   "author": "Joel Longanecker",
   "license": "ISC",
