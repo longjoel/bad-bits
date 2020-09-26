@@ -2,7 +2,7 @@ import { I2dContext, I3dContext, IBadBits, IVertexPosition, IVertexTexture } fro
 
 import { IExample } from './index';
 
-import { Matrix4 } from './util/matrix-math';
+import Matrix4 from '../Matrix4';
 
 let time = 0.0;
 let b: IBadBits;
@@ -31,11 +31,11 @@ const example: IExample = {
 
         ctx.setView(0, 2, -5, 0, 0, 0);
 
-        let m4: Matrix4 = new Matrix4();
+   
         r = r + (dt * 20);
 
 
-        m4.rotateX(r * 0.0174533);
+        const m4 = new Matrix4().yRotate(r * 0.0174533);
 
         ctx.drawTexturedTriangles('grass', m4.transform([
             { x: -5, y: 0, z: -5, u: 0, v: 0 },
