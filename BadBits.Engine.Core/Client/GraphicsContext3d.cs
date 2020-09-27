@@ -29,7 +29,8 @@ namespace BadBits.Engine.Client
 
         public Matrix ViewMatrix { get; private set; }
 
-        public void drawColoredTriangles(object color, object[] verticies) {
+        public void drawColoredTriangles(object color, object[] verticies)
+        {
             drawColoredTriangles(color, verticies, null);
         }
         public void drawColoredTriangles(object color, object[] verticies, object transform = null)
@@ -37,7 +38,8 @@ namespace BadBits.Engine.Client
             dynamic dynamicColor = color;
             var c = new Color((byte)dynamicColor.r, (byte)dynamicColor.g, (byte)dynamicColor.b);
 
-            if (!TrianglesByColor.ContainsKey(c)) {
+            if (!TrianglesByColor.ContainsKey(c))
+            {
                 TrianglesByColor[c] = new List<VertexPosition>();
             }
 
@@ -51,7 +53,8 @@ namespace BadBits.Engine.Client
 
                 TrianglesByColor[c].AddRange(verts);
             }
-            else {
+            else
+            {
                 dynamic t = transform;
                 var sx = (float)t.scaleX;
                 var sy = (float)t.scaleY;
@@ -70,14 +73,15 @@ namespace BadBits.Engine.Client
                 var verts = verticies.Select(v =>
                 {
                     dynamic dynamicVert = v;
-                    return new VertexPosition( Vector3.Transform( new Vector3((float)(dynamicVert.x), (float)dynamicVert.y, (float)dynamicVert.z),transformed));
+                    return new VertexPosition(Vector3.Transform(new Vector3((float)(dynamicVert.x), (float)dynamicVert.y, (float)dynamicVert.z), transformed));
                 });
 
                 TrianglesByColor[c].AddRange(verts);
             }
         }
 
-        public void drawTexturedTriangles(string textureName, object[] verticies) {
+        public void drawTexturedTriangles(string textureName, object[] verticies)
+        {
             drawTexturedTriangles(textureName, verticies, null);
         }
         public void drawTexturedTriangles(string textureName, object[] verticies, object transform = null)
@@ -85,7 +89,8 @@ namespace BadBits.Engine.Client
 
             var tex2d = _resourceManager.TextureCache[textureName];
 
-            if (!TrianglesByTexture.ContainsKey(tex2d)) {
+            if (!TrianglesByTexture.ContainsKey(tex2d))
+            {
                 TrianglesByTexture[tex2d] = new List<VertexPositionTexture>();
             }
 
@@ -100,7 +105,8 @@ namespace BadBits.Engine.Client
 
                 TrianglesByTexture[tex2d].AddRange(verts);
             }
-            else {
+            else
+            {
                 dynamic t = transform;
                 var sx = (float)t.scaleX;
                 var sy = (float)t.scaleY;
@@ -114,7 +120,7 @@ namespace BadBits.Engine.Client
                 var ty = (float)t.translateY;
                 var tz = (float)t.translateZ;
 
-                var transformed =  Matrix.CreateFromYawPitchRoll(yaw, pitch, roll) * Matrix.CreateTranslation(tx, ty, tz) * Matrix.CreateScale(sx, sy, sz);
+                var transformed = Matrix.CreateFromYawPitchRoll(yaw, pitch, roll) * Matrix.CreateTranslation(tx, ty, tz) * Matrix.CreateScale(sx, sy, sz);
 
                 var verts = verticies.Select(v =>
                 {
