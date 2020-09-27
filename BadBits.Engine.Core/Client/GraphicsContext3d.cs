@@ -65,7 +65,7 @@ namespace BadBits.Engine.Client
                 var ty = (float)t.translateY;
                 var tz = (float)t.translateZ;
 
-                var transformed = Matrix.CreateTranslation(tx, ty, tz) * Matrix.CreateFromYawPitchRoll(yaw, pitch, roll) * Matrix.CreateScale(sx, sy, sz);
+                var transformed = Matrix.CreateFromYawPitchRoll(yaw, pitch, roll) * Matrix.CreateTranslation(tx, ty, tz) * Matrix.CreateScale(sx, sy, sz);
 
                 var verts = verticies.Select(v =>
                 {
@@ -114,7 +114,7 @@ namespace BadBits.Engine.Client
                 var ty = (float)t.translateY;
                 var tz = (float)t.translateZ;
 
-                var transformed = Matrix.CreateTranslation(tx, ty, tz) * Matrix.CreateFromYawPitchRoll(yaw, pitch, roll) * Matrix.CreateScale(sx, sy, sz);
+                var transformed =  Matrix.CreateFromYawPitchRoll(yaw, pitch, roll) * Matrix.CreateTranslation(tx, ty, tz) * Matrix.CreateScale(sx, sy, sz);
 
                 var verts = verticies.Select(v =>
                 {

@@ -27,12 +27,12 @@ const example: IExample = {
     name: '3d example',
     draw3d: (dt, ctx) => {
 
-        ctx.setView(0, 2, -5, 0, 0, 0);
+        ctx.setView(0, 2, -5, 0, 0, 4);
         r = r + (dt * 20);
-var transform = {
-    scaleX: 1, scaleY: 1, scaleZ: 1, 
-    roll: 0, pitch: r * 0.0174533 * 1.5, yaw:  r * 0.0174533, 
-    translateX: 0, translateY: 0, translateZ: 0
+        const transform = {
+            scaleX: 1, scaleY: 1, scaleZ: 1, 
+            roll: 0, pitch: r * 0.0174533 * 1.5, yaw:  r * 0.0174533, 
+            translateX: 0, translateY: 0, translateZ: 4
 };
         ctx.drawTexturedTriangles('grass', [
             { x: -5, y: 0, z: -5, u: 0, v: 0 },
