@@ -29,67 +29,82 @@ export interface IRect {
  * 
  */
 export interface IVertexPosition {
-    x:number;
-    y:number;
-    z:number;
+    x: number;
+    y: number;
+    z: number;
 }
 
 /**
  * 
  */
 export interface IVertexTexture extends IVertexPosition {
-    u:number;
-    v:number;
+    u: number;
+    v: number;
 }
 
 /**
  * 
  */
 export interface IGamepadState {
-    up:boolean;
-    down:boolean;
-    left:boolean;
-    right:boolean;
+    up: boolean;
+    down: boolean;
+    left: boolean;
+    right: boolean;
 
-    a:boolean;
-    b:boolean;
-    x:boolean;
-    y:Boolean;
+    a: boolean;
+    b: boolean;
+    x: boolean;
+    y: Boolean;
 
-    l1:boolean;
-    r1:boolean;
-    l2:boolean;
-    r2:boolean;
+    l1: boolean;
+    r1: boolean;
+    l2: boolean;
+    r2: boolean;
 
-    start:boolean;
-    select:boolean;
+    start: boolean;
+    select: boolean;
 
+}
+
+export interface ITransform {
+
+    scaleX: number;
+    scaleY: number;
+    scaleZ: number;
+
+    yaw: number;
+    pitch: number;
+    roll: number;
+
+    translateX: number;
+    translateY: number;
+    translateZ: number;
 }
 
 /**
  * 
  */
 export interface I3dContext {
-    drawColoredTriangles:(color:IRgba, verticies:IVertexPosition[])=>void;
-    drawTexturedTriangles:(textureName:string, verticies:IVertexTexture[])=>void;
-	setView:(xEye:number, yEye:number, zEye:number, xLook:number, yLook:number, zLook:number)=>void;
+    drawColoredTriangles: (color: IRgba, verticies: IVertexPosition[], transform?: ITransform) => void;
+    drawTexturedTriangles: (textureName: string, verticies: IVertexTexture[], transform?: ITransform) => void;
+    setView: (xEye: number, yEye: number, zEye: number, xLook: number, yLook: number, zLook: number) => void;
 }
 
 /**
  * 
  */
 export interface I2dContext {
-    drawTexture:(texture:string, srcRect:IRect, destRect:IRect)=>void;
-    drawSprite:(spriteName:string, destRect:IRect, ignoreAspectRatio:boolean, frameTime:number)=>void;
-    drawLightText:(x:number, y:number, text:string)=>void;
-    drawDarkText:(x:number, y:number, text:string)=>void;
+    drawTexture: (texture: string, srcRect: IRect, destRect: IRect) => void;
+    drawSprite: (spriteName: string, destRect: IRect, ignoreAspectRatio: boolean, frameTime: number) => void;
+    drawLightText: (x: number, y: number, text: string) => void;
+    drawDarkText: (x: number, y: number, text: string) => void;
 }
 
 /**
  * 
  */
 export interface IInputContext {
-    pollGamepadState:()=>IGamepadState;
+    pollGamepadState: () => IGamepadState;
 
 }
 
@@ -112,7 +127,7 @@ export interface IBadBits {
 
     getTextureAttributes: (name: string) => IRect;
 
-    loadSprite:(name:string, path:string)=> void;
+    loadSprite: (name: string, path: string) => void;
 
-    log:(value:string)=>void;
+    log: (value: string) => void;
 }

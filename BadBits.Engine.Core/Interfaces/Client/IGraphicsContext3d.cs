@@ -15,7 +15,9 @@ namespace BadBits.Engine.Interfaces.Client
         Matrix ProjectionMatrix { get; }
         Matrix ViewMatrix { get; }
 
+        void drawColoredTriangles(object color, object[] verticies, object transform = null);
         void drawColoredTriangles(object color, object[] verticies);
+        void drawTexturedTriangles(string textureName, object[] verticies, object transform = null);
         void drawTexturedTriangles(string textureName, object[] verticies);
 
         void setView(double xEye, double yEye, double zEye, double xLook, double yLook, double zLook);

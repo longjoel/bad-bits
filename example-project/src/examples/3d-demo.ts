@@ -2,8 +2,6 @@ import { I2dContext, I3dContext, IBadBits, IVertexPosition, IVertexTexture } fro
 
 import { IExample } from './index';
 
-import Matrix4 from '../Matrix4';
-
 let time = 0.0;
 let b: IBadBits;
 
@@ -31,9 +29,12 @@ const example: IExample = {
 
         ctx.setView(0, 2, -5, 0, 0, 0);
         r = r + (dt * 20);
-        const m4 = new Matrix4().rotate(r * 0.0174533,0,1,1);
-
-        ctx.drawTexturedTriangles('grass', m4.transform([
+var transform = {
+    scaleX: 1, scaleY: 1, scaleZ: 1, 
+    roll: 0, pitch: r * 0.0174533 * 1.5, yaw:  r * 0.0174533, 
+    translateX: 0, translateY: 0, translateZ: 0
+};
+        ctx.drawTexturedTriangles('grass', [
             { x: -5, y: 0, z: -5, u: 0, v: 0 },
             { x: -5, y: 0, z: 5, u: 10, v: 0 },
             { x: 5, y: 0, z: 5, u: 10, v: 10 },
@@ -41,9 +42,9 @@ const example: IExample = {
             { x: -5, y: 0, z: -5, u: 0, v: 0 },
             { x: 5, y: 0, z: -5, u: 0, v: 10 },
             { x: 5, y: 0, z: 5, u: 10, v: 10 }
-        ] as IVertexTexture[]));
+        ] as IVertexTexture[], transform);
 
-        ctx.drawColoredTriangles({ r: 0, g: 0, b: 0, a: 255 }, m4.transform(vertices));
+        ctx.drawColoredTriangles({ r: 0, g: 0, b: 0, a: 255 }, vertices, transform);
 
     },
 
