@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Texture = BadBits.Engine.Models.Host.Texture;
 using Newtonsoft;
+using Microsoft.Xna.Framework.Audio;
 
 namespace BadBits.Engine.Services
 {
@@ -21,10 +22,13 @@ namespace BadBits.Engine.Services
 
         public Dictionary<string, Sprite> SpriteCache {get; private set;}
 
+        public Dictionary<string, SoundEffect> SoundEffectCache { get; private set; }
+
         public ResourceManager(GraphicsDevice graphicsDevice) {
             _graphicsDevice = graphicsDevice;
             TextureCache = new Dictionary<string, Texture>();
             SpriteCache = new Dictionary<string, Sprite>();
+            SoundEffectCache = new Dictionary<string, SoundEffect>();
         }
 
 
@@ -123,6 +127,10 @@ namespace BadBits.Engine.Services
 
 
         }
-       
+
+        public void LoadAudio(string name, string path)
+        {
+            SoundEffectCache[name] = SoundEffect.FromFile(path);
+        }
     }
 }
