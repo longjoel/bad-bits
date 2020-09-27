@@ -17,7 +17,7 @@ namespace BadBits.Engine.Client
             TrianglesByColor = new Dictionary<Color, List<VertexPosition>>();
             TrianglesByTexture = new Dictionary<Texture2D, List<VertexPositionTexture>>();
             _resourceManager = resourceManager;
-            ProjectionMatrix = Matrix.Identity;
+            ProjectionMatrix = ProjectionMatrix = Matrix.CreateOrthographicOffCenter(-10, 10, -10, 10, -10, 10);
             ViewMatrix = Matrix.Identity;
         }
 
@@ -65,8 +65,8 @@ namespace BadBits.Engine.Client
 
         public void setView(double xEye, double yEye, double zEye, double xLook, double yLook, double zLook)
         {
-            ProjectionMatrix = Matrix.CreatePerspectiveFieldOfView((90f) * 0.0174533f, 320f / 240f, 0.001f, 100f);
-            ViewMatrix = Matrix.CreateLookAt(new Vector3((float)xEye, (float)yEye, (float)zEye), new Vector3((float)xLook, (float)yLook, (float)zLook), new Vector3(0, 1, 0));
+            ProjectionMatrix = Matrix.CreateOrthographicOffCenter(-10,10,-10,10,-10,10);
+          ViewMatrix = Matrix.CreateLookAt(new Vector3((float)xEye, (float)yEye, (float)zEye), new Vector3((float)xLook, (float)yLook, (float)zLook), new Vector3(0, 1, 0));
         }
     }
 }

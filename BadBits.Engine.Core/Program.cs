@@ -96,7 +96,7 @@ namespace BadBits.Engine
                 foreach (var p in _flatShadedEffect.CurrentTechnique.Passes)
                 {
                     _flatShadedEffect.Projection = _graphicsContext3d.ProjectionMatrix;
-                    _flatShadedEffect.View = _graphicsContext3d.ViewMatrix;
+                   _flatShadedEffect.View = _graphicsContext3d.ViewMatrix;
 
                     p.Apply();
 

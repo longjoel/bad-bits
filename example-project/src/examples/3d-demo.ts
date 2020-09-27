@@ -30,12 +30,8 @@ const example: IExample = {
     draw3d: (dt, ctx) => {
 
         ctx.setView(0, 2, -5, 0, 0, 0);
-
-   
         r = r + (dt * 20);
-
-
-        const m4 = new Matrix4().yRotate(r * 0.0174533);
+        const m4 = new Matrix4().rotate(r * 0.0174533,0,1,1);
 
         ctx.drawTexturedTriangles('grass', m4.transform([
             { x: -5, y: 0, z: -5, u: 0, v: 0 },
