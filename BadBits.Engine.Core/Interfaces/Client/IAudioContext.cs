@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BadBits.Engine.Interfaces.Client
 {
-    interface IAudioContext
+    public interface IAudioContext
     {
         void playSound(string soundName, double pan, double volume);
 
