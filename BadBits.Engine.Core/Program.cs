@@ -4,6 +4,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 
 namespace BadBits.Engine
@@ -204,9 +206,32 @@ namespace BadBits.Engine
             _engine.SetValue("engine", _scriptingContext);
 
 
-            _engine.CommonJS().RunMain(Environment.GetCommandLineArgs()[1]);
+            string pathToIndex = "";
+            string cwd = Environment.CurrentDirectory;
 
+            // was a path explicitly stated?
+            if (Environment.GetCommandLineArgs().Length > 1)
+            {
+                pathToIndex = Environment.GetCommandLineArgs()[1];
+            }
+            // is index in root?
+            else if (File.Exists("index.js")) {
+                pathToIndex = "index.js";
+            }
+            else {
+                // Where is it?
+                var dirs = Directory.EnumerateDirectories("..");
+                pathToIndex = dirs.FirstOrDefault(x => File.Exists(Path.Combine(x, "index.js")));
 
+            }
+
+            if (string.IsNullOrEmpty(pathToIndex)) {
+                // can we still not find anything?
+                Console.WriteLine("Can not find index.js... Exiting");
+                return;
+            }
+
+            _engine.CommonJS().RunMain(pathToIndex);
 
 
             _resourceManager.CreateTexture("__dither", 320, 240);
