@@ -1,5 +1,6 @@
 import { IBadBits, IGamepadState, I2dContext } from '../../Typescript/index';
 import { examples } from './examples';
+import example from './examples/sprite-demo';
 
 // this must be done so 'engine' gets recognised as an external global.
 declare var engine: IBadBits;
@@ -31,22 +32,31 @@ engine.setDraw3d((dt,context)=>{
 });
 
 // handle the gamepad input.
-engine.setProcess((_, ctx) => {
+engine.setProcess((_, ctx, aCtx) => {
     const state = ctx.pollGamepadState();
 
+    let changed=false;
     // handle the key presses.
     if (state.up && !oldState.up) {
         exampleIndex--;
+        aCtx.stopMusic();
+        changed = true;
     }
     else if (state.down && !oldState.down) {
         exampleIndex++;
+        aCtx.stopMusic();
+        changed = true;
     }
-
+    
     oldState = state;
 
     // make sure the counter is in the correct position.
     if (exampleIndex === examples.length) { exampleIndex = 0; } 
     else if (exampleIndex < 0) { exampleIndex = examples.length - 1; }
+
+    if(changed && examples[exampleIndex].name==='sound example'){
+        aCtx.startMusic('city', ()=>{});
+    }
 });
 
 // a silly little function to draw light text against a dark background.

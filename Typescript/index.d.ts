@@ -108,6 +108,16 @@ export interface IInputContext {
 
 }
 
+export interface IAudioContext {
+
+    playSound: (name: string, pan: number, volume: number) => void;
+
+    startMusic: (name: string, onFinished: () => void) => void;
+    startMusic: (name: string) => void;
+    stopMusic: () => void;
+    setMusicVolume: (volume: number) => void;
+}
+
 /**
  * 
  */
@@ -120,7 +130,7 @@ export interface IBadBits {
 
     setInit: (initCallback: () => void) => void;
     setClose: (closeCallback: () => void) => void;
-    setProcess: (processCallback: (dt: number, context: IInputContext) => void) => void;
+    setProcess: (processCallback: (dt: number, context: IInputContext, audioContext: IAudioContext) => void) => void;
     setDraw3d: (renderCallback: (dt: number, context: I3dContext) => void) => void;
     setDrawBackground: (renderCallback: (dt: number, context: I2dContext) => void) => void;
     setDrawForeground: (renderCallback: (dt: number, context: I2dContext) => void) => void;
@@ -128,6 +138,8 @@ export interface IBadBits {
     getTextureAttributes: (name: string) => IRect;
 
     loadSprite: (name: string, path: string) => void;
+
+    loadAudio: (name: string, path: string) => void;
 
     log: (value: string) => void;
 }
