@@ -18,6 +18,7 @@ namespace BadBits.Engine
         Interfaces.Client.IGraphicsContext3d _graphicsContext3d;
         Interfaces.Client.IScriptingContext _scriptingContext;
         Interfaces.Client.IInputContext _inputContext;
+        Interfaces.Client.IAudioContext _audioContext;
 
         Interfaces.Services.IResourceManager _resourceManager;
         RenderTarget2D _backgroundRenderTarget;
@@ -160,6 +161,8 @@ namespace BadBits.Engine
             _engine = new Jint.Engine(cfg => cfg.Strict(false).AllowClr(typeof(GameInstance).Assembly));
             _resourceManager = new Services.ResourceManager(GraphicsDevice);
 
+            _audioContext = new AudioContext(_resourceManager);
+
 
             _backgroundRenderTarget = new RenderTarget2D(GraphicsDevice, 320, 240);
             _graphics3dTarget = new RenderTarget2D(GraphicsDevice, 320, 240, false, SurfaceFormat.Color, DepthFormat.Depth24);
@@ -296,7 +299,7 @@ namespace BadBits.Engine
         protected override void Update(GameTime gameTime)
         {
 
-            _scriptingContext.ProcessCallback?.Invoke(gameTime.ElapsedGameTime.TotalSeconds, _inputContext);
+            _scriptingContext.ProcessCallback?.Invoke(gameTime.ElapsedGameTime.TotalSeconds, _inputContext, _audioContext);
 
             base.Update(gameTime);
         }
