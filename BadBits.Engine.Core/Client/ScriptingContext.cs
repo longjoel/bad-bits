@@ -15,7 +15,7 @@ namespace BadBits.Engine.Client
 
         public Action<double, IGraphicsContext3d> Draw3dCallback { get; private set; }
 
-        public Action<double, IInputContext> ProcessCallback { get; private set; }
+        public Action<double, IInputContext, IAudioContext> ProcessCallback { get; private set; }
 
         public Action InitCallback { get; private set; }
 
@@ -75,7 +75,7 @@ namespace BadBits.Engine.Client
             _resourceManager.TextureCache[name].SetPixel(x, y, new Color((byte)c.r, (byte)c.g, (byte)c.b));
         }
 
-        public void setProcess(Action<double, IInputContext> processCallback)
+        public void setProcess(Action<double, IInputContext, IAudioContext> processCallback)
         {
             ProcessCallback = processCallback;
         }
@@ -86,9 +86,19 @@ namespace BadBits.Engine.Client
             return new { x = 0, y = 0, width = t.Width, height = t.Height };
         }
 
+        public void loadSprite(string name, string path) {
+
+            _resourceManager.LoadSprite(name, path);
+        }
+
         public void log(string value)
         {
             Console.WriteLine(value);
+        }
+
+        public void loadAudio(string name, string path)
+        {
+            _resourceManager.LoadAudio(name, path);
         }
     }
 }

@@ -1,5 +1,6 @@
 {
     "globalDependencies": {
-        "Typescript":"../Typescript/index.d.ts"
+        "Typescript":"../Typescript/index.d.ts",
+        "Matrix4":"../Typescript/Matrix4.ts"
     }
 }

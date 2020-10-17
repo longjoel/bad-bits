@@ -12,7 +12,7 @@ namespace BadBits.Engine.Interfaces.Client
         Action<double, IGraphicsContext2d> DrawBackgroundCallback { get; }
         Action<double, IGraphicsContext2d> DrawForegroundCallback { get; }
         Action<double, IGraphicsContext3d> Draw3dCallback { get; }
-        Action<double, IInputContext> ProcessCallback { get; }
+        Action<double, IInputContext, IAudioContext> ProcessCallback { get; }
         Action InitCallback { get; }
         Action CloseCallback { get; }
 
@@ -20,7 +20,7 @@ namespace BadBits.Engine.Interfaces.Client
         void setDrawForeground(Action<double, IGraphicsContext2d> renderCallback);
         void setDraw3d(Action<double, IGraphicsContext3d> renderCallback);
 
-        void setProcess(Action<double,IInputContext> processCallback);
+        void setProcess(Action<double,IInputContext, IAudioContext> processCallback);
         void setInit(Action initCallback);
         void setClose(Action closeCallback);
 
@@ -28,6 +28,10 @@ namespace BadBits.Engine.Interfaces.Client
         void createTexture(string name, int width, int height);
         void setPixel(string name, int x, int y, object color);
         void makeTransparent(string name, object color);
+
+        void loadSprite(string name, string path);
+
+        void loadAudio(string name, string path);
 
         object getTextureAttributes(string name);
 

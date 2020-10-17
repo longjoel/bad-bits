@@ -1,39 +1,79 @@
-import { IBadBits } from '../../Typescript/index';
+import { IBadBits, IGamepadState, I2dContext } from '../../Typescript/index';
+import { examples } from './examples';
+import example from './examples/sprite-demo';
 
+// this must be done so 'engine' gets recognised as an external global.
 declare var engine: IBadBits;
-declare var __dirname: string;
 
+// counter to keep track of what example we are on
+let exampleIndex: number = 0;
 
+// previous input state. Used to compare old values against new ones.
+let oldState: IGamepadState = {} as IGamepadState;
+
+// initialize all the demos in the demo application.
 engine.setInit(() => {
 
-    engine.loadTexture("ship", "assets/tiny-ship.png");
+    examples.forEach(e => e.init(engine));
 
 });
 
+// tell the engine to use whatever the current example is for drawing the background.
 engine.setDrawBackground((dt, context) => {
 
-    const srcRect = engine.getTextureAttributes("ship");
-    
-    context.drawTexture("ship", { x: 0, y: 0, width: 32, height: 32 }, { x: 0, y: 0, width: 32, height: 32 });
+    examples[exampleIndex].drawBackground(dt, context);
+
 });
 
- engine.setDraw3d((dt, context)=>{
+// tell the engine to draw 3d for whatever the current example is
+engine.setDraw3d((dt,context)=>{
+    examples[exampleIndex].draw3d(dt, context);
 
+});
 
-    context.drawColoredTriangles({r:128,g:128,b:128,a:255},[
-        {x:0,y:0,z:0},
-        {x:1,y:0,z:0},
-        {x:1,y:1,z:0}
-    ]);
+// handle the gamepad input.
+engine.setProcess((_, ctx, aCtx) => {
+    const state = ctx.pollGamepadState();
 
-    context.drawTexturedTriangles("ship", [
-        {x:.15,y:.15,z:.25,u:0,v:0},
-        {x:.45,y:.15,z:.25,u:1,v:0},
-        {x:.45,y:.45,z:.25,u:1,v:1},
+    let changed=false;
+    // handle the key presses.
+    if (state.up && !oldState.up) {
+        exampleIndex--;
+        aCtx.stopMusic();
+        changed = true;
+    }
+    else if (state.down && !oldState.down) {
+        exampleIndex++;
+        aCtx.stopMusic();
+        changed = true;
+    }
+    
+    oldState = state;
 
-        {x:.15,y:.15,z:.25,u:0,v:0},
-        {x:.15,y:.45,z:.25,u:0,v:1},
-        {x:.45,y:.45,z:.25,u:1,v:1}
-    ]);
+    // make sure the counter is in the correct position.
+    if (exampleIndex === examples.length) { exampleIndex = 0; } 
+    else if (exampleIndex < 0) { exampleIndex = examples.length - 1; }
 
- });
+    if(changed && examples[exampleIndex].name==='sound example'){
+        aCtx.startMusic('city', ()=>{});
+    }
+});
+
+// a silly little function to draw light text against a dark background.
+const drawText = (ctx:I2dContext, x:number,y:number, text:string)=>{
+    ctx.drawDarkText(x+-1,y+-1,text);
+    ctx.drawDarkText(x+0,y+-1,text);
+    ctx.drawDarkText(x+-1,y+0,text);
+    ctx.drawLightText(x+0,y+0,text);
+}
+
+// draw everything in the foreground that the example wants to, then put some text on top of that.
+engine.setDrawForeground((dt, context) => {
+
+    examples[exampleIndex].drawForeground(dt, context);
+
+   drawText(context,5, 5, "Bad-Bits Engine \n"
+    + "Press Up/Dn to change example.\n"
+    + examples[exampleIndex].name);
+
+});

@@ -4,6 +4,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 
 namespace BadBits.Engine
@@ -18,6 +20,7 @@ namespace BadBits.Engine
         Interfaces.Client.IGraphicsContext3d _graphicsContext3d;
         Interfaces.Client.IScriptingContext _scriptingContext;
         Interfaces.Client.IInputContext _inputContext;
+        Interfaces.Client.IAudioContext _audioContext;
 
         Interfaces.Services.IResourceManager _resourceManager;
         RenderTarget2D _backgroundRenderTarget;
@@ -35,28 +38,29 @@ namespace BadBits.Engine
             Window.AllowUserResizing = true;
         }
 
-        private void DrawForeground(GameTime gameTime, List<RenderTarget2D> drawChain)
+        private void DrawForeground(GameTime gameTime, List<Texture2D> drawChain)
         {
             if (_scriptingContext.DrawForegroundCallback != null)
             {
                 GraphicsDevice.SetRenderTarget(_foregroundRenderTarget);
                 GraphicsDevice.Clear(Color.Transparent);
-                _scriptingContext.DrawBackgroundCallback.Invoke(gameTime.ElapsedGameTime.TotalSeconds, _foregroundGraphicsContext);
+                _scriptingContext.DrawForegroundCallback.Invoke(gameTime.ElapsedGameTime.TotalSeconds, _foregroundGraphicsContext);
 
                 _resourceManager.UpdateTextures();
-
-                _spriteBatch.Begin();
+                _spriteBatch.Begin(SpriteSortMode.Immediate,
+                    BlendState.AlphaBlend,
+                    SamplerState.PointClamp);
 
                 _foregroundGraphicsContext.DrawCommands.ForEach(x => _spriteBatch.Draw(_resourceManager.TextureCache[x.TextureName], x.Dest, x.Source, Color.White));
 
                 _spriteBatch.End();
 
-                _backgroundGraphicsContext.DrawCommands.Clear();
+                _foregroundGraphicsContext.DrawCommands.Clear();
                 drawChain.Add(_foregroundRenderTarget);
             }
         }
 
-        private void DrawBackground(GameTime gameTime, List<RenderTarget2D> drawChain)
+        private void DrawBackground(GameTime gameTime, List<Texture2D> drawChain)
         {
             if (_scriptingContext.DrawBackgroundCallback != null)
             {
@@ -65,8 +69,9 @@ namespace BadBits.Engine
                 _scriptingContext.DrawBackgroundCallback.Invoke(gameTime.ElapsedGameTime.TotalSeconds, _backgroundGraphicsContext);
 
                 _resourceManager.UpdateTextures();
-
-                _spriteBatch.Begin();
+                _spriteBatch.Begin(SpriteSortMode.Immediate,
+                    BlendState.AlphaBlend,
+                    SamplerState.PointClamp);
 
                 _backgroundGraphicsContext.DrawCommands.ForEach(x => _spriteBatch.Draw(_resourceManager.TextureCache[x.TextureName], x.Dest, x.Source, Color.White));
 
@@ -78,14 +83,14 @@ namespace BadBits.Engine
             }
         }
 
-        private void Draw3d(GameTime gameTime, List<RenderTarget2D> drawChain)
+        private void Draw3d(GameTime gameTime, List<Texture2D> drawChain)
         {
             if (_scriptingContext.Draw3dCallback != null)
             {
+
                 GraphicsDevice.SetRenderTarget(_graphics3dTarget);
                 GraphicsDevice.Clear(Color.Transparent);
-                GraphicsDevice.RasterizerState = RasterizerState.CullNone;
-                GraphicsDevice.SamplerStates[0] = SamplerState.PointWrap;
+
                 _scriptingContext.Draw3dCallback.Invoke(gameTime.ElapsedGameTime.TotalSeconds, _graphicsContext3d);
 
 
@@ -94,8 +99,14 @@ namespace BadBits.Engine
                 foreach (var p in _flatShadedEffect.CurrentTechnique.Passes)
                 {
                     _flatShadedEffect.Projection = _graphicsContext3d.ProjectionMatrix;
-                    _flatShadedEffect.View = _graphicsContext3d.ViewMatrix;
+                   _flatShadedEffect.View = _graphicsContext3d.ViewMatrix;
+
                     p.Apply();
+
+                    GraphicsDevice.RasterizerState = RasterizerState.CullNone;
+                    GraphicsDevice.SamplerStates[0] = SamplerState.PointWrap;
+                    GraphicsDevice.DepthStencilState = DepthStencilState.Default;
+
                     foreach (var kvp in _graphicsContext3d.TrianglesByColor)
                     {
                         var color = kvp.Key;
@@ -113,8 +124,15 @@ namespace BadBits.Engine
                 {
                     _texturedEffect.Projection = _graphicsContext3d.ProjectionMatrix;
                     _texturedEffect.View = _graphicsContext3d.ViewMatrix;
+                    GraphicsDevice.DepthStencilState = DepthStencilState.DepthRead;
+
 
                     p.Apply();
+
+                    GraphicsDevice.RasterizerState = RasterizerState.CullNone;
+                    GraphicsDevice.SamplerStates[0] = SamplerState.PointWrap;
+                    GraphicsDevice.DepthStencilState = DepthStencilState.Default;
+
                     foreach (var kvp in _graphicsContext3d.TrianglesByTexture)
                     {
                         var texture = kvp.Key;
@@ -130,7 +148,6 @@ namespace BadBits.Engine
                 _graphicsContext3d.TrianglesByTexture.Clear();
 
                 drawChain.Add(_graphics3dTarget);
-
             }
         }
 
@@ -146,9 +163,11 @@ namespace BadBits.Engine
             _engine = new Jint.Engine(cfg => cfg.Strict(false).AllowClr(typeof(GameInstance).Assembly));
             _resourceManager = new Services.ResourceManager(GraphicsDevice);
 
+            _audioContext = new AudioContext(_resourceManager);
+
 
             _backgroundRenderTarget = new RenderTarget2D(GraphicsDevice, 320, 240);
-            _graphics3dTarget = new RenderTarget2D(GraphicsDevice, 320, 240);
+            _graphics3dTarget = new RenderTarget2D(GraphicsDevice, 320, 240, false, SurfaceFormat.Color, DepthFormat.Depth24);
             _foregroundRenderTarget = new RenderTarget2D(GraphicsDevice, 320, 240);
 
             _spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -162,7 +181,6 @@ namespace BadBits.Engine
                 FogStart = 90,
                 FogEnd = 100,
                 LightingEnabled = false,
-                Projection = Matrix.CreateOrthographicOffCenter(0, 320, 240, 0, 0, 100),
                 TextureEnabled = false,
                 VertexColorEnabled = true
             };
@@ -174,7 +192,6 @@ namespace BadBits.Engine
                 FogStart = 90,
                 FogEnd = 100,
                 LightingEnabled = false,
-                Projection = Matrix.CreateOrthographicOffCenter(0, 320, 240, 0, 0, 100),
                 TextureEnabled = true
             };
 
@@ -189,7 +206,50 @@ namespace BadBits.Engine
             _engine.SetValue("engine", _scriptingContext);
 
 
-            _engine.CommonJS().RunMain(Environment.GetCommandLineArgs()[1]);
+            string pathToIndex = "";
+            string cwd = Environment.CurrentDirectory;
+
+            // was a path explicitly stated?
+            if (Environment.GetCommandLineArgs().Length > 1)
+            {
+                pathToIndex = Environment.GetCommandLineArgs()[1];
+            }
+            // is index in root?
+            else if (File.Exists("index.js")) {
+                pathToIndex = "index.js";
+            }
+            else {
+                // Where is it?
+                var dirs = Directory.EnumerateDirectories("..");
+                pathToIndex = dirs.FirstOrDefault(x => File.Exists(Path.Combine(x, "index.js")));
+
+            }
+
+            if (string.IsNullOrEmpty(pathToIndex)) {
+                // can we still not find anything?
+                Console.WriteLine("Can not find index.js... Exiting");
+                return;
+            }
+
+            _engine.CommonJS().RunMain(pathToIndex);
+
+
+            _resourceManager.CreateTexture("__dither", 320, 240);
+            var r = new Random(4206932);
+            for (int y = 0; y < 240; y++)
+            {
+                for (int x = 0; x < 320; x++)
+                {
+                    var c = Color.Transparent;
+
+                    if ((x+y)%2==0) {
+                        c = new Color(0, 0, 0, (byte)r.Next()%16);
+                    }
+                    _resourceManager.SetPixel("__dither",x, y, c);
+                }
+            }
+
+            _resourceManager.UpdateTextures();
 
             base.Initialize();
         }
@@ -206,7 +266,7 @@ namespace BadBits.Engine
 
         protected override void Draw(GameTime gameTime)
         {
-            var drawChain = new List<RenderTarget2D>();
+            var drawChain = new List<Texture2D>();
 
             DrawBackground(gameTime, drawChain);
 
@@ -214,11 +274,12 @@ namespace BadBits.Engine
 
             DrawForeground(gameTime, drawChain);
 
+            drawChain.Add(_resourceManager.TextureCache["__dither"]);
             GraphicsDevice.SetRenderTarget(null);
 
-            GraphicsDevice.Clear(Color.White);
+            GraphicsDevice.Clear(Color.Black);
 
-            float z = -.25f;
+            float z = 0.25f;
 
             foreach (var pass in _mainEffect.CurrentTechnique.Passes)
             {
@@ -248,7 +309,7 @@ namespace BadBits.Engine
 
                     }, 0, 2);
 
-                    z += 0.05f;
+                    z -= 0.05f;
 
                 }
 
@@ -263,7 +324,7 @@ namespace BadBits.Engine
         protected override void Update(GameTime gameTime)
         {
 
-            _scriptingContext.ProcessCallback?.Invoke(gameTime.ElapsedGameTime.TotalSeconds, _inputContext);
+            _scriptingContext.ProcessCallback?.Invoke(gameTime.ElapsedGameTime.TotalSeconds, _inputContext, _audioContext);
 
             base.Update(gameTime);
         }

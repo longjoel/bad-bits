@@ -1,0 +1,82 @@
+[
+    {
+        "TextureName": "coins",
+        "FrameDurration": 0.10,
+        "SrcRect": {
+            "X": 0,
+            "Y": 0,
+            "Width": 80,
+            "Height": 80
+        }
+    },
+    {
+        "TextureName": "coins",
+        "FrameDurration": 0.10,
+        "SrcRect": {
+            "X": 100,
+            "Y": 0,
+            "Width": 85,
+            "Height": 80
+        }
+    },
+    {
+        "TextureName": "coins",
+        "FrameDurration": 0.10,
+        "SrcRect": {
+            "X": 210,
+            "Y": 0,
+            "Width": 70,
+            "Height": 80
+        }
+    },
+    {
+        "TextureName": "coins",
+        "FrameDurration": 0.10,
+        "SrcRect": {
+            "X": 300,
+            "Y": 0,
+            "Width": 50,
+            "Height": 80
+        }
+    },
+    {
+        "TextureName": "coins",
+        "FrameDurration": 0.10,
+        "SrcRect": {
+            "X": 370,
+            "Y": 0,
+            "Width": 25,
+            "Height": 80
+        }
+    },
+    {
+        "TextureName": "coins",
+        "FrameDurration": 0.10,
+        "SrcRect": {
+            "X": 415,
+            "Y": 0,
+            "Width": 50,
+            "Height": 80
+        }
+    },
+    {
+        "TextureName": "coins",
+        "FrameDurration": 0.10,
+        "SrcRect": {
+            "X": 485,
+            "Y": 0,
+            "Width": 70,
+            "Height": 80
+        }
+    },
+    {
+        "TextureName": "coins",
+        "FrameDurration": 0.10,
+        "SrcRect": {
+            "X": 570,
+            "Y": 0,
+            "Width": 80,
+            "Height": 80
+        }
+    }
+]

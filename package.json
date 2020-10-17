@@ -8,8 +8,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build-engine": "dotnet publish BadBits.Engine.Core -r win-x64 --output bin -c Release /p:PublishSingleFile=true",
-    "start":"npm run start --prefix example-project"
+    "build": "dotnet publish BadBits.Engine.Core -r win-x64 --output bin -c Release /p:PublishSingleFile=true",
+    "start": "npm start --prefix example-project"
   },
   "repository": {
     "type": "git",
@@ -23,5 +23,9 @@
   "homepage": "https://github.com/longjoel/bad-bits#readme",
   "dependencies": {
     "dotnet": "^1.1.4"
+  },
+  "devDependencies": {
+    "copyfiles": "^2.3.0",
+    "cp": "^0.2.0"
   }
 }
