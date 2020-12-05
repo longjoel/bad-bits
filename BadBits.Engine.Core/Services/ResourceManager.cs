@@ -24,11 +24,14 @@ namespace BadBits.Engine.Services
 
         public Dictionary<string, SoundEffect> SoundEffectCache { get; private set; }
 
+        public Dictionary<string, Mesh> MeshCache { get; private set; }
+
         public ResourceManager(GraphicsDevice graphicsDevice) {
             _graphicsDevice = graphicsDevice;
             TextureCache = new Dictionary<string, Texture>();
             SpriteCache = new Dictionary<string, Sprite>();
             SoundEffectCache = new Dictionary<string, SoundEffect>();
+            MeshCache = new Dictionary<string, Mesh>();
         }
 
 
@@ -46,6 +49,37 @@ namespace BadBits.Engine.Services
             {
                 SpriteCache[spriteName] = new Sprite();
             }
+        }
+
+        public void CreateMesh(string meshName, string textureName, List<VertexPositionTexture> verticies) {
+
+            var mesh = new Mesh
+            {
+                Buffer = new VertexBuffer(_graphicsDevice, typeof(VertexPositionTexture), verticies.Count, BufferUsage.None),
+                NumTriangles = verticies.Count / 3,
+                MeshType = MeshType.Texture,
+                TextureName = textureName
+            };
+
+            mesh.Buffer.SetData<VertexPositionTexture>(verticies.ToArray());
+
+            MeshCache[meshName] = mesh;
+        }
+
+        public void CreateMesh(string meshName, Color color, List<VertexPosition> verticies)
+        {
+
+            var mesh = new Mesh
+            {
+                Buffer = new VertexBuffer(_graphicsDevice, typeof(VertexPositionColor), verticies.Count, BufferUsage.None),
+                NumTriangles = verticies.Count / 3,
+                MeshType = MeshType.Color
+            };
+
+            mesh.Buffer.SetData<VertexPositionColor>(verticies.Select(v=> new VertexPositionColor(v.Position, color)).ToArray());
+
+
+            MeshCache[meshName] = mesh;
         }
 
         public void CreateTexture(string name, int width, int height)

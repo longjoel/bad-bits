@@ -20,6 +20,10 @@ namespace BadBits.Engine.Interfaces.Client
         void drawTexturedTriangles(string textureName, object[] verticies, object transform = null);
         void drawTexturedTriangles(string textureName, object[] verticies);
 
+        void drawMesh(string meshName, object transform = null);
+        void drawMesh(string meshName);
+
+
         void setView(double xEye, double yEye, double zEye, double xLook, double yLook, double zLook);
     }
 }

@@ -1,4 +1,5 @@
-﻿using BadBits.Engine.Models.Host.Sprite;
+﻿using BadBits.Engine.Models.Host;
+using BadBits.Engine.Models.Host.Sprite;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
@@ -15,6 +16,9 @@ namespace BadBits.Engine.Interfaces.Services
         Dictionary<string, Models.Host.Texture> TextureCache { get; }
         Dictionary<string, Sprite> SpriteCache { get; }
         Dictionary<string, SoundEffect> SoundEffectCache { get; }
+
+        Dictionary<string, Mesh> MeshCache { get; }
+
 
         void CreateTexture(string name, int width, int height);
         void LoadTexture(string name, string path);

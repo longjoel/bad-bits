@@ -1,5 +1,6 @@
 ﻿using BadBits.Engine.Interfaces.Client;
 using BadBits.Engine.Interfaces.Services;
+using BadBits.Engine.Models.Host;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -12,14 +13,6 @@ namespace BadBits.Engine.Client
     {
         private IResourceManager _resourceManager;
 
-        public GraphicsContext3d(IResourceManager resourceManager)
-        {
-            TrianglesByColor = new Dictionary<Color, List<VertexPosition>>();
-            TrianglesByTexture = new Dictionary<Texture2D, List<VertexPositionTexture>>();
-            _resourceManager = resourceManager;
-            ProjectionMatrix = ProjectionMatrix = Matrix.CreateOrthographicOffCenter(-10, 10, -10, 10, -10, 10);
-            ViewMatrix = Matrix.Identity;
-        }
 
         public Dictionary<Color, List<VertexPosition>> TrianglesByColor { get; private set; }
 
@@ -28,6 +21,46 @@ namespace BadBits.Engine.Client
         public Matrix ProjectionMatrix { get; private set; }
 
         public Matrix ViewMatrix { get; private set; }
+
+        public Dictionary<Texture2D, List<Tuple<Mesh, Matrix>>> MeshesByTexture { get; private set; }
+
+        public List<Tuple<Mesh, Matrix>> MeshesByColor { get; set; }
+
+        public GraphicsContext3d(IResourceManager resourceManager)
+        {
+            TrianglesByColor = new Dictionary<Color, List<VertexPosition>>();
+            TrianglesByTexture = new Dictionary<Texture2D, List<VertexPositionTexture>>();
+
+            MeshesByTexture = new Dictionary<Texture2D, List<Tuple<Mesh,Matrix>>>();
+            MeshesByColor = new List<Tuple<Mesh, Matrix>>();
+
+            _resourceManager = resourceManager;
+            ProjectionMatrix = ProjectionMatrix = Matrix.CreateOrthographicOffCenter(-10, 10, -10, 10, -10, 10);
+            ViewMatrix = Matrix.Identity;
+        }
+
+
+        public void drawMesh(string meshName, object transform = null)
+        {
+            var mesh = _resourceManager.MeshCache[meshName];
+
+            if (mesh.MeshType == MeshType.Color) {
+
+                MeshesByColor.Add(new Tuple<Mesh, Matrix>(mesh, TransformFromClient(transform)));
+            
+            }
+            else if(mesh.MeshType == MeshType.Texture){
+
+                var texture = _resourceManager.TextureCache[mesh.TextureName];
+                if (!MeshesByTexture.ContainsKey(texture)) {
+                    MeshesByTexture[texture] = new List<Tuple<Mesh, Matrix>>();
+                }
+
+                MeshesByTexture[texture].Add(new Tuple<Mesh, Matrix>( mesh, TransformFromClient(transform)));
+            
+            }
+
+        }
 
         public void drawColoredTriangles(object color, object[] verticies)
         {
@@ -55,29 +88,25 @@ namespace BadBits.Engine.Client
             }
             else
             {
-                dynamic t = transform;
-                var sx = (float)t.scaleX;
-                var sy = (float)t.scaleY;
-                var sz = (float)t.scaleZ;
-
-                var yaw = (float)t.yaw;
-                var pitch = (float)t.pitch;
-                var roll = (float)t.roll;
-
-                var tx = (float)t.translateX;
-                var ty = (float)t.translateY;
-                var tz = (float)t.translateZ;
-
-                var transformed = Matrix.CreateFromYawPitchRoll(yaw, pitch, roll) * Matrix.CreateTranslation(tx, ty, tz) * Matrix.CreateScale(sx, sy, sz);
-
+              
                 var verts = verticies.Select(v =>
                 {
                     dynamic dynamicVert = v;
-                    return new VertexPosition(Vector3.Transform(new Vector3((float)(dynamicVert.x), (float)dynamicVert.y, (float)dynamicVert.z), transformed));
+                    return new VertexPosition(Vector3.Transform(new Vector3((float)(dynamicVert.x), (float)dynamicVert.y, (float)dynamicVert.z), TransformFromClient(transform)));
                 });
 
                 TrianglesByColor[c].AddRange(verts);
             }
+        }
+
+        public void drawTexturedMesh(string meshName, object transform = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void drawTexturedMesh(string meshName)
+        {
+            throw new NotImplementedException();
         }
 
         public void drawTexturedTriangles(string textureName, object[] verticies)
@@ -107,20 +136,7 @@ namespace BadBits.Engine.Client
             }
             else
             {
-                dynamic t = transform;
-                var sx = (float)t.scaleX;
-                var sy = (float)t.scaleY;
-                var sz = (float)t.scaleZ;
-
-                var yaw = (float)t.yaw;
-                var pitch = (float)t.pitch;
-                var roll = (float)t.roll;
-
-                var tx = (float)t.translateX;
-                var ty = (float)t.translateY;
-                var tz = (float)t.translateZ;
-
-                var transformed = Matrix.CreateFromYawPitchRoll(yaw, pitch, roll) * Matrix.CreateTranslation(tx, ty, tz) * Matrix.CreateScale(sx, sy, sz);
+                Matrix transformed = TransformFromClient(transform);
 
                 var verts = verticies.Select(v =>
                 {
@@ -133,10 +149,34 @@ namespace BadBits.Engine.Client
             }
         }
 
+        private static Matrix TransformFromClient(object transform)
+        {
+            dynamic t = transform;
+            var sx = (float)t.scaleX;
+            var sy = (float)t.scaleY;
+            var sz = (float)t.scaleZ;
+
+            var yaw = (float)t.yaw;
+            var pitch = (float)t.pitch;
+            var roll = (float)t.roll;
+
+            var tx = (float)t.translateX;
+            var ty = (float)t.translateY;
+            var tz = (float)t.translateZ;
+
+            var transformed = Matrix.CreateFromYawPitchRoll(yaw, pitch, roll) * Matrix.CreateTranslation(tx, ty, tz) * Matrix.CreateScale(sx, sy, sz);
+            return transformed;
+        }
+
         public void setView(double xEye, double yEye, double zEye, double xLook, double yLook, double zLook)
         {
             ProjectionMatrix = Matrix.CreatePerspectiveFieldOfView((90f) * 0.0174533f, 320f / 240f, 0.001f, 100f);
             ViewMatrix = Matrix.CreateLookAt(new Vector3((float)xEye, (float)yEye, (float)zEye), new Vector3((float)xLook, (float)yLook, (float)zLook), new Vector3(0, 1, 0));
+        }
+
+        public void drawMesh(string meshName)
+        {
+            drawMesh(meshName, Matrix.Identity);
         }
     }
 }
