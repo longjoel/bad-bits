@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BadBits.Engine.Models.Host;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,12 @@ namespace BadBits.Engine.Interfaces.Client
         Action<double, IInputContext, IAudioContext> ProcessCallback { get; }
         Action InitCallback { get; }
         Action CloseCallback { get; }
+
+        Action<double,IGraphicsContext2d> LoadingFunc { get; set; }
+        Action LoadComplete { get; set; }
+
+        List<Asset> AssetsToLoad { get; set; }
+
 
         void setDrawBackground(Action<double, IGraphicsContext2d> renderCallback);
         void setDrawForeground(Action<double, IGraphicsContext2d> renderCallback);
@@ -40,5 +47,10 @@ namespace BadBits.Engine.Interfaces.Client
         object getTextureAttributes(string name);
 
         void log(string value);
+
+        void clearCache();
+
+        void loadScreen(object[] itemsToLoad, Action<double, IGraphicsContext2d> loadingScreenFunc, Action onLoadingComplete);
+
     }
 }

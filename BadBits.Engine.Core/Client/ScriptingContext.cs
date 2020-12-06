@@ -1,5 +1,6 @@
 ﻿using BadBits.Engine.Interfaces.Client;
 using BadBits.Engine.Interfaces.Services;
+using BadBits.Engine.Models.Host;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -22,6 +23,11 @@ namespace BadBits.Engine.Client
         public Action InitCallback { get; private set; }
 
         public Action CloseCallback { get; private set; }
+
+        public Action<double, IGraphicsContext2d> LoadingFunc { get; set; }
+        public Action LoadComplete { get; set; }
+
+        public List<Asset> AssetsToLoad { get; set; }
 
         public ScriptingContext(IResourceManager resourceManager)
         {
@@ -140,6 +146,38 @@ namespace BadBits.Engine.Client
             }
 
             _resourceManager.CreateMesh(meshName, new Color((byte)cc.r, (byte)cc.g, (byte)cc.b), mesh);
+        }
+
+        public void clearCache()
+        {
+            
+            _resourceManager.MeshCache.Clear();
+            _resourceManager.SoundEffectCache.Clear();
+            _resourceManager.SpriteCache.Clear();
+
+            foreach (var kvp in _resourceManager.TextureCache) {
+                if (!kvp.Key.StartsWith("__")) {
+                    _resourceManager.TextureCache.Remove(kvp.Key);
+                }
+            }
+        }
+
+        public void loadScreen(object[] itemsToLoad, Action<double,IGraphicsContext2d> loadingScreenFunc, Action onLoadingComplete)
+        {
+            this.LoadingFunc = loadingScreenFunc;
+            this.CloseCallback = onLoadingComplete;
+
+            this.AssetsToLoad = new List<Asset>();
+            foreach (var itl in itemsToLoad)
+            {
+                dynamic item = itl;
+                this.AssetsToLoad.Add(new Asset
+                {
+                    AssetName = item.name,
+                    AssetPath = item.path,
+                    AssetType = item.type
+                });
+            }
         }
     }
 }

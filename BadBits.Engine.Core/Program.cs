@@ -302,11 +302,18 @@ namespace BadBits.Engine
         {
             var drawChain = new List<Texture2D>();
 
-            DrawBackground(gameTime, drawChain);
+            if ((_scriptingContext.AssetsToLoad == null) || (_scriptingContext.AssetsToLoad.Count == 0))
+            {
 
-            Draw3d(gameTime, drawChain);
+                DrawBackground(gameTime, drawChain);
 
-            DrawForeground(gameTime, drawChain);
+                Draw3d(gameTime, drawChain);
+
+                DrawForeground(gameTime, drawChain);
+            }
+            { 
+            
+            }
 
             drawChain.Add(_resourceManager.TextureCache["__dither"]);
             GraphicsDevice.SetRenderTarget(null);

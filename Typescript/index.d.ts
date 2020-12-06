@@ -81,6 +81,19 @@ export interface ITransform {
     translateZ: number;
 }
 
+export enum IAssetType {
+    Texture = 0,
+    Sprite=1,
+    Sound = 2
+}
+
+export interface IAsset {
+    type: IAssetType,
+    path: string,
+    name:string
+}
+
+
 /**
  * 
  */
@@ -145,4 +158,8 @@ export interface IBadBits {
     loadAudio: (name: string, path: string) => void;
 
     log: (value: string) => void;
+
+    loadScreen: (itemsToLoad: IAsset[], loadingScreenFunc: (percentLoaded: number, ctx:I2dContext) => void, onLoadingComplete:()=>void) => void;
+
+    clearCache: () => void;
 }
