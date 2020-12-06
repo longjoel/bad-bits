@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using BadBits.Engine.Models.Host;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,9 @@ namespace BadBits.Engine.Interfaces.Client
     {
         Dictionary<Color, List<VertexPosition>> TrianglesByColor { get; }
         Dictionary<Texture2D, List<VertexPositionTexture>> TrianglesByTexture { get; }
+        Dictionary<Texture2D, List<Tuple<Mesh, Matrix>>> MeshesByTexture { get;}
+
+        List<Tuple<Mesh, Matrix>> MeshesByColor { get;  }
         Matrix ProjectionMatrix { get; }
         Matrix ViewMatrix { get; }
 

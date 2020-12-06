@@ -34,15 +34,8 @@ const example: IExample = {
             roll: 0, pitch: r * 0.0174533 * 1.5, yaw:  r * 0.0174533, 
             translateX: 0, translateY: 0, translateZ: 4
 };
-        ctx.drawTexturedTriangles('grass', [
-            { x: -5, y: 0, z: -5, u: 0, v: 0 },
-            { x: -5, y: 0, z: 5, u: 10, v: 0 },
-            { x: 5, y: 0, z: 5, u: 10, v: 10 },
-
-            { x: -5, y: 0, z: -5, u: 0, v: 0 },
-            { x: 5, y: 0, z: -5, u: 0, v: 10 },
-            { x: 5, y: 0, z: 5, u: 10, v: 10 }
-        ] as IVertexTexture[], transform);
+       
+        ctx.drawMesh('grassField',transform)
 
         ctx.drawColoredTriangles({ r: 0, g: 0, b: 0, a: 255 }, vertices, transform);
 
@@ -70,6 +63,16 @@ const example: IExample = {
 
     init: (bb) => {
         b = bb;
+
+        bb.createTexturedMesh('grassField','grass', [
+            { x: -5, y: 0, z: -5, u: 0, v: 0 },
+            { x: -5, y: 0, z: 5, u: 10, v: 0 },
+            { x: 5, y: 0, z: 5, u: 10, v: 10 },
+
+            { x: -5, y: 0, z: -5, u: 0, v: 0 },
+            { x: 5, y: 0, z: -5, u: 0, v: 10 },
+            { x: 5, y: 0, z: 5, u: 10, v: 10 }
+        ] as IVertexTexture[]);
 
         b.loadTexture('clouds', 'assets/clouds.png');
         b.loadTexture('grass', 'assets/grass.png');

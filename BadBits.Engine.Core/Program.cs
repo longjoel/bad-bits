@@ -107,6 +107,15 @@ namespace BadBits.Engine
                     GraphicsDevice.SamplerStates[0] = SamplerState.PointWrap;
                     GraphicsDevice.DepthStencilState = DepthStencilState.Default;
 
+                    foreach (var m in _graphicsContext3d.MeshesByColor) {
+
+                        _flatShadedEffect.World = m.Item2;
+                        GraphicsDevice.SetVertexBuffer(m.Item1.Buffer);
+                        GraphicsDevice.DrawPrimitives(PrimitiveType.TriangleList, 0, m.Item1.NumTriangles * 3);
+                    }
+
+                    _flatShadedEffect.World = Matrix.Identity;
+
                     foreach (var kvp in _graphicsContext3d.TrianglesByColor)
                     {
                         var color = kvp.Key;
@@ -116,6 +125,8 @@ namespace BadBits.Engine
                         GraphicsDevice.DrawUserPrimitives(PrimitiveType.TriangleList,
                            vx.ToArray(), 0, kvp.Value.Count / 3);
                     }
+
+                    
 
                 }
 
@@ -128,6 +139,27 @@ namespace BadBits.Engine
 
 
                     p.Apply();
+
+                    GraphicsDevice.RasterizerState = RasterizerState.CullNone;
+                    GraphicsDevice.SamplerStates[0] = SamplerState.PointWrap;
+                    GraphicsDevice.DepthStencilState = DepthStencilState.Default;
+
+                    foreach (var kvp in _graphicsContext3d.MeshesByTexture)
+                    {
+                        var texture = kvp.Key;
+
+                        foreach (var m in kvp.Value) {
+                            _texturedEffect.Texture = texture;
+                            _texturedEffect.TextureEnabled = true;
+
+                            _texturedEffect.World = m.Item2;
+                            GraphicsDevice.SetVertexBuffer(m.Item1.Buffer);
+                            GraphicsDevice.DrawPrimitives(PrimitiveType.TriangleList, 0, m.Item1.NumTriangles * 3);
+                        }
+
+                    }
+
+                    _flatShadedEffect.World = Matrix.Identity;
 
                     GraphicsDevice.RasterizerState = RasterizerState.CullNone;
                     GraphicsDevice.SamplerStates[0] = SamplerState.PointWrap;
@@ -146,6 +178,8 @@ namespace BadBits.Engine
 
                 _graphicsContext3d.TrianglesByColor.Clear();
                 _graphicsContext3d.TrianglesByTexture.Clear();
+                _graphicsContext3d.MeshesByColor.Clear();
+                _graphicsContext3d.MeshesByTexture.Clear();
 
                 drawChain.Add(_graphics3dTarget);
             }

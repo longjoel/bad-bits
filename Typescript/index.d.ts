@@ -88,6 +88,7 @@ export interface I3dContext {
     drawColoredTriangles: (color: IRgba, verticies: IVertexPosition[], transform?: ITransform) => void;
     drawTexturedTriangles: (textureName: string, verticies: IVertexTexture[], transform?: ITransform) => void;
     setView: (xEye: number, yEye: number, zEye: number, xLook: number, yLook: number, zLook: number) => void;
+    drawMesh: (meshName: string, transform?: ITransform) => void;
 }
 
 /**
@@ -112,8 +113,7 @@ export interface IAudioContext {
 
     playSound: (name: string, pan: number, volume: number) => void;
 
-    startMusic: (name: string, onFinished: () => void) => void;
-    startMusic: (name: string) => void;
+    startMusic: (name: string, onFinished?: () => void) => void;
     stopMusic: () => void;
     setMusicVolume: (volume: number) => void;
 }
@@ -134,6 +134,9 @@ export interface IBadBits {
     setDraw3d: (renderCallback: (dt: number, context: I3dContext) => void) => void;
     setDrawBackground: (renderCallback: (dt: number, context: I2dContext) => void) => void;
     setDrawForeground: (renderCallback: (dt: number, context: I2dContext) => void) => void;
+
+    createTexturedMesh: (meshName: string, textureName: string, meshData: IVertexTexture[]) => void;
+    createColoredMesh: (meshName: string, color: IRgb, meshData: IVertexTexture[]) => void;
 
     getTextureAttributes: (name: string) => IRect;
 

@@ -117,7 +117,7 @@ namespace BadBits.Engine.Client
                 mesh.Add(new VertexPositionTexture
                 {
                     Position = new Vector3((float)vv.x, (float)vv.y, (float)vv.z),
-                    TextureCoordinate = new Vector2((float)vv.u, (float)vv.y)
+                    TextureCoordinate = new Vector2((float)vv.u, (float)vv.v)
                 });
             }
 
