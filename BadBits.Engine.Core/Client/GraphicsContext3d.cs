@@ -99,16 +99,6 @@ namespace BadBits.Engine.Client
             }
         }
 
-        public void drawTexturedMesh(string meshName, object transform = null)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void drawTexturedMesh(string meshName)
-        {
-            throw new NotImplementedException();
-        }
-
         public void drawTexturedTriangles(string textureName, object[] verticies)
         {
             drawTexturedTriangles(textureName, verticies, null);

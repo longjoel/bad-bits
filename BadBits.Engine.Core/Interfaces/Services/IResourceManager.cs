@@ -32,5 +32,9 @@ namespace BadBits.Engine.Interfaces.Services
         void AddSpriteFrame(string spriteName, SpriteFrame spriteFrame);
 
         void LoadAudio(string name, string path);
+
+        void CreateMesh(string meshName, string textureName, List<VertexPositionTexture> verticies);
+
+        void CreateMesh(string meshName, Color color, List<VertexPosition> verticies);
     }
 }

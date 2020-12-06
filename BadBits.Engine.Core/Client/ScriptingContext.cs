@@ -1,7 +1,9 @@
 ﻿using BadBits.Engine.Interfaces.Client;
 using BadBits.Engine.Interfaces.Services;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
 
 namespace BadBits.Engine.Client
 {
@@ -86,7 +88,8 @@ namespace BadBits.Engine.Client
             return new { x = 0, y = 0, width = t.Width, height = t.Height };
         }
 
-        public void loadSprite(string name, string path) {
+        public void loadSprite(string name, string path)
+        {
 
             _resourceManager.LoadSprite(name, path);
         }
@@ -99,6 +102,44 @@ namespace BadBits.Engine.Client
         public void loadAudio(string name, string path)
         {
             _resourceManager.LoadAudio(name, path);
+        }
+
+        public void createTexturedMesh(string meshName, string textureName, object[] meshData)
+        {
+
+            var mesh = new List<VertexPositionTexture>();
+
+            foreach (var v in meshData)
+            {
+
+                dynamic vv = v;
+
+                mesh.Add(new VertexPositionTexture
+                {
+                    Position = new Vector3((float)vv.x, (float)vv.y, (float)vv.z),
+                    TextureCoordinate = new Vector2((float)vv.u, (float)vv.y)
+                });
+            }
+
+            _resourceManager.CreateMesh(meshName, textureName, mesh);
+        }
+
+        public void createColoredMesh(string meshName, object color, object[] meshData)
+        {
+            var mesh = new List<VertexPosition>();
+            dynamic cc = color;
+
+            foreach (var v in meshData)
+            {
+
+                dynamic vv = v;
+                mesh.Add(new VertexPosition
+                {
+                    Position = new Vector3((float)vv.x, (float)vv.y, (float)vv.z)
+                });
+            }
+
+            _resourceManager.CreateMesh(meshName, new Color((byte)cc.r, (byte)cc.g, (byte)cc.b), mesh);
         }
     }
 }

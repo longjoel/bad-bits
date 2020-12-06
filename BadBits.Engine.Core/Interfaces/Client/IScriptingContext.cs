@@ -24,6 +24,10 @@ namespace BadBits.Engine.Interfaces.Client
         void setInit(Action initCallback);
         void setClose(Action closeCallback);
 
+        void createTexturedMesh(string meshName, string textureName, object[] meshData);
+
+        void createColoredMesh(string meshName, object color, object[] meshData);
+
         void loadTexture(string name, string path);
         void createTexture(string name, int width, int height);
         void setPixel(string name, int x, int y, object color);
