@@ -2,6 +2,18 @@
 
 _A retro game enspired engine for PC, Mac, and Linux._
 
+## Getting started
+
+Ideally, run these 3 commands, in order, and you should be ready to roll.
+
+`npm install` -- will install the NPM dependencies
+
+`npm run build` -- will build the engine, and the sample program
+
+`npm run start` -- will run the sample program
+
+If you don't have .net core 3.1 installed, you will need this to build the project. [DOWNLOAD](https://dotnet.microsoft.com/download/dotnet-core/3.1) Linux and Mac OSX may have missing base dependencies. If you are testing on these platforms lets figure out some instructions!
+
 ## Facts about Bad Bits
 
 * It is written using .NET Framework.
